@@ -1,0 +1,9 @@
+package com.biziitech.attm.dao;
+
+import com.biziitech.attm.model.ModelPaymentChd;
+
+public interface DaoPaymentChd {
+
+	public void savePaymentChd(ModelPaymentChd modelPaymentChd);
+	
+}

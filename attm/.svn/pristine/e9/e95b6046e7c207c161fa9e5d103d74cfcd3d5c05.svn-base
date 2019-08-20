@@ -1,0 +1,227 @@
+package com.biziitech.attm.bg.daoimp;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import com.biziitech.attm.bg.dao.DaoUser_attm;
+import com.biziitech.attm.bg.model.ModelBgUser;
+import com.biziitech.attm.bg.model.ModelUser;
+import com.biziitech.attm.bg.repository.BgUserRepository;
+import com.biziitech.attm.custom.model.ModelBgUserCustom;
+import com.biziitech.attm.custom.model.ModelPassportReceiveCustom;
+
+
+
+@Service
+public class DaoUserImp_attm implements DaoUser_attm{
+	
+	@Autowired
+	private BgUserRepository bgUserRepository;
+	
+	@Autowired
+    private DataSource dataSource;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+    
+	
+	
+    public void setNamedDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+        this.namedParameterJdbcTemplate=namedParameterJdbcTemplate;
+          }
+
+	@Override
+	public void saveUser_ATTM(ModelBgUser modelBgUser) {
+		// TODO Auto-generated method stub
+		if(modelBgUser.isActive()) 
+		{
+			modelBgUser.setActiveStatus(1);
+			
+		}
+		else 
+		{
+			modelBgUser.setActiveStatus(0);
+			
+		}
+		bgUserRepository.save(modelBgUser);
+	}
+
+	@Override
+	public List<ModelBgUser> getUserListByCraiteria(String userName, String titleName, String passportNo, int status) {
+		// TODO Auto-generated method stub
+		List<ModelBgUser> resultList= bgUserRepository.findUserDetails(userName, titleName, passportNo, status);
+		
+		List<ModelBgUser> userList=new ArrayList<>();
+		
+		for(ModelBgUser user: resultList) {
+				if(user.getActiveStatus()==1)
+				 { 
+					user.setsActive("Yes");
+					user.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 user.setsActive("NO");
+					 user.setActive(false);
+				     
+				 }
+				
+				if(user.getGenderStatus()==1) 
+				{
+					user.setsGender("Male");
+					
+				}
+				else if(user.getGenderStatus()==2) 
+				{
+					user.setsGender("Female");
+					
+				}
+				else if(user.getGenderStatus()==3) 
+				{
+					user.setsGender("Others");
+				}
+				 
+				userList.add(user);
+		}
+		
+		
+		
+		return userList;
+	}
+
+	@Override
+	public List<ModelBgUserCustom> getUserNameById(Long userId) {
+		// TODO Auto-generated method stub
+	
+		String qry="SELECT a.user_id,a.active_status,a.dob,a.mother_name,\r\n" + 
+				"a.PASSPORT_NO,a.father_name,a.user_remarks,a.user_name,\r\n" + 
+				"a.national_id,a.user_address,a.CONTACT_NO FROM bg_user a WHERE a.active_status=1\r\n" + 
+				"and a.user_id=coalesce(:userId,a.user_id)";
+	RowMapper<ModelBgUserCustom> serviceMapper=new RowMapper<ModelBgUserCustom>() {
+
+		@Override
+		public ModelBgUserCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+			// TODO Auto-generated method stub
+			ModelBgUserCustom bn= new ModelBgUserCustom();
+			
+
+						
+			bn.setUserId(rs.getLong("user_id"));
+			bn.setUserName(rs.getString("user_name"));
+			bn.setFatherName(rs.getString("father_name"));
+			bn.setMotherName(rs.getString("mother_name"));
+			bn.setPassportNo(rs.getString("PASSPORT_NO"));
+			bn.setRemarks(rs.getString("user_remarks"));
+			bn.setDob(rs.getDate("dob"));
+			bn.setUserAddress(rs.getString("user_address"));
+			bn.setContactNo(rs.getString("CONTACT_NO"));
+							
+			return bn;
+		}
+
+	};
+	
+	MapSqlParameterSource parameters = new MapSqlParameterSource();
+      parameters.addValue("userId", userId);
+      System.out.println(" in daoUserImp, userId:" +userId);
+
+	System.out.println("service mapper ");
+	return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelBgUserCustom> getUserByPassportNo(String passportNo) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.user_id,a.active_status,a.dob,a.mother_name,\r\n" + 
+				"a.PASSPORT_NO,a.father_name,a.user_remarks,a.user_name,\r\n" + 
+				"a.national_id,a.user_address,a.CONTACT_NO FROM bg_user a WHERE a.active_status=1\r\n" + 
+				"and a.PASSPORT_NO LIKE CONCAT('%',:passportNo, '%')";
+	RowMapper<ModelBgUserCustom> serviceMapper=new RowMapper<ModelBgUserCustom>() {
+
+		@Override
+		public ModelBgUserCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+			// TODO Auto-generated method stub
+			ModelBgUserCustom bn= new ModelBgUserCustom();
+			
+
+						
+			bn.setUserId(rs.getLong("user_id"));
+			bn.setUserName(rs.getString("user_name"));
+			bn.setFatherName(rs.getString("father_name"));
+			bn.setMotherName(rs.getString("mother_name"));
+			bn.setPassportNo(rs.getString("PASSPORT_NO"));
+			bn.setRemarks(rs.getString("user_remarks"));
+			bn.setDob(rs.getDate("dob"));
+			bn.setUserAddress(rs.getString("user_address"));
+			bn.setContactNo(rs.getString("CONTACT_NO"));
+							
+			return bn;
+		}
+
+	};
+	
+	MapSqlParameterSource parameters = new MapSqlParameterSource();
+      parameters.addValue("passportNo", passportNo);
+      System.out.println(" in daoUserImp, passportNo:" +passportNo);
+
+	System.out.println("service mapper ");
+	return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	
+	
+	public boolean hasLoginUser(String loginUser) {
+		/*
+		String qry="SELECT COUNT(*) FROM BG_USER a WHERE a.login_user LIKE CONCAT('%',loginUser,'%') and "
+				+ " a.active_status=1 ";
+		RowMapper serviceMapper=new RowMapper() {
+
+			@Override
+			public boolean mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelBgUserCustom bn= new ModelBgUserCustom();
+				
+
+							
+				bn.setUserId(rs.getLong("user_id"));
+				bn.setUserName(rs.getString("user_name"));
+				bn.setFatherName(rs.getString("father_name"));
+				bn.setMotherName(rs.getString("mother_name"));
+				bn.setPassportNo(rs.getString("PASSPORT_NO"));
+				bn.setRemarks(rs.getString("user_remarks"));
+				bn.setDob(rs.getDate("dob"));
+				bn.setUserAddress(rs.getString("user_address"));
+				bn.setContactNo(rs.getString("CONTACT_NO"));
+								
+				return bn;
+			}
+
+		};
+		
+		return jdbcTemplate.execute(qry)>0 ? true :false;
+		*/
+		
+		return false;
+	
+	}
+
+	
+	
+	
+}

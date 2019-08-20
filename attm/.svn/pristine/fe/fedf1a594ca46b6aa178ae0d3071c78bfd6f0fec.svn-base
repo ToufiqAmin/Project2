@@ -1,0 +1,3826 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ticket Purchase</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	 <!-- <link rel="stylesheet" href="../../static/css/bootstrap-select.less"> -->
+    <link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+  
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		.modal-backdrop.fade {
+			display: none;
+		}
+
+		input[type=checkbox],
+		input[type=radio] {
+			width: 20px !important;
+		}
+
+		.up-msg {
+			padding: 10px;
+		}
+	</style>
+	
+	<style>
+
+.groove {
+/*
+	border-style: groove;
+*/
+
+	border-bottom-style: solid;
+
+}
+
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">ATTM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+          
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+          <!--
+          	<li><a th:href="@{'/bgusercontroller/init'+'/'+${userId}}">User</a></li>
+			<li><a th:href="@{'/bgusertypecontroller/init'+'/'+${userId}}">User Type</a></li>
+			<li><a th:href="@{'/servicecontroller/init'+'/'+${userId}}">Service</a></li>
+			<li><a th:href="@{'/clientservicecontroller/init'+'/'+${userId}}">Client Service</a></li>
+          	<li><a th:href="@{'/agentcontroller/init'+'/'+${userId}}">Agent</a></li>
+          	<li><a th:href="@{'/airlinecontroller/init'+'/'+${userId}}">Air Line</a></li>
+          	<li><a th:href="@{'/ticketrequestcontroller/init'+'/'+${userId}}">Ticket Request</a></li>
+          -->	
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+           
+           
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+             
+             <!--
+             <li><a th:href="@{'/passportreceivecontroller/init'+'/'+${userId}}">Passport Receive</a></li>
+             <li><a th:href="@{'/manpowerclearancecontroller/init'+'/'+${userId}}">Manpower Clearance</a></li>
+             --> 
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside><!-- /#left-panel -->
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                       <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                       	   <span class="nav-link" id="logonUserId" th:text="${userId}"readonly style="color: black; float:right;" hidden></span>	
+                           <span class="nav-link" id="logonUserName" th:text="${name}"readonly style="color: black; float:right;"></span>
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+
+
+		
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Ticket Purchase Form</strong>
+					<!--			
+								<a  style="float:right" class="btn btn-success" th:href="@{'/bgusercontroller/init'+'/'+${userId}}">New User Info</a>
+					-->	
+							</div>
+							<div class="card-body">
+								<!-- Credit Card -->
+								<div id="">
+									<div class="card-body">
+										<form class="needs-validation" id="searchForm" method="post" novalidate>
+											<div class="row">
+							
+							<!--				
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Agent:</label>
+															<select class="form-control" name ="agentId" id="agentId" >
+														  		<option value="">Select Agent</option>
+														   		<option th:each="agent:${agentList}"
+																th:value="${agent.agentId}"	
+																th:utext="${agent.agentName}"
+																/>										
+															</select>
+																											
+													</div>
+												</div>
+							-->								
+							
+												
+												
+								
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Passport No</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="passportNo" id="passportNo" placeholder="Passport No" >
+													</div>
+												</div>
+												
+												<div class="col-1">
+													<div class="form-group">
+														<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="checkForUserId()" value="Check">				
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Passenger Name</label>
+														<select class="form-control" id="userName" name ="userName"  >
+														  <option value="">Select User</option>
+														   <option th:each="user:${userList}"
+															th:value="${user.userId}"	
+															th:utext="${user.userName}"
+															/>										
+														</select>
+														
+													</div>
+												</div>
+												
+												<div class="col-2" >
+													<div class="form-group">
+														<label class="control-label mb-1">User ID</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="userId" id="userId" placeholder="User ID" readonly>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>Country From:</label>
+														<select class="form-control" name ="countryFrom" id="fromCountry">
+													  	<option value="">Select Country</option>		
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>City From:</label>
+														<select class="form-control" name ="cityFrom" id="fromCity">
+															<option value="">Select City</option>
+															<option th:each="city:${cityList}"
+																	th:value="${city.cityId}"	
+																	th:utext="${city.cityName}"
+															/>
+														   								
+														</select>
+													</div>
+												</div>
+												
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Country To:</label>
+														<select class="form-control" name ="countryTo" id="toCountry">
+													  	<option value="">Select Country</option>	
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+									
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">City To:</label>
+														<select class="form-control" name ="cityTo" id="toCity">
+											    		<option value="">Select City</option>
+														<option th:each="city:${cityList}"
+																th:value="${city.cityId}"	
+																th:utext="${city.cityName}"
+														/>
+														</select>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">From Agent:</label>
+															<select class="form-control" name ="fromAgentId" id="fromAgentId" >
+														  		<option value="">Select Agent</option>
+														   		<option th:each="agent:${agentList}"
+																th:value="${agent.agentId}"	
+																th:utext="${agent.agentName}"
+																/>										
+															</select>
+																											
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">To Agent:</label>
+															<select class="form-control" name ="toAgentId" id="toAgentId" >
+														  		<option value="">Select Agent</option>
+														   		<option th:each="agent:${agentList2}"
+																th:value="${agent.agentId}"	
+																th:utext="${agent.agentName}"
+																/>										
+															</select>
+																											
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>From Date</label>
+														<input type="date" id="startDate" class="form-control"  name ="From Date" >
+													</div>
+												</div>
+									
+												<div class="col-3">
+													<div class="form-group">
+														<label>To Date</label>
+														<input type="date" id="endDate" class="form-control"  name ="To Date"  >
+													</div>
+												</div>												
+											
+                     							<div class="col-1">
+													<div class="form-group">
+														<label class="control-label mb-1">Purchase Done</label>
+														<!-- Default checked -->
+														<div class="custom-control custom-checkbox">
+											 				<input type="checkbox" class="custom-control-input" onClick="myFunction()" id="purchaseActive" >
+															<label class="custom-control-label" for="purchaseActive"></label>
+														</div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+													</div>
+												</div>
+												
+												<div class="col-1">
+													<div class="form-group">
+														<input type="button" style="margin-top: 24px;" class="btn btn-primary" onClick="selfPurchase()" value="Self PurChase" data-toggle="modal" data-target="#largeModal75">
+													</div>
+												</div>
+								
+											</div>
+
+										<div class="col-sm-12 text-right">
+											<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+											<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+										</div>										
+									</form>
+
+								</div>
+							</div>
+
+
+		<!-- =======================================Ticket Purchase Table-1========================== -->
+					
+						<div class="card" style="width: 1070px; overflow:scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+									
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+								<table id="ticketPurchaseTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+									<a><span class="req" style="color: red">Click Request Date to view Mst Data in Purchase Mst</span></a>
+									<thead>
+										<tr>
+											
+											<th scope="col" hidden>Ticket Request ID</th>
+											<th scope="col" >Request Date(<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+							<!--			<th scope="col" >Agent</th>		-->
+											<th scope="col" >From Agent</th>
+											<th scope="col" >To Agent</th>
+											<th scope="col" >Passenger</th>	
+											<th scope="col" >Requester Name</th>										
+											<th scope="col" >Possible Flight Date(<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col" >From Country</th>
+											<th scope="col" >From City</th>
+											<th scope="col" >To Country</th>
+											<th scope="col" >To City</th>
+											<th scope="col" >No of Ticket</th>
+											<th scope="col" >Purchased Qty</th>
+											<th scope="col" >AutoPayment</th>
+											<th scope="col" >Action</th>
+										</tr>
+									</thead>
+									<tbody>
+						<!--		
+										<tr >
+                                            <td><span ></span> </td>
+                                            <td><span ></span></td>                                                                                                                                                                                                                            
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            
+                                            <td>
+                                            <input type="button" value="Purchaseed QTY" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal15" >
+                                            </td>
+                                            <td>
+                                            <input type="button" value="Purchase" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >
+                                            </td>
+                                           
+                                        </tr>
+				-->
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInTicketPurchaseTable" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+
+
+<!-- =======================================Ticket Purchase Table-2========================== -->
+					
+						<div class="card" style="width: 1070px; overflow:scroll">
+							<div class="card-header">
+								<strong class="card-title">Purchase MST</strong>
+							</div>
+									
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names">
+							</div>
+								<table id="purchaseMSTTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+								<a><span class="req" style="color: red">Click Purchase Date to view Chd Data in Purchase Chd</span></a>	
+									<thead>
+										<tr>
+											
+											<th scope="col" hidden>Ticket Purchase Mst ID</th>
+											<th scope="col" >Purchase Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col" >Ticket Request ID</th>
+											<th scope="col" >Air Line</th>
+											<th scope="col" >No Of Tickets</th>
+											<th scope="col" >Flight Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col" >Total Amount</th>
+											<th scope="col" >Remarks</th>
+											<th scope="col" >Active</th>
+											<th scope="col" >Action</th>
+								<!--		<th scope="col" >Edit</th> -->
+
+										</tr>
+									</thead>
+									<tbody>
+						<!--			
+										<tr >
+                                            <td hidden><span ></span> </td>
+                                            <td><span ></span> </td>
+                                       		<td><span ></span></td>
+                                            <td><span ></span></td>                                                                                                                                                                                                                            
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            
+                                            <td>
+                                            <input type="button" value="Chd Data Populate" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >
+                                            </td>
+                                           
+                                        </tr>
+				-->
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInPurchaseMSTTable" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+
+<!-- =======================================  Purchase Table-3========================== -->
+					
+						<div class="card" style="width: 1070px; overflow:scroll">
+							<div class="card-header">
+								<strong class="card-title">Purchase Chd</strong>
+							</div>
+									
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for names">
+							</div>
+								<table id="purchaseChdTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+									<thead>
+										<tr>
+											
+											<th scope="col" hidden>Ticket Purchase Chd ID</th>
+											<th scope="col" >Ticket Purchase Mst ID</th>
+											<th scope="col" >Ticket No</th>
+											<th scope="col" >Passenger</th>
+											<th scope="col" >PNR</th>
+											<th scope="col" >Ticket AMT(USD/BDT)</th>
+											<th scope="col" >Selling Price(USD/BDT)</th>
+											<th scope="col" >Purchase Price(USD/BDT)</th>
+											<th scope="col" >From Country</th>
+											<th scope="col" >From City</th>
+											<th scope="col" >To Country</th>
+											<th scope="col" >To City</th>
+					<!--					<th scope="col" >Agent Passenger Name</th>		-->
+											<th scope="col" >Remarks</th>
+											<th scope="col" >Active</th>
+											<th scope="col" >Action</th>
+											<th scope="col" >Cancel</th>
+
+										</tr>
+									</thead>
+									<tbody>
+					<!--				
+										<tr >
+											<td hidden><span></span> </td>
+											<td><span></span> </td>
+                                            <td><span></span> </td>
+                                       		<td><span></span></td>
+                                            <td><span></span></td>                                                                                                                                                                                                                            
+                                            <td><span></span></td>
+                                            <td><span></span></td>
+                                            <td><span></span></td>
+                                            <td><span></span></td>
+                                            <td><span></span></td>
+                                            <td><span></span></td>
+                                           
+                                            <td><span></span></td>
+                                            <td>
+                                            <input type="button" value="Chd" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >
+                                            </td>
+                                           
+                                        </tr>
+			-->
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInPurchaseChdTable" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+
+
+
+
+
+
+					</div>
+				</div> <!-- .card -->
+
+			</div>
+			<!--/.col-->
+		</div>
+
+
+
+<!----------------------------------------------------------------------------------------------------------------------------------->
+
+
+			
+
+				
+
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+	
+<!--=====================================================================
+				Purchased QTY Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal15" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Purchased QTY</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+					
+<!-- =======================================  Purchased QTY Modal Table========================== -->
+						<div class="content mt-3">
+							<div class="animated fadeIn">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="card" style="width: 100%; overflow-y:scroll">
+											<div class="card-header">
+												<strong class="card-title">Purchased QTY</strong>
+											</div>
+											<div class="card-body">
+												<table id="purchasedQtyTable" class="table table-striped table-bordered" style="min-width: 100%">
+													<thead>
+														<tr class="titlerow">
+															<th scope="col" hidden>Purchase ID</th>
+															<th scope="col">Purchased Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+															<th scope="col">Purchased Qty</th>
+																										
+														</tr>
+													</thead>
+													<tbody>
+							<!--					<tr >
+														<td scope="row"><span></span></td>
+														<td scope="row"><span></span></td>
+														<td><span></span></td>
+							-->						</tr>
+														
+													</tbody>
+																								
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- .animated -->
+						</div><!-- .content -->
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>                         					
+
+ 
+<!--=====================================================================
+				Purchase Mst Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal30" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Purchase MST</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+			<!--	<div class="groove">	-->
+						<div class="row" >
+ 			   
+ 			   				<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Ticket Purchase Mst ID</label>
+									<input type="text" id="ticketPurchaseMstId" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketPurchaseMstId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Purchased Qty</label>
+									<input type="text" id="purchasedQty" class="form-control" aria-required="true" aria-invalid="false" name ="purchasedQty" readonly>
+								</div>
+							</div>
+							
+							<div class="col-2" hidden>
+								<div class="form-group" >
+									<label>From Agent Id</label>
+									<input type="text" id="fromAgentId3" class="form-control" aria-required="true" aria-invalid="false" name ="fromAgentId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-2" hidden>
+								<div class="form-group" >
+									<label>To Agent Id</label>
+									<input type="text" id="toAgentId3" class="form-control" aria-required="true" aria-invalid="false" name ="toAgentId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-2" hidden>
+								<div class="form-group" >
+									<label>AutoPayment</label>
+									<input type="text" id="autoPayment" class="form-control" aria-required="true" aria-invalid="false" name ="autoPayment" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group">
+									<label>Purchase Date</label>
+									<input type="date" id="purchaseDate" class="form-control" aria-required="true" aria-invalid="false"  name ="purchaseDate" >
+								</div>
+							</div>
+							
+							<div class="col-2" hidden>
+								<div class="form-group" >
+									<label>From Agent Self Status</label>
+									<input type="text" id="fromAgentSelfStatus" class="form-control" aria-required="true" aria-invalid="false"  name ="fromAgentSelfStatus" readonly>
+								</div>
+							</div>
+							
+					
+							<div class="col-3" >
+								<div class="form-group">
+									<label class="control-label mb-1">Ticket Request ID</label>
+									<input  type="text" id="ticketRequestId" class="form-control" aria-required="true" aria-invalid="false" name ="ticketRequestId" placeholder="Ticket Request ID" readonly>
+								</div>
+							</div>
+					
+							<div class="col-3">
+								<div class="form-group">
+									<label>Air Line:</label>
+						<!--								
+									<select class="form-control" name ="airLineId" id="airLineId" >
+										<option value="">Select Air Line</option>
+										<option th:each="airLine:${airLineList}"
+												th:value="${airLine.airLineId}"	
+												th:utext="${airLine.airLineName}"
+										/>
+									</select>
+						-->
+								<select class="form-control" id="ticketOwnerCompanyId" name ="ticketOwnerCompanyId"  >
+									<option value="">Select Air Line</option>
+									<option th:each="ticketOwner:${ticketOwnerCompanyList}"
+											th:value="${ticketOwner.ticketOwnerCompanyId}"	
+											th:utext="${ticketOwner.ownerCompanyName}"
+									/>
+								</select>
+								</div>
+							</div> 			   	
+					
+					<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">No of Tickets</label>
+							<input  type="text" id="noOfTickets" class="form-control" aria-required="true" aria-invalid="false"  name ="noOfTickets" placeholder="No of Tickets" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label>Possible Flight Date</label>
+							<input type="date" id="possibleFlightDate" class="form-control" aria-required="true" aria-invalid="false"  name ="possibleFlightDate" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label>Flight Date<span class="req" style="color: red">*</span></label>
+							<input type="date" id="flightDate" class="form-control" aria-required="true" aria-invalid="false"  name ="flightDate" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Total Amount</label>
+							<input  type="text" id="totalAMT" class="form-control" aria-required="true" aria-invalid="false" name ="totalAMT" placeholder="Total Amount" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Req. Agent Name</label>
+							<input  type="text" id="requestedAgentName" class="form-control" aria-required="true" aria-invalid="false" name ="requestedAgentName" placeholder="Requested Agent Name" > 					
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Req. Passenger Name</label>
+							<input  type="text" id="requestedPassengerName" class="form-control" aria-required="true" aria-invalid="false" name ="requestedPassengerName" placeholder="Requested Passenger Name" > 												
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Agent Passenger Name</label>
+							<input  type="text" id="agentPassengerName" class="form-control" aria-required="true" aria-invalid="false"  name ="agentPassengerName" placeholder="Agent Passenger Name" >
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group" >
+							<label class="control-label mb-1">User ID</label>
+							<input  type="text" id="userIdMst" class="form-control" aria-required="true" aria-invalid="false" name ="userId" placeholder="User ID" > 												
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group"  >
+							<label class="control-label mb-1">From Country ID</label>
+							<input  type="text" id="fromCountryId" class="form-control" aria-required="true" aria-invalid="false" name ="fromCountryId" placeholder="From Country ID" >																	
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group"  >
+							<label class="control-label mb-1">From City ID</label>
+							<input  type="text" id="fromCityId" class="form-control" aria-required="true" aria-invalid="false" name ="fromCityId" placeholder="From City ID" >																
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group"  >
+							<label class="control-label mb-1">To Country ID</label>
+							<input  type="text" id="toCountryId" class="form-control" aria-required="true" aria-invalid="false" name ="toCountryId" placeholder="To Country ID" >							
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group"  >
+							<label class="control-label mb-1">To City ID</label>
+							<input  type="text" id="toCityId" class="form-control" aria-required="true" aria-invalid="false" name ="toCityId" placeholder="To City ID" >										
+						</div>
+					</div>
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="purchaseMstActive" name ="active" checked>
+								<label class="custom-control-label" for="purchaseMstActive"></label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="purchaseMstRemarks" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="purchaseMstRemarks" placeholder="Write Message Here" id="purchaseMstRemarks" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+				
+				</div>	
+					
+					
+					<div class="row" id="row2">
+						<div class="col-5 text-left">
+							<a><span class="req" style="color: red">Purchase Info(Per Ticket)</span></a>
+						</div>
+					</div>
+				
+			
+			
+			<div class="row" id="row3">
+		
+			</div>
+			
+			
+			
+				<div class="row" id="row1">
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(USD)</label>
+							<input  type="text" id="ticketAMTUSD2" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTUSD" placeholder="Purchase Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(BDT)</label>
+							<input  type="text" id="ticketAMTBDT2" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTBDT" placeholder="Purchase Price(BDT)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(USD)</label>
+							<input  type="text" id="sellingPriceUSD2" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceUSD" placeholder="Selling Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(BDT)</label>
+							<input  type="text" id="sellingPriceBDT2" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceBDT" placeholder="Selling Price(BDT)" >
+						</div>
+					</div>
+					
+				</div>
+				
+					
+					<div class="row">  
+					    <div class="col-12 text-right">
+						     <div class="form-group">
+								<button type="button" id="savePurchaseMst" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" data-dismiss="modal" class="btn btn-default btn-md">
+        						Close
+        						</button>
+						     </div>
+					    </div>
+	
+                   </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div> 
+ 
+ <!--=====================================================================
+				Purchase Chd  Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal45" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Purchase Chd</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+					
+						<div class="row">
+ 			   
+ 			   				<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Ticket Purchase Chd ID</label>
+									<input type="text" id="ticketPurchaseChdId" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketPurchaseChdId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>No of Tickets</label>
+									<input type="text" id="noOfTicketsChd" class="form-control" aria-required="true" aria-invalid="false"  name ="noOfTicketsChd" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>Ticket Purchase Mst ID</label>
+									<input type="text" id="chdticketPurchaseMstId" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketPurchaseMstId" readonly>
+								</div>
+							</div>
+
+							<div class="col-3">
+								<div class="form-group">
+									<label>Ticket No</label>
+									<input type="text" id="ticketNo" class="form-control" aria-required="true" aria-invalid="false" name ="ticketNo" placeholder="Ticket No">
+								</div>
+							</div>
+					
+							<div class="col-3">
+								<div class="form-group">
+								<label class="control-label mb-1">User Name</label>
+									<select class="form-control" id="ticketChdUserId" name ="ticketChduserName"  >
+										<option value="0">Select User</option>
+										<option th:each="user:${userList}"
+												th:value="${user.userId}"	
+												th:utext="${user.userName}"
+										/>										
+									</select>
+														
+								</div>
+							</div>
+					
+					
+					<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">Agent Passenger Name</label>
+							<input  type="text" id="agentPassengerNameChd" class="form-control" aria-required="true" aria-invalid="false"  name ="agentPassengerNameChd" placeholder="Agent Passenger Name" >
+						</div>
+					</div>
+										   	
+					
+					<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">PNR</label>
+							<input  type="text" id="pNR" class="form-control" aria-required="true" aria-invalid="false"  name ="pNR" placeholder="PNR" >
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Ticket AMT(USD)</label>
+							<input  type="text" id="ticketAMTUSD" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTUSD" placeholder="Ticket AMT(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Ticket AMT(BDT)</label>
+							<input  type="text" id="ticketAMTBDT" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTBDT" placeholder="Ticket AMT(BDT)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(USD)</label>
+							<input  type="text" id="purchasePriceUSD" class="form-control" aria-required="true" aria-invalid="false" name ="purchasePriceUSD" placeholder="Purchase Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(BDT)</label>
+							<input  type="text" id="purchasePriceBDT" class="form-control" aria-required="true" aria-invalid="false" name ="purchasePriceBDT" placeholder="Purchase Price(BDT)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(USD)</label>
+							<input  type="text" id="sellingPriceUSD" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceUSD" placeholder="Selling Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(BDT)</label>
+							<input  type="text" id="sellingPriceBDT" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceBDT" placeholder="Selling Price(BDT)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label>Country From<span class="req" style="color: red">*</span>:</label>
+								<select class="form-control" name ="countryFrom" id="ticketFromCountryId" required>
+									<option value="">Select Country</option>	
+									<option th:each="country:${countryList}"
+											th:value="${country.countryId}"	
+											th:utext="${country.countryName}"
+									/>										
+								</select>
+						</div>
+					</div>
+												
+					<div class="col-3">
+						<div class="form-group">
+							<label>City From<span class="req" style="color: red">*</span>:</label>
+							<select class="form-control" name ="cityFrom" id="ticketFromCityId" required>
+								<option value="">Select City</option>
+								<option th:each="city:${cityList}"
+										th:value="${city.cityId}"	
+										th:utext="${city.cityName}"
+								/> 						   								
+							</select>
+						</div>
+					</div>
+												
+												
+					<div class="col-3">
+						<div class="form-group">
+							<label  class="control-label mb-1">Country To<span class="req" style="color: red">*</span>:</label>
+								<select class="form-control" name ="countryTo" id="ticketToCountryId" required>
+								<option value="">Select Country</option>		
+								<option th:each="country:${countryList}"
+										th:value="${country.countryId}"	
+										th:utext="${country.countryName}"
+								/>										
+								</select>
+						</div>
+					</div>
+												
+					<div class="col-3">
+						<div class="form-group">
+							<label  class="control-label mb-1">City To<span class="req" style="color: red">*</span>:</label>
+								<select class="form-control" name ="cityTo" id="ticketToCityId" required>
+								<option value="">Select City</option>
+								<option th:each="city:${cityList}"
+										th:value="${city.cityId}"	
+										th:utext="${city.cityName}"
+								/> 						   								
+							</select>
+						</div>
+					</div>
+					
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="ticketRemarksChd" placeholder="Write Message Here" id="ticketRemarksChd" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+					
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="ticketChdActive" name ="active" checked>
+								<label class="custom-control-label" for="ticketChdActive"></label>
+							</div>
+						</div>
+					</div>
+					
+					
+					  
+					    <div class="col-12 text-right">
+						     <div class="form-group">
+								<button type="button" id="savePurchaseChd" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						     </div>
+					    </div>
+	
+                 </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div> 
+ 
+ 
+<!--=====================================================================
+				PurchaseChd Cancel Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal60" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">PurchaseChd Cancel</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+		
+						<div class="row" >
+ 			   
+ 			   				<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Ticket PurchaseChd Cancel Id</label>
+									<input type="text" id="ticketPurchaseChdCancelId" class="form-control" aria-required="true" aria-invalid="false" name ="ticketPurchaseChdCancelId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Ticket PurchaseMstId</label>
+									<input type="text" id="cancelPurchaseMstId"  class="form-control" aria-required="true" aria-invalid="false" name ="ticketPurchaseMstId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group" >
+									<label>Ticket PurchaseChd Id</label>
+									<input type="text" id="cancelPurchaseChdId" class="form-control" aria-required="true" aria-invalid="false" name ="ticketPurchaseChdId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>Cancel Date</label>
+									<input type="Date" id="cancelDate" class="form-control" aria-required="true" aria-invalid="false" name ="CancelDate" >
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>QTY</label>
+									<input type="text" id="qty" class="form-control" aria-required="true" aria-invalid="false" name ="qty" >
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>Cancel Reason</label>
+									<input type="text" id="cancelReason" class="form-control" aria-required="true" aria-invalid="false" name ="cancelReason" >
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>Penalty Amount</label>
+									<input type="text" id="penaltyAmount" class="form-control" aria-required="true" aria-invalid="false" name ="penaltyAmount" >
+								</div>
+							</div>
+							
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="purchaseCancelActive" name ="purchaseCancelActive" checked>
+								<label class="custom-control-label" for="purchaseCancelActive"></label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="purchaseMstRemarks" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="purchaseCancelRemarks" placeholder="Write Message Here" id="purchaseCancelRemarks" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+				
+				</div>	
+				
+					
+					<div class="row">  
+					    <div class="col-12 text-right">
+						     <div class="form-group">
+								<button type="button" id="savePurchaseCancel" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" data-dismiss="modal" class="btn btn-default btn-md">
+        						Close
+        						</button>
+						     </div>
+					    </div>
+	
+                   </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>			
+
+ 
+ <!--=====================================================================
+			self Purchase Mst Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal75" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Purchase MST</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+			<!--	<div class="groove">	-->
+						<div class="row" >
+ 			   
+ 			   				<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Ticket Purchase Mst ID</label>
+									<input type="text" id="ticketPurchaseMstId2" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketPurchaseMstId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" hidden>
+								<div class="form-group" >
+									<label>Purchased Qty</label>
+									<input type="text" id="purchasedQty2" class="form-control" aria-required="true" aria-invalid="false" name ="purchasedQty" readonly>
+								</div>
+							</div>
+							
+							
+							<div class="col-2" hidden>
+								<div class="form-group" >
+									<label>AutoPayment</label>
+									<input type="text" id="autoPayment2" class="form-control" aria-required="true" aria-invalid="false" name ="autoPayment" readonly>
+								</div>
+							</div>
+
+							<div class="col-3">
+								<div class="form-group">
+									<label>Purchase Date</label>
+									<input type="date" id="purchaseDate2" class="form-control" aria-required="true" aria-invalid="false"  name ="purchaseDate" >
+								</div>
+							</div>
+					
+							<div class="col-3" >
+								<div class="form-group">
+									<label class="control-label mb-1">Ticket Request ID</label>
+									<input  type="text" id="ticketRequestId2" class="form-control" aria-required="true" aria-invalid="false" name ="ticketRequestId" placeholder="Ticket Request ID" readonly>
+								</div>
+							</div>
+					
+							<div class="col-3">
+								<div class="form-group">
+									<label>Air Line:</label>						
+									<select class="form-control" id="ticketOwnerCompanyId2" name ="ticketOwnerCompanyId"  >
+									<option value="">Select Air Line</option>
+									<option th:each="ticketOwner:${ticketOwnerCompanyList}"
+											th:value="${ticketOwner.ticketOwnerCompanyId}"	
+											th:utext="${ticketOwner.ownerCompanyName}"
+									/>
+									</select>
+								</div>
+							</div>
+							
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>From Agent</label>
+									<select class="form-control" name ="fromAgentId2" id="fromAgentId2" >
+							    		<option value="">Select Agent</option>		
+									    <option th:each="agent:${agentList}"
+										        th:value="${agent.agentId}"	
+											    th:utext="${agent.agentName}"
+									    />										
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label>To Agent Id</label>
+									<select class="form-control" name ="toAgentId2" id="toAgentId2" >
+							    		<option value="">Select Agent</option>		
+									    <option th:each="agent:${agentList}"
+										        th:value="${agent.agentId}"	
+											    th:utext="${agent.agentName}"
+									    />										
+									 </select>
+								</div>
+							</div> 			   	
+					
+					<div class="col-3" >
+						<div class="form-group">
+							<label class="control-label mb-1">No of Tickets</label>
+							<input  type="text" id="noOfTickets2" class="form-control" aria-required="true" aria-invalid="false"  name ="noOfTickets" placeholder="No of Tickets" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label>Possible Flight Date</label>
+							<input type="date" id="possibleFlightDate2" class="form-control" aria-required="true" aria-invalid="false"  name ="possibleFlightDate" readonly>
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label>Flight Date<span class="req" style="color: red">*</span></label>
+							<input type="date" id="flightDate2" class="form-control" aria-required="true" aria-invalid="false"  name ="flightDate" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Total Amount</label>
+							<input  type="text" id="totalAMT2" class="form-control" aria-required="true" aria-invalid="false" name ="totalAMT" placeholder="Total Amount" >
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Req. Agent Name</label>
+							<input  type="text" id="requestedAgentName2" class="form-control" aria-required="true" aria-invalid="false" name ="requestedAgentName" placeholder="Requested Agent Name" > 					
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Req. Passenger Name</label>
+							<input  type="text" id="requestedPassengerName2" class="form-control" aria-required="true" aria-invalid="false" name ="requestedPassengerName" placeholder="Requested Passenger Name" > 												
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group">
+							<label class="control-label mb-1">Agent Passenger Name</label>
+							<input  type="text" id="agentPassengerName2" class="form-control" aria-required="true" aria-invalid="false"  name ="agentPassengerName" placeholder="Agent Passenger Name" >
+						</div>
+					</div>
+					
+					<div class="col-3" hidden>
+						<div class="form-group" >
+							<label class="control-label mb-1">User ID</label>
+							<input  type="text" id="userIdMst2" class="form-control" aria-required="true" aria-invalid="false" name ="userId" placeholder="User ID" > 												
+						</div>
+					</div>
+					
+					<div class="col-3" >
+						<div class="form-group"  >
+							<label class="control-label mb-1">From Country ID</label>
+			<!--			<input  type="text" id="fromCountryId" class="form-control" aria-required="true" aria-invalid="false" name ="fromCountryId" placeholder="From Country ID" > 	-->											
+							<select class="form-control" id="fromCountryId2" name ="countryTo" >
+								<option value="">Select Country</option>		
+								<option th:each="country:${countryList}"
+										th:value="${country.countryId}"	
+										th:utext="${country.countryName}"
+								/>										
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-3" >
+						<div class="form-group"  >
+							<label class="control-label mb-1">From City ID</label>
+			<!--			<input  type="text" id="fromCityId" class="form-control" aria-required="true" aria-invalid="false" name ="fromCityId" placeholder="From City ID" > 		-->										
+							<select class="form-control" id="fromCityId2" name ="toCity" >
+								<option value="">Select City</option>
+								<option th:each="city:${cityList}"
+										th:value="${city.cityId}"	
+										th:utext="${city.cityName}"
+								/>  								
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-3" >
+						<div class="form-group"  >
+							<label class="control-label mb-1">To Country ID</label>
+			<!--			<input  type="text" id="toCountryId" class="form-control" aria-required="true" aria-invalid="false" name ="toCountryId" placeholder="To Country ID" > 		-->										
+							<select class="form-control" id="toCountryId2" name ="countryTo" >
+								<option value="">Select Country</option>		
+								<option th:each="country:${countryList}"
+										th:value="${country.countryId}"	
+										th:utext="${country.countryName}"
+								/>										
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-3" >
+						<div class="form-group"  >
+							<label class="control-label mb-1">To City ID</label>
+	<!--					<input  type="text" id="toCityId" class="form-control" aria-required="true" aria-invalid="false" name ="toCityId" placeholder="To City ID" > 	-->											
+							<select class="form-control" id="toCityId2" name ="toCity" >
+								<option value="">Select City</option>
+								<option th:each="city:${cityList}"
+										th:value="${city.cityId}"	
+										th:utext="${city.cityName}"
+								/>  								
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="purchaseMstActive2" name ="active" checked>
+								<label class="custom-control-label" for="purchaseMstActive2"></label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="purchaseMstRemarks2" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="purchaseMstRemarks" placeholder="Write Message Here" id="purchaseMstRemarks2" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+				
+				</div>	
+					
+					
+					<div class="row" id="row22">
+						<div class="col-5 text-left">
+							<a><span class="req" style="color: red">Purchase Info(Per Ticket)</span></a>
+						</div>
+					</div>
+				
+			
+			
+			<div class="row" id="row32">
+		
+			</div>
+			
+			
+			
+				<div class="row" id="row12">
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(USD)</label>
+							<input  type="text" id="ticketAMTUSD22" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTUSD" placeholder="Purchase Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Purchase Price(BDT)</label>
+							<input  type="text" id="ticketAMTBDT22" class="form-control" aria-required="true" aria-invalid="false" name ="ticketAMTBDT" placeholder="Purchase Price(BDT)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(USD)</label>
+							<input  type="text" id="sellingPriceUSD22" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceUSD" placeholder="Selling Price(USD)" >
+						</div>
+					</div>
+					
+					<div class="col-3">
+						<div class="form-group">
+							<label class="control-label mb-1">Selling Price(BDT)</label>
+							<input  type="text" id="sellingPriceBDT22" class="form-control" aria-required="true" aria-invalid="false" name ="sellingPriceBDT" placeholder="Selling Price(BDT)" >
+						</div>
+					</div>
+					
+				</div>
+				
+					
+					<div class="row">  
+					    <div class="col-12 text-right">
+						     <div class="form-group">
+								<button type="button" id="savePurchaseMst2" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" data-dismiss="modal" class="btn btn-default btn-md">
+        						Close
+        						</button>
+						     </div>
+					    </div>
+	
+                   </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+ 
+ 
+ 			   
+	
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/ajax.js"></script>
+
+
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script type="text/javascript">
+	
+
+	$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#ticketPurchaseTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#purchaseMSTTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+$(document).ready(function(){
+  $("#myInput3").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#purchaseChdTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+
+
+   function checkForUserId()
+		{
+		
+		
+		var passportNo=$("#passportNo").val();
+		
+		var formData= { 
+     				 		"passportNo" :passportNo
+     				 		
+						};
+		
+		 $.ajax({
+		            type : "GET",	    		           
+		             url:"/ticketpurchasecontroller/checkinguserid",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            var x="";
+            document.getElementById("userId").value=x;
+            document.getElementById("userName").value=x;
+	  	 	document.getElementById("dob").value=x;
+	     	document.getElementById("fatherName").value=x;
+	     	document.getElementById("motherName").value=x;
+	     	document.getElementById("contactNo").value=x;
+	     	document.getElementById("userAddress").value=x;
+            }
+            else{
+            
+             $.each(result, function(i,modelUser){
+             
+             
+	     
+	     document.getElementById("userId").value=modelUser.userId;
+	     document.getElementById("userName").value=modelUser.userId;
+	  	 document.getElementById("dob").value=modelUser.dob;
+	     document.getElementById("fatherName").value=modelUser.fatherName;
+	     document.getElementById("motherName").value=modelUser.motherName;
+	     document.getElementById("contactNo").value=modelUser.contactNo;
+	     document.getElementById("userAddress").value=modelUser.userAddress;
+	    
+	 
+	     		
+		});        // each
+            
+            }		//else
+		               
+		            	
+		            },		// success
+			 });		// ajax's
+		
+		}		//function
+     
+     $('#userName').change(
+		        function() {
+		        
+		        var userId=$('#userName').val();
+		        //document.getElementById("userId").value = userId;
+		        
+		        var formData= { 
+     				 		"userId" :userId
+     				 		
+						};
+		
+		 $.ajax({
+		            type : "GET",	    		           
+		             url:"/ticketpurchasecontroller/getuserid",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            var x="";
+            document.getElementById("userId").value=x;
+            document.getElementById("userName").value=x;
+	  	 	document.getElementById("passportNo").value=x;
+            }
+            else{
+            
+             $.each(result, function(i,modelUser){
+             
+             
+	     
+	     document.getElementById("userId").value=modelUser.userId;
+	     document.getElementById("userName").value=modelUser.userId;
+	  	 
+	     document.getElementById("passportNo").value=modelUser.passportNo;
+	 
+	     		
+		});        // each
+            
+            }		//else
+		               
+		            	
+		            },		// success
+			 });		// ajax's
+		        
+	 });	//change function
+	 
+	 function codeAddress(){
+	
+	 var purchaseAcitve= document.getElementById("purchaseActive");
+	 
+	 if(purchaseAcitve.checked==true)
+	 {
+	 $('#startDate').prop('readonly', false);
+	 $('#endDate').prop('readonly', false);
+	 //document.getElementById("startDate").readOnly==false;
+	 //document.getElementById("endDate").readOnly==false;
+	 
+	 }
+	 else
+	 {
+	 $('#startDate').prop('readonly', true);
+	 $('#endDate').prop('readonly', true);
+	 //document.getElementById("startDate").readOnly==true;
+	 //document.getElementById("endDate").readOnly==true;
+	 }
+     
+     }
+    // window.onload=codeAddress;
+     
+     function myFunction(){
+    /*
+     var purchaseAcitve= document.getElementById("purchaseActive");
+     if(purchaseAcitve.checked==true)
+	 {
+	 $('#startDate').prop('readonly', false);
+	 $('#endDate').prop('readonly', false);
+	 
+	 
+	 }
+	 else
+	 {
+	 $('#startDate').prop('readonly', true);
+	 $('#endDate').prop('readonly', true);
+	 
+	 }
+  */   
+	}
+     
+$(function () {
+    $('#searchForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+      //alert("in submit function");
+      
+      var check=document.getElementById("purchaseActive");
+       if(check.checked==true){
+      	
+      	 ticketPurchaseDone();
+      		      	
+      	}
+      	else{
+      	
+      	 ticketPurchaseUnDone();
+   	
+      	}
+      
+   
+ 
+   });  // submit
+   });   // function
+   
+   
+   function ticketPurchaseUnDone()
+   {
+   
+   
+   //var agentId = $("#agentId").val();
+   var fromAgentId = $("#fromAgentId").val();
+   var toAgentId = $("#toAgentId").val();
+   var passportNo = $("#passportNo").val();
+   var userId = $("#userName").val();
+   var fromCountryId = $("#fromCountry").val();
+   var fromCityId = $("#fromCity").val();
+   var toCountryId = $("#toCountry").val();
+   var toCityId = $("#toCity").val();
+   var startDate = $("#startDate").val();
+   var endDate = $("#endDate").val();
+   
+   
+   var formData= { 
+       	 		"passportNo" : passportNo,
+       	 		//"agentId" : agentId,
+       	 		"fromAgentId" : fromAgentId,
+       	 		"toAgentId" : toAgentId,
+        		"userId" : userId,
+        		"fromCountryId" : fromCountryId,
+        		"fromCityId" : fromCityId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"fromDate" : startDate,
+        		"toDate" : endDate
+        		
+        		};
+       		
+        		
+        		 $('#ticketPurchaseTable tbody').empty();
+       	  
+       	 
+       	  $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getticketpurchasemstundone",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+	    
+	    	
+			 var customerRow = '<tr>' +
+	    	'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdTicketRequestId" hidden>' + modelTicketPurchaseCustomList.ticketRequestId + '</td>' +   			
+			'<td class="tdRequestDate" >' +'<a href="#" >'+ modelTicketPurchaseCustomList.requestDate +'</a>'+ '</td>' +
+			'<td class="tdFromAgentId" hidden>' + modelTicketPurchaseCustomList.fromAgentId+'</td>' +
+			'<td class="tdFromAgentName">' + modelTicketPurchaseCustomList.fromAgentName+'</td>' +
+			'<td class="tdFromAgentSelfStatus" hidden>' + modelTicketPurchaseCustomList.fromAgentSelfStatus+'</td>' +
+			'<td class="tdToAgentId" hidden>' + modelTicketPurchaseCustomList.toAgentId+'</td>' +
+			'<td class="tdToAgentName">' + modelTicketPurchaseCustomList.toAgentName+'</td>' +
+			'<td class="tdToAgentSelfStatus" hidden>' + modelTicketPurchaseCustomList.toAgentSelfStatus+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseCustomList.userId+'</td>' +
+			'<td class="tdUserName">' + modelTicketPurchaseCustomList.userName+'</td>' +
+			'<td class="tdRequesterName">' + modelTicketPurchaseCustomList.ticketRequesterName+'</td>' +
+			'<td class="tdPossibleFlightDate">' + modelTicketPurchaseCustomList.possibleFlightDate+'</td>' +
+			'<td class="tdTicketOwnerCompanyId" hidden>' + modelTicketPurchaseCustomList.ticketOwnerCompanyId+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseCustomList.fromCountryId + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseCustomList.fromCityId+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseCustomList.toCountryId+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseCustomList.toCityId +'</td>' +
+			'<td class="tdFromCountry" >' + modelTicketPurchaseCustomList.fromCountryName + '</td>' +
+			'<td class="tdFromCity" >' + modelTicketPurchaseCustomList.fromCityName+'</td>' +
+			'<td class="tdToCountry" >' + modelTicketPurchaseCustomList.tocountryName+'</td>' +
+			'<td class="tdToCity">' + modelTicketPurchaseCustomList.toCityName +'</td>' +
+			'<td class="tdAgreementAMT" hidden>' + modelTicketPurchaseCustomList.agreementAMT +'</td>' +
+			'<td class="tdNoOfTickets">' + modelTicketPurchaseCustomList.ticketRequestNoOfTickets + '</td>' +
+			'<td class="tdPurchasedQTY" data-toggle="modal" data-target="#largeModal15">' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +
+		   	'<td class="tdAutoPayment" hidden>' + modelTicketPurchaseCustomList.autoPayment + '</td>' +
+			'<td class="tdsAutoPayment">' + modelTicketPurchaseCustomList.sAuotPayment + '</td>' +
+		   	'<td class="tdPurchase">' + '<input type="button" value="Purchase Mst" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#ticketPurchaseTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	var table="#ticketPurchaseTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInTicketPurchaseTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+   
+   
+   
+   }		//ticketPurchaseUnDone function
+   
+   
+   function ticketPurchaseDone()
+   {
+   
+   
+   //var agentId = $("#agentId").val();
+   var fromAgentId = $("#fromAgentId").val();
+   var toAgentId = $("#toAgentId").val();
+   var passportNo = $("#passportNo").val();
+   var userId = $("#userName").val();
+   var fromCountryId = $("#fromCountry").val();
+   var fromCityId = $("#fromCity").val();
+   var toCountryId = $("#toCountry").val();
+   var toCityId = $("#toCity").val();
+   var startDate = $("#startDate").val();
+   var endDate = $("#endDate").val();
+   
+   
+   var formData= { 
+       	 		"passportNo" : passportNo,
+       	 		//"agentId" : agentId,
+       	 		"fromAgentId" : fromAgentId,
+       	 		"toAgentId" : toAgentId,
+        		"userId" : userId,
+        		"fromCountryId" : fromCountryId,
+        		"fromCityId" : fromCityId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"fromDate" : startDate,
+        		"toDate" : endDate
+        		};
+       		
+        		
+        		 $('#ticketPurchaseTable tbody').empty();
+       	  
+       	 
+       	  $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getticketpurchasemstdone",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+	    
+	    	
+			 var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketRequestId" hidden>' + modelTicketPurchaseCustomList.ticketRequestId + '</td>' +
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +    			
+			'<td class="tdRequestDate" >' + '<a href="#" >'+ modelTicketPurchaseCustomList.requestDate +'</a>' + '</td>' +
+			'<td class="tdFromAgentId" hidden>' + modelTicketPurchaseCustomList.fromAgentId+'</td>' +
+			'<td class="tdFromAgentName">' + modelTicketPurchaseCustomList.fromAgentName+'</td>' +
+			'<td class="tdFromAgentSelfStatus" hidden>' + modelTicketPurchaseCustomList.fromAgentSelfStatus+'</td>' +
+			'<td class="tdToAgentId" hidden>' + modelTicketPurchaseCustomList.toAgentId+'</td>' +
+			'<td class="tdToAgentName">' + modelTicketPurchaseCustomList.toAgentName+'</td>' +
+			'<td class="tdToAgentSelfStatus" hidden>' + modelTicketPurchaseCustomList.toAgentSelfStatus+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseCustomList.userId+'</td>' +
+			'<td class="tdUserName">' + modelTicketPurchaseCustomList.userName+'</td>' +
+			'<td class="tdRequesterName">' + modelTicketPurchaseCustomList.ticketRequesterName+'</td>' +
+			'<td class="tdPossibleFlightDate">' + modelTicketPurchaseCustomList.possibleFlightDate+'</td>' +
+			'<td class="tdTicketOwnerCompanyId" hidden>' + modelTicketPurchaseCustomList.ticketOwnerCompanyId+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseCustomList.fromCountryId + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseCustomList.fromCityId+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseCustomList.toCountryId+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseCustomList.toCityId +'</td>' +
+			'<td class="tdFromCountry" >' + modelTicketPurchaseCustomList.fromCountryName + '</td>' +
+			'<td class="tdFromCity" >' + modelTicketPurchaseCustomList.fromCityName+'</td>' +
+			'<td class="tdToCountry" >' + modelTicketPurchaseCustomList.tocountryName+'</td>' +
+			'<td class="tdToCity">' + modelTicketPurchaseCustomList.toCityName +'</td>' +
+			'<td class="tdAgreementAMT" hidden>' + modelTicketPurchaseCustomList.agreementAMT +'</td>' +
+			'<td class="tdNoOfTickets">' + modelTicketPurchaseCustomList.ticketRequestNoOfTickets + '</td>' +
+			'<td class="tdPurchasedQTY" data-toggle="modal" data-target="#largeModal15">' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +
+		   	'<td class="tdAutoPayment" hidden>' + modelTicketPurchaseCustomList.autoPayment + '</td>' +
+			'<td class="tdsAutoPayment">' + modelTicketPurchaseCustomList.sAuotPayment + '</td>' +
+		   	'<td class="tdPurchase">' + '<input type="button" value="Purchase Mst" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#ticketPurchaseTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	var table="#ticketPurchaseTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInTicketPurchaseTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+   
+   
+   
+   }		//ticketPurchaseDone function
+   
+   
+   $("#ticketPurchaseTable").on('click','.tdPurchasedQTY',function(){
+   
+   var $row = $(this).closest("tr");
+   var ticketPurchaseMstId=$row.find(".tdTicketPurchaseMstId").text();
+   
+   //alert("MstId: "+ticketPurchaseMstId);
+   
+   if(ticketPurchaseMstId==0)
+   {
+   alert("No Records are found");
+   
+   $('#purchasedQtyTable tbody').empty();	
+   }
+   else
+   {
+   var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId
+       	 	       		
+        		};
+        		
+    $('#purchasedQtyTable tbody').empty();	
+       
+      $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getticketpurchasemstbyid",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+                      
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+	    	    	
+			 var customerRow = '<tr>' +
+	    				
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdPurchaseDate" >' + '<a href="#" >'+ modelTicketPurchaseCustomList.purchaseDate +'</a>' + '</td>' +
+			'<td class="tdPurchasedQTY" >' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +    			
+					 
+			'</tr>';
+									  
+									  						
+	      $('#purchasedQtyTable tbody').append(customerRow);
+					
+		});        // each
+		
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax    		
+        		
+   
+   
+   }		//else condition
+   
+   
+   });
+   
+   
+   
+   $("#ticketPurchaseTable").on('click','.tdPurchase',function(){
+   
+  
+   
+    $('#ticketAMTUSD2').prop('readonly', false);
+	$('#ticketAMTBDT2').prop('readonly', false);
+	$('#sellingPriceUSD2').prop('readonly', false);
+	$('#sellingPriceBDT2').prop('readonly', false);
+	$('#agentPassengerName').prop('readonly', false);
+	
+	//$('#ticketAMTUSD2').prop('hidden', false);
+	//$('#ticketAMTBDT2').prop('hidden', false);
+	//$('#sellingPriceUSD2').prop('hidden', false);
+	//$('#sellingPriceBDT2').prop('hidden', false);
+	
+	$('#row1').prop('hidden', false);
+	$('#row2').prop('hidden', false);
+	document.getElementById("row3").classList.add("groove");
+ //fromAgentId
+ //toAgentId
+   
+   var x ="";
+   var $row = $(this).closest("tr");
+   var ticketOwnerCompanyId=$row.find(".tdTicketOwnerCompanyId").text();
+   var noOfTickets=$row.find(".tdNoOfTickets").text();
+   var totalAMT=$row.find(".tdAgreementAMT").text();
+   var purchasedQty=$row.find(".tdPurchasedQTY").text();
+   //var requestedAgentName=$row.find(".tdAgentName").text();
+   var requestedAgentName=$row.find(".tdToAgentName").text();
+   var requestedPassengerName=$row.find(".tdUserName").text();
+   var ticketRequestId = $row.find(".tdTicketRequestId").text();
+   var possibleFlightDate = $row.find(".tdPossibleFlightDate").text();
+   var fromAgentSelfStatus = $row.find(".tdFromAgentSelfStatus").text();
+   var toAgentSelfStatus = $row.find(".tdToAgentSelfStatus").text();
+   var fromAgentId = $row.find(".tdFromAgentId").text();
+   var toAgentId = $row.find(".tdToAgentId").text();
+   var autoPayment = $row.find(".tdAutoPayment").text();
+   var ticketOwnerCompanyId = $row.find(".tdTicketOwnerCompanyId").text();
+  
+   
+   var userId=$row.find(".tdUserId").text();
+   var fromCountryId=$row.find(".tdFromCountryId").text();
+   var fromCityId=$row.find(".tdFromCityId").text();
+   var toCountryId=$row.find(".tdToCountryId").text();
+   var toCityId=$row.find(".tdToCityId").text();
+   
+ 
+ 
+  
+       Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+	document.getElementById("purchasedQty").value = purchasedQty;
+	document.getElementById("fromAgentId3").value = fromAgentId;
+    document.getElementById("toAgentId3").value = toAgentId;
+	document.getElementById("autoPayment").value = autoPayment;
+	document.getElementById("fromAgentSelfStatus").value = fromAgentSelfStatus;
+	document.getElementById("agentPassengerName").value = requestedPassengerName;
+    document.getElementById("userIdMst").value = userId;
+    document.getElementById("fromCountryId").value = fromCountryId;
+    document.getElementById("fromCityId").value = fromCityId;
+    document.getElementById("toCountryId").value = toCountryId;
+    document.getElementById("toCityId").value = toCityId;
+   
+    document.getElementById("requestedAgentName").value = requestedAgentName;
+    document.getElementById("requestedPassengerName").value = requestedPassengerName;
+    document.getElementById("ticketOwnerCompanyId").value = ticketOwnerCompanyId;
+   
+   
+    document.getElementById("ticketRequestId").value = ticketRequestId;
+    document.getElementById("noOfTickets").value = noOfTickets;
+    document.getElementById("totalAMT").value = totalAMT;
+    document.getElementById("purchaseMstRemarks").value = x;
+    document.getElementById("flightDate").value = x;
+    
+    document.getElementById("possibleFlightDate").value = possibleFlightDate;
+    
+     document.getElementById("purchaseDate").value = new Date().toDateInputValue();
+     
+     document.getElementById("ticketAMTUSD2").value = x;
+     document.getElementById("ticketAMTBDT2").value = x;
+     document.getElementById("sellingPriceUSD2").value = x;
+     document.getElementById("sellingPriceBDT2").value = x;
+     
+    // document.getElementById("toAgentSelfStatus").value = toAgentSelfStatus;
+   
+   });
+   
+   function selfPurchase()
+   {
+    $('#ticketAMTUSD22').prop('readonly', false);
+	$('#ticketAMTBDT22').prop('readonly', false);
+	$('#sellingPriceUSD22').prop('readonly', false);
+	$('#sellingPriceBDT22').prop('readonly', false);
+	$('#agentPassengerName2').prop('readonly', false);
+	
+	$('#row12').prop('hidden', false);
+	$('#row22').prop('hidden', false);
+	
+	document.getElementById("row32").classList.add("groove");
+	
+	
+	 Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+
+	var x ="";
+	
+    document.getElementById("purchaseDate2").value = new Date().toDateInputValue();
+    document.getElementById("possibleFlightDate2").value = new Date().toDateInputValue();
+    document.getElementById("requestedAgentName2").value = x;
+    document.getElementById("requestedPassengerName2").value = x;
+    document.getElementById("ticketOwnerCompanyId2").value = x;
+    document.getElementById("fromAgentId2").value = x;
+    document.getElementById("toAgentId2").value = x;
+    document.getElementById("ticketRequestId2").value = x;
+    document.getElementById("noOfTickets2").value = x;
+    document.getElementById("totalAMT2").value = x;
+    document.getElementById("purchaseMstRemarks2").value = x;
+    document.getElementById("flightDate2").value = x;
+    document.getElementById("purchasedQty2").value = x;
+    document.getElementById("possibleFlightDate2").value = x;
+    
+     document.getElementById("agentPassengerName2").value = x;
+     document.getElementById("userIdMst2").value = x;
+     document.getElementById("fromCountryId2").value = x;
+     document.getElementById("fromCityId2").value = x;
+     document.getElementById("toCountryId2").value = x;
+     document.getElementById("toCityId2").value = x;
+     document.getElementById("ticketAMTUSD22").value = x;
+     document.getElementById("ticketAMTBDT22").value = x;
+     document.getElementById("sellingPriceUSD22").value = x;
+     document.getElementById("sellingPriceBDT22").value = x;
+     document.getElementById("fromAgentSelfStatus2").value = x;
+     document.getElementById("toAgentSelfStatus2").value = x;
+     document.getElementById("autoPayment2").value = x;
+   
+   }
+   
+    
+    
+    $("#ticketPurchaseTable").on('click','.tdRequestDate',function(){
+    
+    var $row = $(this).closest("tr");
+    var ticketPurchaseMstId= $row.find(".tdTicketPurchaseMstId").text();
+    var fromCountryId= $row.find(".tdFromCountryId").text();;
+	var fromCityId= $row.find(".tdFromCityId").text();;
+	var toCountryId= $row.find(".tdToCountryId").text();;
+	var toCityId= $row.find(".tdToCityId").text();;
+    
+    if(ticketPurchaseMstId==0)
+    {
+    	alert("No Records are found");
+    }
+    else{
+    
+    var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId
+       	 		
+        		
+        		};
+        	
+        	$('#purchaseMSTTable tbody').empty();
+        	$('#purchaseChdTable tbody').empty();	
+       
+      $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getticketpurchasemstbyid",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+  
+	    	
+			 var customerRow = '<tr>' +
+	    	
+			
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdPurchaseDate" >' + '<a href="#" >'+ modelTicketPurchaseCustomList.purchaseDate +'</a>' + '</td>' +
+			'<td class="tdTicketRequestId" >' + modelTicketPurchaseCustomList.ticketRequestId + '</td>' +    			
+			'<td class="tdAirLingId" hidden>' + modelTicketPurchaseCustomList.ticketOwnerCompanyId+'</td>' +
+			'<td class="tdAirLingName" >' + modelTicketPurchaseCustomList.ownerCompanyName+'</td>' +
+			'<td class="tdNoOfTickets" >' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +
+			'<td class="tdFlightDate" >' + modelTicketPurchaseCustomList.flightDate + '</td>' +
+			'<td class="tdTotalAMT" >' + modelTicketPurchaseCustomList.totalAMT +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseCustomList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseCustomList.activeStatus +'</td>' +
+			'<td class="tdsActive" >' + modelTicketPurchaseCustomList.sActive +'</td>' +
+			'<td class="tdAgentName" hidden>' + modelTicketPurchaseCustomList.agentName+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseCustomList.userId+'</td>' +
+			'<td class="tdRequesterName" hidden>' + modelTicketPurchaseCustomList.ticketRequesterName+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseCustomList.fromCountryId + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseCustomList.fromCityId+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseCustomList.toCountryId+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseCustomList.toCityId +'</td>' +
+			'<td class="tdUserName" hidden>' + modelTicketPurchaseCustomList.userName + '</td>' +
+			'<td class="tdPossibleFlightDate" hidden>' + modelTicketPurchaseCustomList.possibleFlightDate+'</td>' +
+		  //'<td class="tdChd">' + '<input type="button" value="Purchase Chd" onClick="myFunction()" class="btn btn-primary btn-md"  data-toggle="modal" data-target="#largeModal45">' + '</td>' +
+			'<td class="tdEdit">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#purchaseMSTTable tbody').append(customerRow);
+					
+		});        // each
+		
+
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax  
+        		
+    }	//	else
+    
+     });
+     
+     
+     $("#purchaseMSTTable").on('click','.tdEdit',function(){
+    
+    $('#ticketAMTUSD2').prop('readonly', true);
+	$('#ticketAMTBDT2').prop('readonly', true);
+	$('#sellingPriceUSD2').prop('readonly', true);
+	$('#sellingPriceBDT2').prop('readonly', true);
+	$('#agentPassengerName').prop('readonly', true);
+	
+	//$('#ticketAMTUSD2').prop('hidden', true);
+	//$('#ticketAMTBDT2').prop('hidden', true);
+	//$('#sellingPriceUSD2').prop('hidden', true);
+	//$('#sellingPriceBDT2').prop('hidden', true);
+	
+	$('#row1').prop('hidden', true);
+	$('#row2').prop('hidden', true);
+	document.getElementById("row3").classList.remove("groove");
+   
+    
+   var x ="";
+   var $row = $(this).closest("tr");
+   var ticketOwnerCompanyId=$row.find(".tdTicketOwnerCompanyId").text();
+   var noOfTickets=$row.find(".tdNoOfTickets").text();
+   var totalAMT=$row.find(".tdTotalAMT").text();
+   var requestedAgentName=$row.find(".tdAgentName").text();
+   var requestedPassengerName=$row.find(".tdUserName").text();
+   var ticketRequestId = $row.find(".tdTicketRequestId").text();
+   var flightDate=$row.find(".tdFlightDate").text();
+   var remarks=$row.find(".tdRemarks").text();
+   var airLineId=$row.find(".tdAirLingId").text();
+   var activeStatus=$row.find(".tdActiveStatus").text();
+   var possibleFlightDate = $row.find(".tdPossibleFlightDate").text();
+   //alert("activeStatus: "+activeStatus);
+   
+   var userId=$row.find(".tdUserId").text();
+   var fromCountryId=$row.find(".tdFromCountryId").text();
+   var fromCityId=$row.find(".tdFromCityId").text();
+   var toCountryId=$row.find(".tdToCountryId").text();
+   var toCityId=$row.find(".tdToCityId").text();
+   var autoPayment = $row.find(".tdAutoPayment").text();
+   
+   //var agentPassengerName=$row.find(".tdRequesterName").text();
+   
+   if(activeStatus==1)
+   {
+   document.getElementById("purchaseMstActive").checked=true;
+   }
+   else
+   {
+   document.getElementById("purchaseMstActive").checked=false;
+   }
+   
+       Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+	
+
+    document.getElementById("purchaseDate").value = new Date().toDateInputValue();
+    document.getElementById("requestedAgentName").value = requestedAgentName;
+    document.getElementById("requestedPassengerName").value = requestedPassengerName;
+    document.getElementById("ticketOwnerCompanyId").value = ticketOwnerCompanyId;
+    document.getElementById("ticketRequestId").value = ticketRequestId;
+    document.getElementById("noOfTickets").value = noOfTickets;
+    document.getElementById("totalAMT").value = totalAMT;
+    document.getElementById("purchaseMstRemarks").value = remarks;
+    document.getElementById("flightDate").value = flightDate;
+    document.getElementById("possibleFlightDate").value = possibleFlightDate;
+    document.getElementById("purchasedQty").value = x;
+   
+	 document.getElementById("agentPassengerName").value = x;
+     document.getElementById("userIdMst").value = userId;
+     document.getElementById("fromCountryId").value = fromCountryId;
+     document.getElementById("fromCityId").value = fromCityId;
+     document.getElementById("toCountryId").value = toCountryId;
+     document.getElementById("toCityId").value = toCityId;
+     document.getElementById("ticketAMTUSD2").value = x;
+     document.getElementById("ticketAMTBDT2").value = x;
+     document.getElementById("sellingPriceUSD2").value = x;
+     document.getElementById("sellingPriceBDT2").value = x;
+     document.getElementById("fromAgentId3").value = x;
+     document.getElementById("toAgentId3").value = x;
+     document.getElementById("ticketOwnerCompanyId").value = airLineId;
+     document.getElementById("autoPayment").value = autoPayment;
+    
+    });
+    
+   
+   $('#savePurchaseMst').click(function(e) {
+   
+   		var x="";
+   		var ticketOwnerCompanyId= $("#ticketOwnerCompanyId").val();
+   		//var agentPassengerName= $("#agentPassengerName").val();
+   		var noOfTickets= $("#noOfTickets").val();
+   		var totalAMT= $("#totalAMT").val();
+   		var purchaseDate= $("#purchaseDate").val();
+   		var remarks= $("#purchaseMstRemarks").val();
+   		var ticketRequestId= $("#ticketRequestId").val();
+   		if(ticketRequestId==x)
+   		{
+   			ticketRequestId=0;
+   		}
+   		else{
+   			ticketRequestId=$("#ticketRequestId").val();
+   		}
+   		
+   		var ticketPurchaseMstId= $("#ticketPurchaseMstId").val();  		
+   		var flightDate= $("#flightDate").val();
+   		var possibleFlightDate= $("#possibleFlightDate").val();
+   		var active=document.getElementById("purchaseMstActive");
+   		var purchasedQty=$("#purchasedQty").val();
+   		var fromAgentId=$("#fromAgentId3").val();
+   		var toAgentId=$("#toAgentId3").val();
+   		
+   		var agentPassengerName=$("#agentPassengerName").val();
+   		var userId=$("#userIdMst").val();
+   		if(userId!=null||userId!=0)
+   		{
+   			var userId=$("#userIdMst").val();
+   		}
+   		else 
+   		{
+   			var userId=0;
+   		}
+   		var fromCountryId=$("#fromCountryId").val();
+   		var fromCityId=$("#fromCityId").val();
+   		var toCountryId=$("#toCountryId").val();
+   		var toCityId=$("#toCityId").val();
+   		var ticketAMTUSD=$("#ticketAMTUSD2").val();
+   		var ticketAMTBDT=$("#ticketAMTBDT2").val();
+   		var sellingPriceUSD=$("#sellingPriceUSD2").val();
+   		var sellingPriceBDT=$("#sellingPriceBDT2").val();
+   		//var sellingPriceUSD=$("#sellingPriceUSD2").val();
+   		//var sellingPriceBDT=$("#sellingPriceBDT2").val();
+   		var fromAgentSelfStatus=$("#fromAgentSelfStatus").val();
+   		var toAgentSelfStatus=$("#toAgentSelfStatus").val();
+   		var autoPayment= $("#autoPayment").val();
+   		if(autoPayment==x)
+   		{
+   			autoPayment=0;
+   		}
+   		else{
+   			autoPayment= $("#autoPayment").val();
+   		}
+   		
+   		//alert("userId: "+userId+" fromCountryId: "+fromCountryId+" fromCityId: "+fromCityId+" toCountryId: "+toCountryId+" toCityId: "+toCityId)
+   		
+   		if(active.checked==true)
+   		{
+   		var activeStatus=1;
+   		}
+   		else
+   		{
+   		var activeStatus=0;
+   		}
+   		
+   		Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		var today = new Date().toDateInputValue();
+		
+		var y = purchasedQty-noOfTickets;
+   		
+   		//alert("in click function");
+   		
+   		if(purchasedQty==0 || purchasedQty==x || y!==0)
+   		{
+   		
+   		alert("Y: "+y);
+   		
+   		if(flightDate==x)
+   		{
+   			alert("Please Insert Flight Date");
+   		}
+   		else if(flightDate < today)
+   		{
+   			alert("Flight Date must be today or future upcoming days");
+   		}
+   		
+   		else{
+   		
+   		var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId,
+       	 		"ticketRequestId" : ticketRequestId,
+        		"ticketOwnerCompanyId" : ticketOwnerCompanyId,
+        		"fromAgentId" : fromAgentId,
+        		"toAgentId" : toAgentId,
+        		"totalAMT" : totalAMT,
+        		"purchaseDate" : purchaseDate,
+        		"remarks" : remarks,
+        		"noOfTickets" : noOfTickets,
+        		"flightDate" : flightDate,
+        		"activeStatus" : activeStatus,
+        		"agentPassengerName" : agentPassengerName,
+        		"userId" : userId,
+        		"fromCountryId" : fromCountryId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"ticketAMTUSD" : ticketAMTUSD,
+        		"fromCityId" : fromCityId,
+        		"ticketAMTBDT" : ticketAMTBDT,
+        		"sellingPriceUSD" : sellingPriceUSD,
+        		"sellingPriceBDT" : sellingPriceBDT,
+        		"autoPayment" : autoPayment,
+        		"fromAgentSelfStatus" : fromAgentSelfStatus,
+        		"toAgentSelfStatus" : toAgentSelfStatus
+        		
+        		};
+       		
+        		
+        		 $('#purchaseMSTTable tbody').empty();
+        		 $('#purchaseChdTable tbody').empty();
+   		
+   		$.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/saveticketpurchasemst",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+            alert("Successfully saved");
+            
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+	    
+	    	
+			 var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdPurchaseDate" >' + '<a href="#" >'+ modelTicketPurchaseCustomList.purchaseDate +'</a>' + '</td>' +
+			'<td class="tdTicketRequestId" >' + modelTicketPurchaseCustomList.ticketRequestId + '</td>' +    			
+			'<td class="tdAirLingId" hidden>' + modelTicketPurchaseCustomList.airLineId+'</td>' +
+			'<td class="tdAirLingName" >' + modelTicketPurchaseCustomList.airLineName+'</td>' +
+			'<td class="tdNoOfTickets" >' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +
+			'<td class="tdFlightDate" >' + modelTicketPurchaseCustomList.flightDate + '</td>' +
+			'<td class="tdTotalAMT" >' + modelTicketPurchaseCustomList.totalAMT +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseCustomList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseCustomList.activeStatus +'</td>' +
+			'<td class="tdsActive" >' + modelTicketPurchaseCustomList.sActive +'</td>' +
+			'<td class="tdAgentName" hidden>' + modelTicketPurchaseCustomList.agentName+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseCustomList.userId+'</td>' +
+			'<td class="tdRequesterName" hidden>' + modelTicketPurchaseCustomList.ticketRequesterName+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseCustomList.fromCountryId + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseCustomList.fromCityId+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseCustomList.toCountryId+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseCustomList.toCityId +'</td>' +
+			'<td class="tdUserName" hidden>' + modelTicketPurchaseCustomList.userName + '</td>' +
+			'<td class="tdPossibleFlightDate" hidden>' + modelTicketPurchaseCustomList.possibleFlightDate+'</td>' +
+		  //'<td class="tdChd">' + '<input type="button" value="Purchase Chd" onClick="myFunction()" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >' + '</td>' +
+			'<td class="tdEdit">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+			        
+			'</tr>';        
+			'</tr>';
+									  
+									  
+						
+	      $('#purchaseMSTTable tbody').append(customerRow);
+					
+				});        // each
+		
+			}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+        
+        
+        }		//else condition
+   		
+   	}		// if condition
+   	else
+   	{
+   	alert("Ticket Purchase Mst for this data is already done");
+   	
+   	}
+   	
+   	
+   		
+   
+    });	//clickFunction
+     
+     
+
+     
+     $("#purchaseMSTTable").on('click','.tdChd',function(){
+    
+   
+     
+     //data-toggle="modal" data-target="#largeModal45"
+      var $row = $(this).closest("tr");
+      
+      
+      var x = "";
+      var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();
+      var userId= $row.find(".tdUserId").text();
+      var userName= $row.find(".tdUserName").text();
+      var fromCountryId = $row.find(".tdFromCountryId").text();     
+      var fromCityId = $row.find(".tdFromCityId").text();
+      var toCountryId = $row.find(".tdToCountryId").text();
+      var toCityId = $row.find(".tdToCityId").text();
+      var userName = $row.find(".tdUserName").text();
+      var noOfTickets = $row.find(".tdNoOfTickets").text();
+      var requesterName = $row.find(".tdRequesterName").text();      
+    //var modal = document.getElementById("largeModal45");
+    
+    //modal.style.display = "block";
+    //$('#largeModal45').modal('show');
+    
+    //noOfTicketsChd
+    
+    //alert("NO Of Tickets: "+noOfTickets);    
+      document.getElementById("ticketChdUserId").value = userId;
+      document.getElementById("noOfTicketsChd").value = noOfTickets;
+      document.getElementById("ticketFromCountryId").value = fromCountryId;
+      document.getElementById("ticketFromCityId").value = fromCityId;
+      document.getElementById("ticketToCountryId").value = toCountryId;
+      document.getElementById("ticketToCityId").value = toCityId;
+      document.getElementById("chdticketPurchaseMstId").value = ticketPurchaseMstId;
+      document.getElementById("agentPassengerNameChd").value = requesterName;
+      document.getElementById("ticketNo").value = x;
+      document.getElementById("pNR").value = x;
+      document.getElementById("ticketAMTUSD").value = x;
+      document.getElementById("ticketAMTBDT").value = x;
+      document.getElementById("sellingPriceUSD").value = x;
+      document.getElementById("sellingPriceBDT").value = x;
+      document.getElementById("ticketRemarksChd").value = x;
+    
+    
+ 
+  
+  
+         });
+ 
+
+/*         
+   
+   $("#purchaseMSTTable").on('click','.tdChd',function(){
+   
+   var $row = $(this).closest("tr");
+   	  var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();
+      var userId= $row.find(".tdUserId").text();
+      tdUserName
+      var fromCountryId = $row.find(".tdFromCountryId").text();     
+      var fromCityId = $row.find(".tdFromCityId").text();
+      var toCountryId = $row.find(".tdToCountryId").text();
+      var toCityId = $row.find(".tdToCityId").text();
+      var userName = $row.find(".tdUserName").text();
+      var noOfTickets = $row.find(".tdNoOfTickets").text();
+      var requesterName = $row.find(".tdRequesterName").text();
+   
+   
+   
+   
+   var colNo=parseInt(noOfTickets);
+   
+   var table = document.getElementById("purchaseChdEntryTable");
+   
+   for(var i=0; i<colNo; i++)
+   {
+   			var row = table.insertRow(i);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			var cell6 = row.insertCell(5);
+			var cell7 = row.insertCell(6);
+			var cell8 = row.insertCell(7);
+			var cell9 = row.insertCell(8);
+			var cell10 = row.insertCell(9);
+			var cell11 = row.insertCell(10);
+			var cell12 = row.insertCell(11);
+			var cell13 = row.insertCell(12);
+			var cell14 = row.insertCell(13);
+			var cell15 = row.insertCell(14);
+			var cell16 = row.insertCell(15);
+			//var cell17 = row.insertCell(16);
+			
+			
+			cell1.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell2.innerHTML = '<span id="chdticketPurchaseMstId" class="chdticketPurchaseMstId">'+ticketPurchaseMstId+'</span>';
+			cell3.innerHTML = '<span id="ticketNo" class="form-control ticketNo" onclick = "update(this.id)" contentEditable>'+'</span>';
+			cell4.innerHTML = '<span id="ticketChdUserId" class="ticketChdUserId">'+userId+'</span>';
+			cell5.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell6.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell7.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell8.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell9.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell10.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell11.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell12.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell13.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell14.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell15.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+			cell16.innerHTML = '<span id="ticketPurchaseChdId" class="ticketPurchaseChdId">'+'</span>';
+   
+   }
+   
+   
+   
+     });     
+ 
+*/ 
+    
+    
+     $('#savePurchaseChd').click(function(e) {
+     
+      //alert("in save chd");
+     
+      var ticketPurchaseMstId = $("#chdticketPurchaseMstId").val();
+      var agentPassengerName = $("#agentPassengerNameChd").val();
+      var userId= $("#ticketChdUserId").val();
+      var fromCountryId = $("#ticketFromCountryId").val();
+      var fromCityId = $("#ticketFromCityId").val();
+      var toCountryId = $("#ticketToCountryId").val();
+      var toCityId = $("#ticketToCityId").val();
+      var ticketNo = $("#ticketNo").val();
+      var pNR = $("#pNR").val();
+      var noOfTicketsChd = $("#noOfTicketsChd").val();
+      var ticketAMTUSD = $("#ticketAMTUSD").val();
+      var ticketAMTBDT = $("#ticketAMTBDT").val();
+      var purchasePriceUSD = $("#purchasePriceUSD").val();
+      var purchasePriceBDT = $("#purchasePriceBDT").val();
+      var sellingPriceUSD = $("#sellingPriceUSD").val();
+      var sellingPriceBDT = $("#sellingPriceBDT").val();
+      var remarks = $("#ticketRemarksChd").val();
+      var ticketPurchaseChdId = $("#ticketPurchaseChdId").val();
+      var check = document.getElementById("ticketChdActive");
+      
+      var tickets;
+      var noOfTicketsChd=parseInt(noOfTicketsChd);
+      
+      
+      //alert("noOfTicketsChd: "+noOfTicketsChd);
+      
+      
+      if(check.checked==true)
+      {
+      var activeStatus=1;
+      }
+      else
+      {
+      var activeStatus=0;
+      }
+
+
+      
+      var formData= { 
+      				
+      				"ticketPurchaseMstId" : ticketPurchaseMstId
+      };
+      
+      
+            $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getpurchasechd",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if((result===null||result.length==0) || result.length!=noOfTicketsChd)
+            {
+            
+		if(tickets==noOfTicketsChd)
+        {
+        //$('#largeModal45').modal('hide');
+        //$('#largeModal45').modal('dismiss');
+        
+        alert("Chd Data cannot be saved more for this Mst");
+        
+        }
+        
+        else{
+      
+      //alert("in save chd 2");
+      
+      var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId,
+       	 		"agentPassengerName" : agentPassengerName,
+       	 		"userId" : userId,
+        		"fromCountryId" : fromCountryId,
+        		"fromCityId" : fromCityId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"ticketNo" : ticketNo,
+        		"pNR" : pNR,
+        		"ticketAMTUSD" : ticketAMTUSD,
+        		"ticketAMTBDT" : ticketAMTBDT,
+        		"purchasePriceUSD" : purchasePriceUSD,
+        		"purchasePriceBDT" : purchasePriceBDT,
+        		"sellingPriceUSD" : sellingPriceUSD,
+        		"sellingPriceBDT" : sellingPriceBDT,
+        		"ticketPurchaseChdId" : ticketPurchaseChdId,
+        		"remarks" : remarks,
+        		
+        		"activeStatus" : activeStatus
+        		
+        		};
+        //alert("No of Tickets: "+tickets);
+       
+        
+        $('#purchaseChdTable tbody').empty();
+        		
+        		$.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/saveticketpurchasechd",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+            alert("Successfully saved");
+            
+            
+            
+             $.each(result, function(i,modelTicketPurchaseMstList){
+					
+	    
+	   	
+			 var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketPurchaseChdId" hidden>' + modelTicketPurchaseMstList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdTicketPurchaseMstId" >' + modelTicketPurchaseMstList.modelTicketPurchaseMst.ticketPurchaseMstId + '</td>' +    			
+	
+			'<td class="tdTicketNo">' + modelTicketPurchaseMstList.ticketNo+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseMstList.modelUser.userId+'</td>' +
+			'<td class="tdUserName">' + modelTicketPurchaseMstList.modelUser.userName+'</td>' +
+			'<td class="tdPNR" >' + modelTicketPurchaseMstList.pNR+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketPurchaseMstList.ticketAMTUSD +'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' +modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPriceUSD" hidden>' + modelTicketPurchaseMstList.sellingPriceUSD +'</td>' +
+			'<td class="tdSellingPriceBDT" hidden>' +modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePriceUSD" hidden>' +modelTicketPurchaseMstList.purchasePriceUSD+'</td>' +
+			'<td class="tdPurchasePriceBDT" hidden>' +modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdTicketAMT" >' + modelTicketPurchaseMstList.ticketAMTUSD +'/'+modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPrice" >' + modelTicketPurchaseMstList.sellingPriceUSD +'/'+modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePrice" >' + modelTicketPurchaseMstList.purchasePriceUSD +'/'+modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseMstList.countryFrom.countryId+'</td>' +
+			'<td class="tdFromCountryName" >' + modelTicketPurchaseMstList.countryFrom.countryName+'</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseMstList.cityFrom.cityId+'</td>' +
+			'<td class="tdFromCityName" >' + modelTicketPurchaseMstList.cityFrom.cityName+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseMstList.countryTo.countryId+'</td>' +
+			'<td class="tdToCountryName" >' + modelTicketPurchaseMstList.countryTo.countryName+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseMstList.cityTo.cityId +'</td>' +
+			'<td class="tdToCityName">' + modelTicketPurchaseMstList.cityTo.cityName +'</td>' +
+			'<td class="tdAgentPassengerName" hidden>' + modelTicketPurchaseMstList.agentPassengerName +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseMstList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseMstList.activeStatus + '</td>' +
+			'<td class="tdsActive">' + modelTicketPurchaseMstList.sActive + '</td>' +
+		   	'<td class="tdEditChd">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >'+ '</td>' +
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#purchaseChdTable tbody').append(customerRow);
+	      
+	  
+					
+				});        // each
+				
+		var x="";
+	  //tickets=tickets-1;
+	  tickets=tickets+1;
+	  //alert("No of Tickets: "+noOfTicketsChd+" tickets: "+tickets);
+	  
+	   
+	      
+	  document.getElementById("ticketNo").value = x;
+      document.getElementById("pNR").value = x;
+     // document.getElementById("ticketAMTUSD").value = x;
+     // document.getElementById("ticketAMTBDT").value = x;
+     // document.getElementById("sellingPriceUSD").value = x;
+     // document.getElementById("sellingPriceBDT").value = x;
+      document.getElementById("ticketRemarksChd").value = x;
+      //document.getElementById("noOfTicketsChd").value = tickets;
+      	
+				
+		
+			}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+        
+
+    }		//else condition
+
+
+            
+            }else{
+            
+            alert("Purchase Chd is already included in or cannot save chd data no more for this Purchase Mst");
+            
+
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax  
+     
+      
+          
+        
+     
+       });
+       
+$("#purchaseMSTTable").on('click','.tdPurchaseDate',function(){  
+
+	  var $row = $(this).closest("tr");
+      var x = "";
+      var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();  
+      
+      
+      var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId
+       	 		
+        		
+        		};
+        	
+        	$('#purchaseChdTable tbody').empty();	
+       
+      $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/getticketpurchasechdbymstid",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketPurchaseMstList){
+					
+	    							  
+			
+			var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketPurchaseChdId" hidden>' + modelTicketPurchaseMstList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdTicketPurchaseMstId" >' + modelTicketPurchaseMstList.ticketPurchaseMstId + '</td>' +    				
+			'<td class="tdTicketNo">' + modelTicketPurchaseMstList.ticketNo+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseMstList.userId+'</td>' +
+			'<td class="tdUserName">' + modelTicketPurchaseMstList.userName+'</td>' +
+			'<td class="tdPNR" >' + modelTicketPurchaseMstList.pNR+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketPurchaseMstList.ticketAMTUSD +'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' +modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPriceUSD" hidden>' + modelTicketPurchaseMstList.sellingPriceUSD +'</td>' +
+			'<td class="tdSellingPriceBDT" hidden>' +modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePriceUSD" hidden>' +modelTicketPurchaseMstList.purchasePriceUSD+'</td>' +
+			'<td class="tdPurchasePriceBDT" hidden>' +modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdTicketAMT" >' + modelTicketPurchaseMstList.ticketAMTUSD +'/'+modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPrice" >' + modelTicketPurchaseMstList.sellingPriceUSD +'/'+modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePrice" >' + modelTicketPurchaseMstList.purchasePriceUSD +'/'+modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseMstList.fromCountryId+'</td>' +
+			'<td class="tdFromCountryName" >' + modelTicketPurchaseMstList.fromCountryName+'</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseMstList.fromCityId+'</td>' +
+			'<td class="tdFromCityName" >' + modelTicketPurchaseMstList.fromCityName+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseMstList.toCountryId+'</td>' +
+			'<td class="tdToCountryName" >' + modelTicketPurchaseMstList.tocountryName+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseMstList.toCityId +'</td>' +
+			'<td class="tdToCityName">' + modelTicketPurchaseMstList.toCityName +'</td>' +
+			'<td class="tdAgentPassengerName" hidden>' + modelTicketPurchaseMstList.agentPassengerName +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseMstList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseMstList.activeStatus + '</td>' +
+			'<td class="tdsActive">' + modelTicketPurchaseMstList.sActive + '</td>' +
+		   	'<td class="tdEditChd">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >'+ '</td>' +
+			'<td class="tdPurchaseChdCancel">' + '<input type="button" value="Purchase Cancel" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal60" >'+ '</td>' +        
+			'</tr>';
+									  
+						
+	      $('#purchaseChdTable tbody').append(customerRow);
+					
+		});        // each
+		
+
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax   
+       
+       
+    });
+    
+    $("#purchaseChdTable").on('click','.tdPurchaseChdCancel',function(){    
+    
+    	var $row = $(this).closest("tr");
+      	var x = "";
+      	var ticketPurchaseChdId = $row.find(".tdTicketPurchaseChdId").text();
+      	var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();
+      	var ticketPurchasePriceBDT = $row.find(".tdPurchasePriceBDT").text();
+      	var penaltyAmount = (parseFloat(ticketPurchasePriceBDT)/100)*20;
+      	
+      	Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		var today = new Date().toDateInputValue();
+      	
+      	document.getElementById("ticketPurchaseChdCancelId").value = x;
+      	document.getElementById("cancelPurchaseChdId").value = ticketPurchaseChdId;
+      	//document.getElementById("penaltyAmount").value = penaltyAmount;
+      	document.getElementById("penaltyAmount").value = x;
+      	document.getElementById("cancelDate").value = today;
+      	document.getElementById("qty").value = 1;
+      	document.getElementById("cancelReason").value = x;
+      	document.getElementById("purchaseCancelRemarks").value = x;
+      	document.getElementById("cancelPurchaseMstId").value = ticketPurchaseMstId;
+      	//ticketPurchaseMstId
+    
+    });
+    
+    
+    $('#savePurchaseCancel').click(function(e) {
+    
+    var ticketPurchaseCancelId= $("#ticketPurchaseChdCancelId").val();
+    var ticketPurchaseMstId= $("#cancelPurchaseMstId").val();
+    var ticketPurchaseChdId= $("#cancelPurchaseChdId").val();
+    var penaltyAmount= $("#penaltyAmount").val();
+    var cancelDate= $("#cancelDate").val();
+    var qty= $("#qty").val();
+    var cancelReason= $("#cancelReason").val();
+    var remarks= $("#purchaseCancelRemarks").val();
+    var check= document.getElementById("purchaseCancelRemarks");
+    
+    if(check.checked==true)
+    {
+    	var activeStatus=1;
+    }
+    else{
+    	var activeStatus=0;
+    }
+    
+    
+    var formData= { 
+       	 		"ticketPurchaseCancelId" : ticketPurchaseCancelId,
+       	 		"ticketPurchaseChdId" : ticketPurchaseChdId,
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId,
+       	 		"penaltyAmount" : penaltyAmount,
+       	 		"cancelDate" : cancelDate,
+       	 		"qty" : qty,
+       	 		"cancelReason" : cancelReason,
+       	 		"remarks" : remarks,
+       	 		"activeStatus" : activeStatus
+        		
+        		};
+        		
+        $('#purchaseChdTable tbody').empty();			
+        		
+        	$.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/saveticketpurchasecancel",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("Successfully Saved");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketPurchaseMstList){
+					
+	    		alert("Successfully Saved");					  
+			
+			var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketPurchaseChdId" hidden>' + modelTicketPurchaseMstList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdTicketPurchaseMstId" >' + modelTicketPurchaseMstList.ticketPurchaseMstId + '</td>' +    				
+			'<td class="tdTicketNo">' + modelTicketPurchaseMstList.ticketNo+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseMstList.userId+'</td>' +
+			'<td class="tdUserName">' + modelTicketPurchaseMstList.userName+'</td>' +
+			'<td class="tdPNR" >' + modelTicketPurchaseMstList.pNR+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketPurchaseMstList.ticketAMTUSD +'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' +modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPriceUSD" hidden>' + modelTicketPurchaseMstList.sellingPriceUSD +'</td>' +
+			'<td class="tdSellingPriceBDT" hidden>' +modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePriceUSD" hidden>' +modelTicketPurchaseMstList.purchasePriceUSD+'</td>' +
+			'<td class="tdPurchasePriceBDT" hidden>' +modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdTicketAMT" >' + modelTicketPurchaseMstList.ticketAMTUSD +'/'+modelTicketPurchaseMstList.ticketAMTBDT+'</td>' +
+			'<td class="tdSellingPrice" >' + modelTicketPurchaseMstList.sellingPriceUSD +'/'+modelTicketPurchaseMstList.sellingPriceBDT+'</td>' +
+			'<td class="tdPurchasePrice" >' + modelTicketPurchaseMstList.purchasePriceUSD +'/'+modelTicketPurchaseMstList.purchasePriceBDT+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseMstList.fromCountryId+'</td>' +
+			'<td class="tdFromCountryName" >' + modelTicketPurchaseMstList.fromCountryName+'</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseMstList.fromCityId+'</td>' +
+			'<td class="tdFromCityName" >' + modelTicketPurchaseMstList.fromCityName+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseMstList.toCountryId+'</td>' +
+			'<td class="tdToCountryName" >' + modelTicketPurchaseMstList.tocountryName+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseMstList.toCityId +'</td>' +
+			'<td class="tdToCityName">' + modelTicketPurchaseMstList.toCityName +'</td>' +
+			'<td class="tdAgentPassengerName" hidden>' + modelTicketPurchaseMstList.agentPassengerName +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseMstList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseMstList.activeStatus + '</td>' +
+			'<td class="tdsActive">' + modelTicketPurchaseMstList.sActive + '</td>' +
+		   	'<td class="tdEditChd">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >'+ '</td>' +
+			'<td class="tdPurchaseChdCancel">' + '<input type="button" value="Purchase Cancel" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal60" >'+ '</td>' +        
+			'</tr>';
+									  
+						
+	      $('#purchaseChdTable tbody').append(customerRow);
+					
+		});        // each
+		
+
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax	
+    
+        });
+    
+    $("#purchaseChdTable").on('click','.tdEditChd',function(){ 
+    
+    //$('#largeModal45').modal('hide',"false"); 
+    //tdPurchasePriceUSD
+    
+    var $row = $(this).closest("tr");
+      var x = "";
+      var ticketPurchaseChdId = $row.find(".tdTicketPurchaseChdId").text();
+   	 var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();
+      var ticketNo= $row.find(".tdTicketNo").text();
+      var userId= $row.find(".tdUserId").text();
+      var pNR= $row.find(".tdPNR").text();
+      var ticketAMTUSD= $row.find(".tdTicketAMTUSD").text();
+      var ticketAMTBDT= $row.find(".tdTicketAMTBDT").text();
+      var purchasePriceUSD= $row.find(".tdPurchasePriceUSD").text();
+      var purchasePriceBDT= $row.find(".tdPurchasePriceBDT").text();
+      var sellingPriceUSD= $row.find(".tdSellingPriceUSD").text();
+      var sellingPriceBDT= $row.find(".tdSellingPriceBDT").text();
+      var fromCountryId = $row.find(".tdFromCountryId").text();
+      var fromCityId = $row.find(".tdFromCityId").text();
+      var toCountryId = $row.find(".tdToCountryId").text();
+      var toCityId = $row.find(".tdToCityId").text();
+      var remarks = $row.find(".tdRemarks").text();
+      var agentPassengerNameChd = $row.find(".tdAgentPassengerName").text();
+      var activeStatus = $row.find(".tdActiveStatus").text();
+      if(activeStatus==1)
+      {
+      	document.getElementById("ticketChdActive").checked=true;
+      }
+      else
+      {
+      	document.getElementById("ticketChdActive").checked=false;
+      }
+    
+   //alert("ticketAMTUSD: "+ticketAMTUSD+" ticketAMTBDT: "+ticketAMTBDT+
+   //" purchasePriceUSD: "+purchasePriceUSD+" purchasePriceBDT: "+purchasePriceBDT+
+  // " sellingPriceUSD: "+sellingPriceUSD+" sellingPriceBDT: "+sellingPriceBDT);
+      
+      
+      document.getElementById("ticketChdUserId").value = userId;
+      document.getElementById("ticketFromCountryId").value = fromCountryId;
+      document.getElementById("ticketFromCityId").value = fromCityId;
+      document.getElementById("ticketToCountryId").value = toCountryId;
+      document.getElementById("ticketToCityId").value = toCityId;
+      document.getElementById("chdticketPurchaseMstId").value = ticketPurchaseMstId;
+      document.getElementById("ticketPurchaseChdId").value = ticketPurchaseChdId;
+      document.getElementById("ticketNo").value = ticketNo;
+      document.getElementById("pNR").value = pNR;
+      document.getElementById("ticketAMTUSD").value = ticketAMTUSD;
+      document.getElementById("ticketAMTBDT").value = ticketAMTBDT;
+      document.getElementById("purchasePriceUSD").value = purchasePriceUSD;
+      document.getElementById("purchasePriceBDT").value = purchasePriceBDT;
+      document.getElementById("ticketRemarksChd").value = remarks;
+      document.getElementById("sellingPriceUSD").value = sellingPriceUSD;
+      document.getElementById("sellingPriceBDT").value = sellingPriceBDT;
+      document.getElementById("agentPassengerNameChd").value = agentPassengerNameChd;
+    
+    
+    
+      });
+      
+      
+      $('#ticketFromCountryId').change(
+		        function() {
+		             	
+		        
+		var fromCountryId=$('#ticketFromCountryId').val();        
+		        
+		         $.getJSON("/ticketpurchasecontroller/getcitybycountryid", {
+		                countryId : fromCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#ticketFromCityId').html(html);
+		                
+		                });
+		
+		  });
+		  
+	$('#ticketToCountryId').change(
+		        function() {
+		              	
+		        
+		var toCountryId=$('#ticketToCountryId').val();
+		
+		$.getJSON("/ticketpurchasecontroller/getcitybycountryid", {
+		                countryId : toCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#ticketToCityId').html(html);
+		                
+		                });
+		
+		  });
+		  
+		  
+		  $('#fromCountry').change(
+		        function() {
+		             	
+		        
+		var fromCountryId=$('#fromCountry').val();        
+		        
+		         $.getJSON("/ticketpurchasecontroller/getcitybycountryid", {
+		                countryId : fromCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#fromCity').html(html);
+		                
+		                });
+		
+		  });
+		  
+	$('#toCountry').change(
+		        function() {
+		              	
+		        
+		var toCountryId=$('#toCountry').val();
+		
+		$.getJSON("/ticketpurchasecontroller/getcitybycountryid", {
+		                countryId : toCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#toCity').html(html);
+		                
+		                });
+		
+		  });
+		  
+   $('#savePurchaseMst2').click(function(e) {
+   
+   		var x="";
+   		var ticketOwnerCompanyId= $("#ticketOwnerCompanyId2").val();
+   		//var agentPassengerName= $("#agentPassengerName2").val();
+   		var noOfTickets= $("#noOfTickets2").val();
+   		var totalAMT= $("#totalAMT2").val();
+   		var purchaseDate= $("#purchaseDate2").val();
+   		var remarks= $("#purchaseMstRemarks2").val();
+   		var ticketRequestId= $("#ticketRequestId2").val();
+   		if(ticketRequestId==x)
+   		{
+   			ticketRequestId=0;
+   		}
+   		else{
+   			ticketRequestId=$("#ticketRequestId2").val();
+   		}
+   		
+   		var ticketPurchaseMstId= $("#ticketPurchaseMstId2").val();  		
+   		var flightDate= $("#flightDate2").val();
+   		var possibleFlightDate= $("#possibleFlightDate2").val();
+   		var active=document.getElementById("purchaseMstActive2");
+   		var purchasedQty=$("#purchasedQty2").val();
+   		var fromAgentId=$("#fromAgentId2").val();
+   		var toAgentId=$("#toAgentId2").val();
+   		
+   		var agentPassengerName=$("#agentPassengerName2").val();
+   		var userId=$("#userIdMst2").val();
+   		if(userId!=null||userId!=0)
+   		{
+   			var userId=$("#userIdMst2").val();
+   		}
+   		else 
+   		{
+   			var userId=0;
+   		}
+   		var fromCountryId=$("#fromCountryId2").val();
+   		var fromCityId=$("#fromCityId2").val();
+   		var toCountryId=$("#toCountryId2").val();
+   		var toCityId=$("#toCityId2").val();
+   		var ticketAMTUSD=$("#ticketAMTUSD22").val();
+   		var ticketAMTBDT=$("#ticketAMTBDT22").val();
+   		var sellingPriceUSD=$("#sellingPriceUSD22").val();
+   		var sellingPriceBDT=$("#sellingPriceBDT22").val();
+   		//var sellingPriceUSD=$("#sellingPriceUSD22").val();
+   		//var sellingPriceBDT=$("#sellingPriceBDT22").val();
+   		var autoPayment= $("#autoPayment2").val();
+   		if(autoPayment==x)
+   		{
+   			autoPayment=0;
+   		}
+   		else{
+   			autoPayment= $("#autoPayment2").val();
+   		}
+   		
+   		//alert("userId: "+userId+" fromCountryId: "+fromCountryId+" fromCityId: "+fromCityId+" toCountryId: "+toCountryId+" toCityId: "+toCityId)
+   		
+   		if(active.checked==true)
+   		{
+   		var activeStatus=1;
+   		}
+   		else
+   		{
+   		var activeStatus=0;
+   		}
+   		
+   		Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		var today = new Date().toDateInputValue();
+		
+		var y = purchasedQty-noOfTickets;
+   		
+   		//alert("in click function");
+   		
+   		if(purchasedQty==0 || purchasedQty==x || y!==0)
+   		{
+   		
+   		alert("Y: "+y);
+   		
+   		if(flightDate==x)
+   		{
+   			alert("Please Insert Flight Date");
+   		}
+   		else if(flightDate < today)
+   		{
+   			alert("Flight Date must be today or future upcoming days");
+   		}
+   		
+   		else{
+   		
+   		var formData= { 
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId,
+       	 		"ticketRequestId" : ticketRequestId,
+        		"ticketOwnerCompanyId" : ticketOwnerCompanyId,
+        		"fromAgentId" : fromAgentId,
+        		"toAgentId" : toAgentId,
+        		"totalAMT" : totalAMT,
+        		"purchaseDate" : purchaseDate,
+        		"remarks" : remarks,
+        		"noOfTickets" : noOfTickets,
+        		"flightDate" : flightDate,
+        		"activeStatus" : activeStatus,
+        		"agentPassengerName" : agentPassengerName,
+        		"userId" : userId,
+        		"fromCountryId" : fromCountryId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"ticketAMTUSD" : ticketAMTUSD,
+        		"fromCityId" : fromCityId,
+        		"ticketAMTBDT" : ticketAMTBDT,
+        		"sellingPriceUSD" : sellingPriceUSD,
+        		"sellingPriceBDT" : sellingPriceBDT,
+        		"autoPayment" : autoPayment
+        		
+        		
+        		};
+       		
+        		
+        		 $('#purchaseMSTTable tbody').empty();
+        		 $('#purchaseChdTable tbody').empty();
+   		
+   		$.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketpurchasecontroller/saveticketpurchasemst",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+            alert("Successfully saved");
+            
+             $.each(result, function(i,modelTicketPurchaseCustomList){
+					
+	    
+	    	
+			 var customerRow = '<tr>' +
+	    	
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketPurchaseCustomList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdPurchaseDate" >' + '<a href="#" >'+ modelTicketPurchaseCustomList.purchaseDate +'</a>' + '</td>' +
+			'<td class="tdTicketRequestId" >' + modelTicketPurchaseCustomList.ticketRequestId + '</td>' +    			
+			'<td class="tdAirLingId" hidden>' + modelTicketPurchaseCustomList.airLineId+'</td>' +
+			'<td class="tdAirLingName" >' + modelTicketPurchaseCustomList.airLineName+'</td>' +
+			'<td class="tdNoOfTickets" >' + modelTicketPurchaseCustomList.noOfTickets + '</td>' +
+			'<td class="tdFlightDate" >' + modelTicketPurchaseCustomList.flightDate + '</td>' +
+			'<td class="tdTotalAMT" >' + modelTicketPurchaseCustomList.totalAMT +'</td>' +
+			'<td class="tdRemarks" >' + modelTicketPurchaseCustomList.remarks +'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketPurchaseCustomList.activeStatus +'</td>' +
+			'<td class="tdsActive" >' + modelTicketPurchaseCustomList.sActive +'</td>' +
+			'<td class="tdAgentName" hidden>' + modelTicketPurchaseCustomList.agentName+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketPurchaseCustomList.userId+'</td>' +
+			'<td class="tdRequesterName" hidden>' + modelTicketPurchaseCustomList.ticketRequesterName+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketPurchaseCustomList.fromCountryId + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketPurchaseCustomList.fromCityId+'</td>' +
+			'<td class="tdToCountryId" hidden>' + modelTicketPurchaseCustomList.toCountryId+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketPurchaseCustomList.toCityId +'</td>' +
+			'<td class="tdUserName" hidden>' + modelTicketPurchaseCustomList.userName + '</td>' +
+			'<td class="tdPossibleFlightDate" hidden>' + modelTicketPurchaseCustomList.possibleFlightDate+'</td>' +
+		  //'<td class="tdChd">' + '<input type="button" value="Purchase Chd" onClick="myFunction()" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal45" >' + '</td>' +
+			'<td class="tdEdit">' + '<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+			        
+			'</tr>';        
+			'</tr>';
+									  
+									  
+						
+	      $('#purchaseMSTTable tbody').append(customerRow);
+					
+				});        // each
+		
+			}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+        
+        
+        }		//else condition
+   		
+   	}		// if condition
+   	else
+   	{
+   	alert("Ticket Purchase Mst for this data is already done");
+   	
+   	}
+   	
+   	
+   		
+   
+    });	//clickFunction    
+		
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+package com.biziitech.attm.custom.model;
+
+import java.util.Date;
+
+public class ModelTransactionCustom {
+  
+	private Long transactionId;
+	private Long agentId;
+	private Double transactionAmount;
+	private Long transactionTypeId;
+	private String agentName;
+	private Double receivealbeAmount;
+	private Double payableAmount;
+	private Double paidAmount;
+	private Double dueAmount;
+	private String status;
+	private String payableStatus;
+	private Date transactionDate;
+	private String transactionTypeName;
+	private Long masterId;
+	private Long childId;
+	private Long checkId;
+	
+	
+	
+	public Long getTransactionId() {
+		return transactionId;
+	}
+	public Long getAgentId() {
+		return agentId;
+	}
+	public Double getTransactionAmount() {
+		return transactionAmount;
+	}
+	public Long getTransactionTypeId() {
+		return transactionTypeId;
+	}
+	public String getAgentName() {
+		return agentName;
+	}
+	public Double getReceivealbeAmount() {
+		return receivealbeAmount;
+	}
+	public Double getPayableAmount() {
+		return payableAmount;
+	}
+	public Double getPaidAmount() {
+		return paidAmount;
+	}
+	public Double getDueAmount() {
+		return dueAmount;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public String getPayableStatus() {
+		return payableStatus;
+	}
+	public void setTransactionId(Long transactionId) {
+		this.transactionId = transactionId;
+	}
+	public void setAgentId(Long agentId) {
+		this.agentId = agentId;
+	}
+	public void setTransactionAmount(Double transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+	public void setTransactionTypeId(Long transactionTypeId) {
+		this.transactionTypeId = transactionTypeId;
+	}
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+	public void setReceivealbeAmount(Double receivealbeAmount) {
+		this.receivealbeAmount = receivealbeAmount;
+	}
+	public void setPayableAmount(Double payableAmount) {
+		this.payableAmount = payableAmount;
+	}
+	public void setPaidAmount(Double paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+	public void setDueAmount(Double dueAmount) {
+		this.dueAmount = dueAmount;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public void setPayableStatus(String payableStatus) {
+		this.payableStatus = payableStatus;
+	}
+	public Date getTransactionDate() {
+		return transactionDate;
+	}
+	public String getTransactionTypeName() {
+		return transactionTypeName;
+	}
+	public void setTransactionDate(Date transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+	public void setTransactionTypeName(String transactionTypeName) {
+		this.transactionTypeName = transactionTypeName;
+	}
+	public Long getMasterId() {
+		return masterId;
+	}
+	public Long getChildId() {
+		return childId;
+	}
+	public void setMasterId(Long masterId) {
+		this.masterId = masterId;
+	}
+	public void setChildId(Long childId) {
+		this.childId = childId;
+	}
+	public Long getCheckId() {
+		return checkId;
+	}
+	public void setCheckId(Long checkId) {
+		this.checkId = checkId;
+	}
+	
+	
+	
+}

@@ -1,0 +1,236 @@
+package com.biziitech.attm.daoImp;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
+
+
+import com.biziitech.attm.bg.repository.TicketSellChdRepository;
+import com.biziitech.attm.custom.model.ModelTicketSellCustom;
+import com.biziitech.attm.dao.DaoTicketSellChd;
+import com.biziitech.attm.model.ModelTicketSellChd;
+
+@Service
+public class DaoTicketSellChdImp implements DaoTicketSellChd{
+	
+	@Autowired
+	private TicketSellChdRepository ticketSellChdRepository;
+	
+	@Autowired
+    private DataSource dataSource;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+
+	@Override
+	@Transactional
+	public void saveTicketSellChd(ModelTicketSellChd modelTicketSellChd) {
+		// TODO Auto-generated method stub
+		ticketSellChdRepository.save(modelTicketSellChd);
+	}
+
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdByTicketPurchaseChdId(Long ticketPurchaseChdId) {
+		// TODO Auto-generated method stub
+		return ticketSellChdRepository.findTicketSellChdByTicketPurchaseChdId(ticketPurchaseChdId);
+	}
+
+	
+	
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdByMstId(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketSellChd> resultList = ticketSellChdRepository.findTicketSellChdByTicketSellMstId(ticketSellMstId);
+		
+		
+		List<ModelTicketSellChd> ticketSellChdList=new ArrayList<>();
+		
+		for(ModelTicketSellChd ticketSellChd: resultList) {
+				if(ticketSellChd.getActiveStatus()==1)
+				 { 
+					ticketSellChd.setsActive("Yes");
+					ticketSellChd.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketSellChd.setsActive("NO");
+					 ticketSellChd.setActive(false);
+				     
+				 }
+				
+				
+				ticketSellChdList.add(ticketSellChd);
+				}
+		
+		return ticketSellChdList;
+	}
+
+
+/*
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdById(Long ticketSellChdId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketSellChd> resultList = ticketSellChdRepository.findTicketSellChdById(ticketSellChdId);
+		
+		
+		List<ModelTicketSellChd> ticketSellChdList=new ArrayList<>();
+		
+		for(ModelTicketSellChd ticketSellChd: resultList) {
+				if(ticketSellChd.getActiveStatus()==1)
+				 { 
+					ticketSellChd.setsActive("Yes");
+					ticketSellChd.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketSellChd.setsActive("NO");
+					 ticketSellChd.setActive(false);
+				     
+				 }
+				
+				
+				ticketSellChdList.add(ticketSellChd);
+				}
+		
+		return ticketSellChdList;
+	}
+
+*/
+
+	@Override
+	public List<ModelTicketSellCustom> getTicketSellChdByMstId2(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_SELL_CHD_ID,a.TICKET_SELL_MST_ID,a.TICKET_PURCHASE_CHD_ID,\r\n" + 
+				"a.USER_ID,b.user_name,a.PNR,a.AGENT_PASSENGER_NAME,\r\n" + 
+				"a.TICKET_AMT_USD,a.TICKET_AMT_BDT,a.REMARKS,a.ACTIVE_STATUS\r\n" + 
+				"FROM attm_ticket_sell_chd a\r\n" + 
+				"Left outer join JOIN bg_user b ON a.USER_ID=b.user_id\r\n" + 
+				"WHERE a.TICKET_SELL_MST_ID=coalesce(:ticketSellMstId,a.TICKET_SELL_MST_ID)\r\n" + 
+				"GROUP BY a.TICKET_SELL_CHD_ID,a.TICKET_SELL_MST_ID,a.TICKET_PURCHASE_CHD_ID,\r\n" + 
+				"a.USER_ID,b.user_name,a.PNR,a.AGENT_PASSENGER_NAME,\r\n" + 
+				"a.TICKET_AMT_USD,a.TICKET_AMT_BDT,a.REMARKS,a.ACTIVE_STATUS";
+		
+		RowMapper<ModelTicketSellCustom> serviceMapper=new RowMapper<ModelTicketSellCustom>() {
+
+			@Override
+			public ModelTicketSellCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketSellCustom bn= new ModelTicketSellCustom();
+				
+				bn.setTicketSellChdId(rs.getLong("TICKET_SELL_CHD_ID"));
+				bn.setTicketSellMstId(rs.getLong("TICKET_SELL_MST_ID"));
+				bn.setTicketPurchaseChdId(rs.getLong("TICKET_PURCHASE_CHD_ID"));
+				bn.setRemarks(rs.getString("REMARKS"));
+				bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+				if(bn.getActiveStatus()==1) 
+				{
+					bn.setActive(true);
+					bn.setsActive("Yes");
+				}
+				else {
+					bn.setActive(false);
+					bn.setsActive("No");
+				}
+				
+				bn.setUserId(rs.getLong("USER_ID"));
+				bn.setUserName(rs.getString("user_name"));
+				bn.setpNR(rs.getString("PNR"));
+				bn.setAgentPassengerName(rs.getString("AGENT_PASSENGER_NAME"));
+				bn.setTicketAMTUSD(rs.getDouble("TICKET_AMT_USD"));
+				bn.setTicketAMTBDT(rs.getDouble("TICKET_AMT_BDT"));
+				
+				
+				//bn.setPurchasedQTY(purChasedQTY);
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("ticketSellMstId", ticketSellMstId);
+	      System.out.println(" in daoTicketPurchaseChdImp, ticketSellMstId:" +ticketSellMstId);
+	     
+	      
+	      System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+	
+	
+
+@Override
+public List<ModelTicketSellCustom> getTicketSellChdById(Long ticketSellChdId) {
+	// TODO Auto-generated method stub
+	String qry="SELECT a.TICKET_SELL_CHD_ID,a.TICKET_SELL_MST_ID,a.TICKET_PURCHASE_CHD_ID,\r\n" + 
+			"a.USER_ID,b.user_name,a.PNR,a.AGENT_PASSENGER_NAME,\r\n" + 
+			"a.TICKET_AMT_USD,a.TICKET_AMT_BDT,a.REMARKS,a.ACTIVE_STATUS\r\n" + 
+			"FROM attm_ticket_sell_chd a\r\n" + 
+			"INNER JOIN bg_user b ON a.USER_ID=b.user_id\r\n" + 
+			"WHERE a.TICKET_SELL_CHD_ID=coalesce(:ticketSellChdId,a.TICKET_SELL_CHD_ID)\r\n" + 
+			"GROUP BY a.TICKET_SELL_CHD_ID,a.TICKET_SELL_MST_ID,a.TICKET_PURCHASE_CHD_ID,\r\n" + 
+			"a.USER_ID,b.user_name,a.PNR,a.AGENT_PASSENGER_NAME,\r\n" + 
+			"a.TICKET_AMT_USD,a.TICKET_AMT_BDT,a.REMARKS,a.ACTIVE_STATUS";
+	
+	RowMapper<ModelTicketSellCustom> serviceMapper=new RowMapper<ModelTicketSellCustom>() {
+
+		@Override
+		public ModelTicketSellCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+			// TODO Auto-generated method stub
+			ModelTicketSellCustom bn= new ModelTicketSellCustom();
+			
+			bn.setTicketSellMstId(rs.getLong("TICKET_SELL_MST_ID"));
+			bn.setTicketPurchaseChdId(rs.getLong("TICKET_PURCHASE_CHD_ID"));
+			bn.setRemarks(rs.getString("REMARKS"));
+			bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+			if(bn.getActiveStatus()==1) 
+			{
+				bn.setActive(true);
+				bn.setsActive("Yes");
+			}
+			else {
+				bn.setActive(false);
+				bn.setsActive("No");
+			}
+			
+			bn.setUserId(rs.getLong("USER_ID"));
+			bn.setUserName(rs.getString("user_name"));
+			bn.setpNR(rs.getString("PNR"));
+			bn.setAgentPassengerName(rs.getString("AGENT_PASSENGER_NAME"));
+			bn.setTicketAMTUSD(rs.getDouble("TICKET_AMT_USD"));
+			bn.setTicketAMTBDT(rs.getDouble("TICKET_AMT_BDT"));
+			
+			
+			//bn.setPurchasedQTY(purChasedQTY);
+			
+			return bn;
+		}
+
+	};
+	
+	MapSqlParameterSource parameters = new MapSqlParameterSource();
+      parameters.addValue("ticketSellChdId", ticketSellChdId);
+      System.out.println(" in daoTicketPurchaseChdImp, ticketSellMstId:" +ticketSellChdId);
+     
+      
+      System.out.println("service mapper ");
+	return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+}
+
+}

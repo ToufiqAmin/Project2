@@ -1,0 +1,363 @@
+package com.biziitech.attm.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.biziitech.attm.bg.dao.DaoCurrency;
+import com.biziitech.attm.bg.dao.DaoUser;
+import com.biziitech.attm.bg.dao.DaoUserObject;
+import com.biziitech.attm.bg.model.ModelUser;
+import com.biziitech.attm.bg.model.ModelUserObject;
+import com.biziitech.attm.bg.repository.AgentRepository;
+import com.biziitech.attm.bg.repository.TicketSellChdRepository;
+import com.biziitech.attm.bg.repository.TicketSellMstRepository;
+import com.biziitech.attm.bg.repository.UserRepository;
+import com.biziitech.attm.custom.model.ModelTicketSellCustom;
+import com.biziitech.attm.dao.DaoLogon;
+import com.biziitech.attm.dao.DaoTicketSellChd;
+import com.biziitech.attm.dao.DaoTicketSellMst;
+import com.biziitech.attm.dao.DaoTran;
+import com.biziitech.attm.dao.DaoTranType;
+import com.biziitech.attm.model.ModelAgent;
+import com.biziitech.attm.model.ModelTicketPurchaseChd;
+import com.biziitech.attm.model.ModelTicketPurchaseMst;
+import com.biziitech.attm.model.ModelTicketSellChd;
+import com.biziitech.attm.model.ModelTicketSellMst;
+
+
+@Controller
+public class TicketSellController {
+	
+	@Autowired
+	private DaoTicketSellMst daoTicketSellMst;
+	
+	@Autowired
+	private DaoTicketSellChd daoTicketSellChd;
+		
+	@Autowired
+	private AgentRepository agentRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private DaoUser daoUser;
+	
+	@Autowired
+	private DaoUserObject daoUserObject;
+	
+	@Autowired
+	private DaoLogon daoLogon;
+	
+	@Autowired
+	private DaoTran daoTran;
+	
+	@Autowired
+	private DaoTranType daoTranType;
+	
+	@Autowired
+	private DaoCurrency daoCurrency;
+	
+	@Autowired
+	private TicketSellChdRepository ticketSellChdRepository;
+	
+	@Autowired
+	private TicketSellMstRepository ticketSellMstRepository;
+	
+	private Long systemUserId;
+	
+	@RequestMapping(path="/ticketsellcontroller/init/{userId}")
+	public String init(@PathVariable Long userId,Model model) {
+		
+		
+		
+		List<ModelAgent> agentList= agentRepository.getAgentName();
+		model.addAttribute("agentList",agentList);
+		
+		List<ModelUser> modelUser = userRepository.getUserNameInOrder();
+		model.addAttribute("userList", modelUser);
+		
+		
+		String msg=" ";
+		model.addAttribute("message",msg );
+		
+		
+		this.systemUserId=userId;
+		ModelUser logonUser=daoLogon.getLogonUserName(userId);
+		  
+		  String userName=logonUser.getUserName();
+		  
+		  System.out.println("logon user name is :" + userName);
+		  
+		  String name="User : " + userName;
+		  model.addAttribute("name",name );	
+		  
+		  model.addAttribute("userId",userId);
+		  this.systemUserId=userId;
+		  
+		  
+		//  for setup
+			
+					List<ModelUserObject> listModelUserObjectSetup= new ArrayList<ModelUserObject>();
+					
+					listModelUserObjectSetup=daoUserObject.getUserObjectByObjectGroup(userId,"S");
+					
+					System.out.println("listModelUserObjectSetup : " + listModelUserObjectSetup);
+					
+					System.out.println("size " + listModelUserObjectSetup.size() );
+					
+					model.addAttribute("listModelUserObjectSetup", listModelUserObjectSetup);
+					
+					
+					//for Transactions
+					
+			        List<ModelUserObject> listModelUserObjectTransaction= new ArrayList<ModelUserObject>();
+					
+			        listModelUserObjectTransaction=daoUserObject.getUserObjectByObjectGroup(userId,"T");
+					
+					System.out.println("listModelUserObjectTransaction : " + listModelUserObjectTransaction);
+					
+					System.out.println("size " + listModelUserObjectTransaction.size() );
+					
+					model.addAttribute("listModelUserObjectTransaction", listModelUserObjectTransaction);
+					
+			       //for Tools
+					
+			        List<ModelUserObject> listModelUserObjectTool= new ArrayList<ModelUserObject>();
+					
+			        listModelUserObjectTool=daoUserObject.getUserObjectByObjectGroup(userId,"U");
+					
+					System.out.println("listModelUserObjectTool : " + listModelUserObjectTool);
+					
+					System.out.println("listModelUserObjectTool size " + listModelUserObjectTool.size() );
+					
+					model.addAttribute("listModelUserObjectTool", listModelUserObjectTool);
+					
+					
+					
+			        //for reports
+					
+			        List<ModelUserObject> listModelUserObjectReport= new ArrayList<ModelUserObject>();
+					
+			        listModelUserObjectReport=daoUserObject.getUserObjectByObjectGroup(userId,"R");
+					
+					System.out.println("listModelUserObjectReport : " + listModelUserObjectReport);
+					
+					System.out.println("listModelUserObjectReport size " + listModelUserObjectReport.size());
+					
+					model.addAttribute("listModelUserObjectReport", listModelUserObjectReport);
+					
+					
+					
+					for(ModelUserObject a:listModelUserObjectSetup) {
+						
+						System.out.println("object name " + a.getModelObject().getObjectName());
+					}
+		
+		
+		
+		return "ticketSell";	
+	}
+	
+	
+	@ResponseBody	
+	@RequestMapping(path = "/ticketsellcontroller/saveticketsellchd", method = RequestMethod.POST) 
+	public List<ModelTicketSellChd> saveTicketSellChd(ModelTicketSellChd modelTicketSellChd,
+			@RequestParam("ticketSellChdId") Long ticketSellChdId,
+			@RequestParam("ticketSellMstId") Long ticketSellMstId,
+			@RequestParam("ticketPurchaseChdId") Long ticketPurchaseChdId,
+			@RequestParam("sellUserId") Long sellUserId,
+			@RequestParam("pNR") String pNR,
+			@RequestParam("agentPassengerName") String agentPassengerName,
+			@RequestParam("ticketAMTUSD") Double ticketAMTUSD,
+			@RequestParam("ticketAMTBDT") Double ticketAMTBDT,
+			@RequestParam("activeStatus") int activeStatus,
+			@RequestParam("remarks")String remarks
+			)
+	{
+		
+		System.out.println("In ticketsellcontroller saveTicketSellChd Method");
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp entryTime = new java.sql.Timestamp(date.getTime());
+		
+		try {
+			
+			//Long id;
+		
+		if(ticketSellChdId==null) {
+			
+		//ModelTicketSellChd modelTicketSellChd = new ModelTicketSellChd();
+		
+		ModelTicketSellMst modelTicketSellMst = new ModelTicketSellMst();
+		modelTicketSellMst.setTicketSellMstId(ticketSellMstId);
+		modelTicketSellChd.setModelTicketSellMst(modelTicketSellMst);
+		
+		ModelTicketPurchaseChd modelTicketPurchaseChd = new ModelTicketPurchaseChd();
+		modelTicketPurchaseChd.setTicketPurchaseChdId(ticketPurchaseChdId);
+		modelTicketSellChd.setModelTicketPurChaseChd(modelTicketPurchaseChd);
+		
+		ModelUser modelUser = new ModelUser();
+		if(sellUserId ==0 || sellUserId== null) 
+		{
+			modelTicketSellChd.setModelUser(null);
+		}
+		else 
+		{
+			modelUser.setUserId(sellUserId);
+			modelTicketSellChd.setModelUser(modelUser);
+		}
+		
+		modelTicketSellChd.setpNR(pNR);
+		modelTicketSellChd.setAgentPassengerName(agentPassengerName);
+		modelTicketSellChd.setTicketAMTUSD(ticketAMTUSD);
+		modelTicketSellChd.setTicketAMTBDT(ticketAMTBDT);
+		modelTicketSellChd.setActiveStatus(activeStatus);
+		modelTicketSellChd.setRemarks(remarks);
+		modelTicketSellChd.setEnteredBy(systemUserId);
+		modelTicketSellChd.setEntryTimeStamp(entryTime);
+		
+		daoTicketSellChd.saveTicketSellChd(modelTicketSellChd);
+		
+		}
+		else 
+		{
+			//ModelTicketSellChd modelTicketSellChd = new ModelTicketSellChd();
+			Optional<ModelTicketSellChd> existTicketSellChd = ticketSellChdRepository.findById(ticketSellChdId);
+			
+			ModelTicketSellMst modelTicketSellMst = new ModelTicketSellMst();
+			modelTicketSellMst.setTicketSellMstId(ticketSellMstId);
+			modelTicketSellChd.setModelTicketSellMst(modelTicketSellMst);
+			
+			ModelTicketPurchaseChd modelTicketPurchaseChd = new ModelTicketPurchaseChd();
+			modelTicketPurchaseChd.setTicketPurchaseChdId(ticketPurchaseChdId);
+			modelTicketSellChd.setModelTicketPurChaseChd(modelTicketPurchaseChd);
+			
+			ModelUser modelUser = new ModelUser();
+			if(sellUserId ==0 || sellUserId== null) 
+			{
+				modelTicketSellChd.setModelUser(null);
+			}
+			else 
+			{
+				modelUser.setUserId(sellUserId);
+				modelTicketSellChd.setModelUser(modelUser);
+			}
+			
+			modelTicketSellChd.setpNR(pNR);
+			modelTicketSellChd.setAgentPassengerName(agentPassengerName);
+			modelTicketSellChd.setTicketAMTUSD(ticketAMTUSD);
+			modelTicketSellChd.setTicketAMTBDT(ticketAMTBDT);
+			modelTicketSellChd.setActiveStatus(activeStatus);
+			modelTicketSellChd.setRemarks(remarks);
+			modelTicketSellChd.setEnteredBy(existTicketSellChd.get().getEnteredBy());
+			modelTicketSellChd.setEntryTimeStamp(existTicketSellChd.get().getEntryTimeStamp());
+			modelTicketSellChd.setUpdatedBy(systemUserId);
+			modelTicketSellChd.setTicketSellChdId(ticketSellChdId);
+			daoTicketSellChd.saveTicketSellChd(modelTicketSellChd);
+			
+			//id=modelTicketSellChd.getTicketSellChdId();
+		}
+		
+		List<ModelTicketSellChd> modelTicketSellChdList = daoTicketSellChd.getTicketSellChdById(modelTicketSellChd.getTicketSellChdId());
+		System.out.println("Size: "+modelTicketSellChdList.size());
+		
+		return modelTicketSellChdList;
+		
+		
+		}		
+		catch(Exception e) {			
+		 e.printStackTrace();
+		 System.out.println("error");
+			return null;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(path="/ticketsellcontroller/getticketsellchd")
+	public List<ModelTicketSellChd> getTicketSellChd(@RequestParam("ticketSellMstId")Long ticketSellMstId){
+		
+		System.out.println("ticketSellMstId: " + ticketSellMstId);
+		
+		
+		//List<ModelBgUser> modelUser = bgUserRepository.getUserDetailsById(userId);
+		List<ModelTicketSellChd> modelTicketSellChdList = daoTicketSellChd.getTicketSellChdByMstId(ticketSellMstId);
+		System.out.println("Size: "+modelTicketSellChdList.size());
+		
+		return modelTicketSellChdList;
+	}
+	
+	@ResponseBody	
+	@RequestMapping(path = "/ticketsellcontroller/saveticketsellmst", method = RequestMethod.POST) 
+	public List<ModelTicketSellCustom> saveTicketSellMst(ModelTicketSellMst modelTicketSellMst,
+			@RequestParam("ticketSellMstId") Long ticketSellMstId,
+			@RequestParam("sellDate")@DateTimeFormat(pattern="yyyy-MM-dd")Date sellDate,
+			@RequestParam("ticketPurChaseMstId") Long ticketPurChaseMstId,
+			@RequestParam("sellQty") Integer sellQty,
+			@RequestParam("toAgentId") Long toAgentId,
+			@RequestParam("remarks") String remarks,
+			@RequestParam("activeStatus") int activeStatus
+			
+			){
+		
+		System.out.println("In ticketsellcontroller saveTicketSellMst Method");
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp entryTime = new java.sql.Timestamp(date.getTime());
+		
+		try {
+			
+			Optional<ModelTicketSellMst> existTicketSellMst = ticketSellMstRepository.findById(ticketSellMstId);
+			
+			modelTicketSellMst.setSellDate(sellDate);
+			modelTicketSellMst.setSellQty(sellQty);
+			
+			ModelTicketPurchaseMst modelTicketPurchaseMst = new ModelTicketPurchaseMst();
+			modelTicketPurchaseMst.setTicketPurchaseMstId(ticketPurChaseMstId);
+			modelTicketSellMst.setModelTicketPurchaseMst(modelTicketPurchaseMst);
+			ModelAgent modelAgent = new ModelAgent();
+			if(toAgentId==0 || toAgentId==null)
+			{
+				modelTicketSellMst.setModelAgent(modelAgent);
+			}
+			else {
+				modelAgent.setAgentId(toAgentId);
+				modelTicketSellMst.setModelAgent(modelAgent);
+			}
+			modelTicketSellMst.setActiveStatus(activeStatus);
+			modelTicketSellMst.setRemarks(remarks);
+			modelTicketSellMst.setEnteredBy(existTicketSellMst.get().getEnteredBy());
+			modelTicketSellMst.setEntryTimeStamp(existTicketSellMst.get().getEntryTimeStamp());
+			modelTicketSellMst.setUpdatedBy(systemUserId);
+			modelTicketSellMst.setUpdateTimeStamp(entryTime);
+			modelTicketSellMst.setTicketSellMstId(ticketSellMstId);
+			
+			daoTicketSellMst.saveTicketSellMst(modelTicketSellMst);
+			
+			List<ModelTicketSellCustom> modelTicketSellMstList = daoTicketSellMst.getTicketSellMstByMstId(ticketSellMstId);
+			System.out.println("Size: "+modelTicketSellMstList.size());
+		
+		return modelTicketSellMstList;
+		
+				}		
+				catch(Exception e) {			
+				e.printStackTrace();
+				System.out.println("error");
+				return null;
+				}
+		}
+	
+	
+
+}

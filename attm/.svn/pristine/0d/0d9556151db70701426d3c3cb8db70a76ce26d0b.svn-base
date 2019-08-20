@@ -1,0 +1,93 @@
+package com.biziitech.attm.daoImp;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.biziitech.attm.bg.repository.TicketSellChdRepository;
+import com.biziitech.attm.dao.DaoTicketSellChd;
+import com.biziitech.attm.model.ModelTicketSellChd;
+
+@Service
+public class DaoTicketSellChdImp implements DaoTicketSellChd{
+	
+	@Autowired
+	private TicketSellChdRepository ticketSellChdRepository;
+
+	@Override
+	@Transactional
+	public void saveTicketSellChd(ModelTicketSellChd modelTicketSellChd) {
+		// TODO Auto-generated method stub
+		ticketSellChdRepository.save(modelTicketSellChd);
+	}
+
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdByTicketPurchaseChdId(Long ticketPurchaseChdId) {
+		// TODO Auto-generated method stub
+		return ticketSellChdRepository.findTicketSellChdByTicketPurchaseChdId(ticketPurchaseChdId);
+	}
+
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdByMstId(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketSellChd> resultList = ticketSellChdRepository.findTicketSellChdByTicketSellMstId(ticketSellMstId);
+		
+		
+		List<ModelTicketSellChd> ticketSellChdList=new ArrayList<>();
+		
+		for(ModelTicketSellChd ticketSellChd: resultList) {
+				if(ticketSellChd.getActiveStatus()==1)
+				 { 
+					ticketSellChd.setsActive("Yes");
+					ticketSellChd.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketSellChd.setsActive("NO");
+					 ticketSellChd.setActive(false);
+				     
+				 }
+				
+				
+				ticketSellChdList.add(ticketSellChd);
+				}
+		
+		return ticketSellChdList;
+	}
+
+	@Override
+	public List<ModelTicketSellChd> getTicketSellChdById(Long ticketSellChdId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketSellChd> resultList = ticketSellChdRepository.findTicketSellChdById(ticketSellChdId);
+		
+		
+		List<ModelTicketSellChd> ticketSellChdList=new ArrayList<>();
+		
+		for(ModelTicketSellChd ticketSellChd: resultList) {
+				if(ticketSellChd.getActiveStatus()==1)
+				 { 
+					ticketSellChd.setsActive("Yes");
+					ticketSellChd.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketSellChd.setsActive("NO");
+					 ticketSellChd.setActive(false);
+				     
+				 }
+				
+				
+				ticketSellChdList.add(ticketSellChd);
+				}
+		
+		return ticketSellChdList;
+	}
+
+}

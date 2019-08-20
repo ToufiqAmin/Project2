@@ -1,0 +1,99 @@
+package com.biziitech.attm.daoImp;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.biziitech.attm.bg.repository.TicketRequestRepository;
+import com.biziitech.attm.dao.DaoTicketRequest;
+import com.biziitech.attm.model.ModelTicketRequest;
+
+
+
+@Service
+public class DaoTicketRequestImp implements DaoTicketRequest{
+	
+	@Autowired
+	private TicketRequestRepository attm_TicketRequestRepository;
+
+	@Override
+	public void saveTicketRequest(ModelTicketRequest modelTicketRequest) {
+		// TODO Auto-generated method stub
+		//if(modelTicketRequest.isActive()) 
+		//{
+		//	modelTicketRequest.setActiveStatus(1);
+			
+		//}
+		//else 
+		//{
+			//modelTicketRequest.setActiveStatus(0);
+			
+		//}
+		if(modelTicketRequest.ispOFlag()) 
+		{
+			modelTicketRequest.setpOFlagStatus(1);
+		}
+		else 
+		{
+			modelTicketRequest.setpOFlagStatus(0);
+		}
+		attm_TicketRequestRepository.save(modelTicketRequest);
+		
+	}
+
+	@Override
+	public List<ModelTicketRequest> getTicketRequestByCraiteria(String requesterName, String requesterContactPhone, String userName, 
+			String fromAgentName,String toAgentName,String airLineName,Date fromDate,Date toDate,int status) {
+		// TODO Auto-generated method stub
+		List<ModelTicketRequest> resultList= attm_TicketRequestRepository.findTicketRequestDetails(requesterName,requesterContactPhone,userName, fromAgentName,toAgentName, airLineName,fromDate,toDate, status);
+		
+		List<ModelTicketRequest> ticketRequestList=new ArrayList<>();
+		
+		for(ModelTicketRequest ticketRequest: resultList) {
+				if(ticketRequest.getActiveStatus()==1)
+				 { 
+					ticketRequest.setsActive("Yes");
+					ticketRequest.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketRequest.setsActive("NO");
+					 ticketRequest.setActive(false);
+				     
+				 }
+				if(ticketRequest.getpOFlagStatus()==1) 
+				{
+					ticketRequest.setsPOFlag("Yes");
+					ticketRequest.setpOFlag(true);
+				}
+				else 
+				{
+					ticketRequest.setsPOFlag("No");
+					ticketRequest.setpOFlag(false);
+				}
+				
+				
+				 
+				ticketRequestList.add(ticketRequest);
+		}
+		
+		
+		
+		return ticketRequestList;
+	}
+
+	@Override
+	public List<ModelTicketRequest> getTicketRequestById(Long ticketRequestId) {
+		// TODO Auto-generated method stub
+		return attm_TicketRequestRepository.findTicketRequestById(ticketRequestId);
+	}
+	
+	
+	
+	
+
+}

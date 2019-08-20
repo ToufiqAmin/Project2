@@ -1,0 +1,25 @@
+package com.biziitech.attm.daoImp;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.biziitech.attm.bg.repository.TranRepository;
+import com.biziitech.attm.dao.DaoTran;
+import com.biziitech.attm.model.ModelTran;
+
+@Service
+public class DaoTranImp implements DaoTran{
+	
+	@Autowired
+	private TranRepository tranRepository;
+
+	@Override
+	@Transactional
+	public void saveTran(ModelTran modelTran) {
+		// TODO Auto-generated method stub
+		tranRepository.save(modelTran);
+	}
+
+}

@@ -1,0 +1,1262 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ticket Request</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	 <!-- <link rel="stylesheet" href="../../static/css/bootstrap-select.less"> -->
+    <link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+  
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		.modal-backdrop.fade {
+			display: none;
+		}
+
+		input[type=checkbox],
+		input[type=radio] {
+			width: 20px !important;
+		}
+
+		.up-msg {
+			padding: 10px;
+		}
+		
+
+	</style>
+	
+	<style>
+	
+.groove {
+/*
+	border-style: groove;
+*/
+
+	border-bottom-style: solid;
+
+}
+
+
+
+	
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+		
+		
+		
+    </style>
+
+
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">ATTM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+          
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+          <!--
+          	<li><a th:href="@{'/bgusercontroller/init'+'/'+${userId}}">User</a></li>
+			<li><a th:href="@{'/bgusertypecontroller/init'+'/'+${userId}}">User Type</a></li>
+			<li><a th:href="@{'/servicecontroller/init'+'/'+${userId}}">Service</a></li>
+			<li><a th:href="@{'/clientservicecontroller/init'+'/'+${userId}}">Client Service</a></li>
+          	<li><a th:href="@{'/agentcontroller/init'+'/'+${userId}}">Agent</a></li>
+          	<li><a th:href="@{'/airlinecontroller/init'+'/'+${userId}}">Air Line</a></li>
+          	<li><a th:href="@{'/ticketrequestcontroller/init'+'/'+${userId}}">Ticket Request</a></li>
+          -->	
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+           
+           
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+             
+             <!--
+             <li><a th:href="@{'/passportreceivecontroller/init'+'/'+${userId}}">Passport Receive</a></li>
+             <li><a th:href="@{'/manpowerclearancecontroller/init'+'/'+${userId}}">Manpower Clearance</a></li>
+             --> 
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside><!-- /#left-panel -->
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                       <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                       	   <span class="nav-link" id="logonUserId" th:text="${userId}"readonly style="color: black; float:right;" hidden></span>	
+                           <span class="nav-link" id="logonUserName" th:text="${name}"readonly style="color: black; float:right;"></span>
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+
+
+		<div class="up-msg">
+			<div class="col-sm-6 text-left">
+		<!--	<input type="text"  th:value="${message}"  readonly style="color: limegreen; background-color:#f5f5f5; display: block; border:none;">-->
+				<a  th:text="${message}" id="message" readonly style="color: limegreen; background-color:#f5f5f5; display: block; border:none;"></a>
+			</div>
+			<div class="col-sm-6 text-right">
+				<a class="btn btn-primary btn-sm" th:href="@{'/ticketrequestcontroller/init'+'/'+${userId}}">New</a>
+				<a class="btn btn-success btn-sm" th:href="@{'/ticketrequestlistcontroller/init'+'/'+${userId}}">View</a>
+			</div>
+		</div>
+
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Ticket Request Upload Form</strong>
+								<a  style="float:right" class="btn btn-success" th:href="@{'/bgusercontroller/init'+'/'+${userId}}">New User Info</a>
+							</div>
+							<div class="card-body">
+								<!-- Credit Card -->
+								<div id="">
+									<div class="card-body">
+							<!--	<form class="needs-validation" th:object="${modelTicketRequest_ATTM}" th:action="@{'/ticketrequestcontroller/saveticketrequest'+'/'+${userId}}"  method="post" novalidate>	-->
+										<form class="needs-validation" th:object="${modelTicketRequest_ATTM}"  method="post" novalidate>	
+											<div class="groove">
+												<div class="row">
+												
+													<div class="col-3" >
+														<div class="form-group">
+															<label  class="control-label mb-1">Ticket Request ID</label>
+															<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="ticketRequestId" name="ticketRequestId" th:field="*{ticketRequestId}" placeholder="Ticket Request ID" readonly>
+														</div>
+													</div>
+										
+									<!--			
+													<div class="col-3">
+														<div class="form-group">
+														<label class="control-label mb-1">Requester ID</label>
+															<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="requesterId" id="requesterId2" th:field="*{requesterId}" placeholder="Requester Name" >
+														</div>
+													</div>
+									-->
+													
+													<div class="col-3">
+														<div class="form-group">
+															<label class="control-label mb-1">Requester Name</label>
+															<select class="form-control" id="requesterId" name ="requesterId" th:field="*{requesterId}" >
+														    	<option value="">Select User</option>
+														    	<option th:each="user:${userList}"
+																		th:value="${user.userId}"
+																		th:utext="${user.userName}"
+																/>										
+															</select>
+														<!-- 
+														<div class="invalid-feedback">
+															Please choose a userName.
+														</div>
+														 -->
+														</div>
+													</div>
+													<div class="col-3" hidden>
+														<div class="form-group">
+														<label class="control-label mb-1">Requester Name</label>
+															<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="requesterName" id="requesterName" th:field="*{requesterName}" placeholder="Requester Name" >
+														</div>
+													</div>
+													
+													<div class="col-3">
+														<div class="form-group">
+														<label class="control-label mb-1">Requester Contact Number</label>
+															<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="requesterContactPhone" id="requesterContactPhone" th:field="*{requesterContactPhone}" placeholder="Requester Contact Number" >
+														</div>
+													</div>
+												
+												
+												</div>
+												<div class="row">
+													<div class="col-3 text-left">
+														<a><span class="req" style="color: red">Passenger Info</span></a>
+													</div>
+													
+													<div class="col-6 text-center">
+														<a><span class="req" style="color: red">Please insert either User Name or Agent</span></a>
+													</div>
+												</div>
+												
+											
+												
+											</div>
+											
+											<div class="groove">
+											<div class="row">
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Passport No</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="passportNo" id="passportNo" th:field="*{modelUser_ATTM.passportNo}" placeholder="Passport No" >
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="checkForUserId()" value="Check">				
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">User ID</label>
+														<input type="text" id="userId" class="form-control" aria-required="true" aria-invalid="false" name="userId" th:field="*{modelUser_ATTM.userId}" placeholder="User ID"  >
+														<!-- 
+														<div class="invalid-feedback">
+															Please choose a userId.
+														</div>
+														 -->
+													</div>
+												</div>
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">User Name</label>
+														<select class="form-control" id="userName" name ="userName" th:field="*{modelUser_ATTM.userId}" >
+														  <option value="0">Select User</option>
+														   <option th:each="user:${userList}"
+															th:value="${user.userId}"	
+															th:utext="${user.userName}"
+															/>										
+														</select>
+														<!-- 
+														<div class="invalid-feedback">
+															Please choose a userName.
+														</div>
+														 -->
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>DOB</label>
+														<input type="date" class="form-control" aria-required="true" aria-invalid="false" id="dob" name="dob" th:field="*{modelUser_ATTM.dob}"  placeholder="mm/dd/yyyy" >
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Father Name</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="fatherName" name="fatherName" th:field="*{modelUser_ATTM.fatherName}"  placeholder="Father Name" >
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Mother Name</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="motherName" name="motherName" th:field="*{modelUser_ATTM.motherName}"  placeholder="Mother Name" >
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Contact No</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" id="contactNo" name="contactNo" th:field="*{modelUser_ATTM.contactNo}" placeholder="Contact No" >
+													</div>
+												</div>
+												
+												<div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Address</label>
+														<textarea placeholder="Type your address here..." name="userAddress" id="userAddress" th:field="*{modelUser_ATTM.userAddress}" 
+			                                            class="form-control" rows="5" cols="50" ></textarea>
+													</div>
+												</div>
+												
+												
+												
+											</div>
+											
+											
+										</div>
+
+										<div class=" groove">
+											
+											<div class="row">	
+												<div class="col-3">
+													<div class="form-group">
+													</div>
+												</div>	
+											</div>
+												
+											<div class="row  form-horizontal">	
+		
+		<!--									
+												<div class="col-6">
+													<div class="form-group row">
+														<label for="modelAgent.agentId" class="col-sm-2 control-label">Agent:</label>
+														<div class="col-sm-10">														
+														<select class="form-control" name ="modelAgent.agentId" th:field="*{modelAgent.agentId}" required>
+														  <option value="">Select Agent</option>
+														  <option th:each="agent:${agentList}"
+																  th:value="${agent.agentId}"	
+																  th:utext="${agent.agentName}"
+														   />										
+														</select>
+														</div>														
+													</div>
+												</div>
+			-->
+			
+							<div class="col-5">
+								<div class="form-group row">
+									<label for="fromAgentId" class="col-sm-4 control-label">From Agent:</label>
+									<div class="col-sm-7">														
+										<select class="form-control" name ="fromAgentId" id="fromAgentId" th:field="*{fromAgent.agentId}" >
+							    		<option value="0">Select Agent</option>
+									    <option th:each="agent:${agentList}"
+										        th:value="${agent.agentId}"	
+											    th:utext="${agent.agentName}"
+									    />										
+									    </select>
+									</div>														
+								</div>
+							</div>
+							
+							<div class="col-5">
+								<div class="form-group row">
+									<label for="toAgentId" class="col-sm-3 control-label">To Agent:</label>
+									<div class="col-sm-7">														
+										<select class="form-control" name ="toAgentId" id="toAgentId" th:field="*{toAgent.agentId}" disabled>
+							<!--   		<option value="">Select Agent</option>		-->
+									    <option th:each="agent:${agentList2}"
+										        th:value="${agent.agentId}"	
+											    th:utext="${agent.agentName}"
+									    />										
+									    </select>
+									</div>														
+								</div>
+							</div>
+							
+							<div class="col-2">
+								<div class="form-group">
+									<label class="control-label mb-1">Enable</label>
+									<!-- Default checked -->
+						 			<div class="custom-control custom-checkbox">
+						 				<input type="checkbox" class="custom-control-input" id="enable" onClick="myFunction()"  >
+										<label class="custom-control-label" for="enable"></label>
+					   			 	</div>									
+								 </div>
+				       		</div>				
+											
+											</div>		
+										</div>
+											
+											<div class="row">
+											
+											
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label>Request Date<span class="req" style="color: red">*</span>:</label>
+														<input id="requestDate" type="date" class="form-control"  name ="requestDate" th:field="*{requestDate}" required>
+													</div>
+												</div>
+												
+												
+					<!--							
+												<div class="col-3">
+													<div class="form-group">
+														<label>Air Line<span class="req" style="color: red">*</span>:</label>					
+														<select class="form-control" id="airLineId" name ="modelAirLine.airLineId" th:field="*{modelAirLine.airLineId}" >
+														  <option value="">Select Air Line</option>
+														   <option th:each="airLine:${airLineList}"
+															th:value="${airLine.airLineId}"	
+															th:utext="${airLine.airLineName}"
+															/>
+														</select>
+														
+														
+													</div>
+												</div>
+					-->							
+											
+											<div class="col-3">
+												<div class="form-group">
+													<label>Ticket Owner Company<span class="req" style="color: red">*</span>:</label>					
+													<select class="form-control" id="ticketOwnerCompanyId" name ="ticketOwnerCompanyId" th:field="*{modelTicketOwnerCompany.ticketOwnerCompanyId}" required>
+													<option value="">Select Ticket Company</option>
+													<option th:each="ticketOwner:${ticketOwnerCompanyList}"
+															th:value="${ticketOwner.ticketOwnerCompanyId}"	
+															th:utext="${ticketOwner.ownerCompanyName}"
+													/>
+													</select>
+													<!-- 
+													<div class="invalid-feedback">
+														Please choose a ticket company.
+													</div>
+													-->	
+												</div>
+											</div>
+											
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label>Possible Flight Date<span class="req" style="color: red">*</span>:</label>
+														<input  type="date" class="form-control" name ="possibleFlightDate" id="possibleFlightDate" th:field="*{possibleFlightDate}" required>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label><span class="req" style="color: red">No Of Tickets*:</span></label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="noOfTickets" id="noOfTickets" th:field="*{noOfTickets}" placeholder="No Of Tickets" required>
+													</div>
+												</div>
+												
+												
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label>Country From<span class="req" style="color: red">*</span>:</label>
+														<select class="form-control" id="fromCountryId" name ="countryFrom" th:field="*{countryFrom.countryId}" required>
+													  	   <option value="">Select Country</option>		
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>City From<span class="req" style="color: red">*</span>:</label>
+														<select class="form-control" id="fromCityId" name ="fromCityId" th:field="*{fromCity.cityId}" required>
+														  <option value="">Select City</option>
+														  <option th:each="city:${cityList}"
+
+															th:value="${city.cityId}"	
+															th:utext="${city.cityName}"
+															/>  								
+														</select>
+													</div>
+												</div>
+												
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Country To<span class="req" style="color: red">*</span>:</label>
+														<select class="form-control" id="toCountryId" name ="countryTo" th:field="*{countryTo.countryId}" required>
+												  		   <option value="">Select Country</option>		
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+												
+		
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">City To<span class="req" style="color: red">*</span>:</label>
+														<select class="form-control" id="toCityId" name ="toCity" th:field="*{toCity.cityId}" required>
+														  <option value="">Select City</option>
+														  <option th:each="city:${cityList}"
+
+															th:value="${city.cityId}"	
+															th:utext="${city.cityName}"
+															/>  								
+														</select>
+													</div>
+												</div>
+												
+										
+												<div class="col-3">
+													<div class="form-group">
+														<label>Approx Amount:</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="approxAMT" id="approxAMT" th:field="*{approxAMT}" placeholder="Approx Amount" >
+													</div>
+												</div>
+												
+											
+												<div class="col-3">
+													<div class="form-group">
+														<label>Agreement Amount:</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="agreementAMT" id="agreementAMT" th:field="*{agreementAMT}" placeholder="Agreement Amount" >
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>Adv. Payment:</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="advPayment" id="advPayment" th:field="*{advPayment}" placeholder="Adv. Payment" >
+													</div>
+												</div>
+												
+												
+												<div class="col-2">			
+													<label class="control-label mb-1">Auto Payment</label>
+														<!-- Default checked -->
+													<div class="custom-control custom-checkbox">
+											 			<input type="checkbox" class="custom-control-input" id="autoPay" name="autoPay" th:field="*{autoPay}" checked>
+														<label class="custom-control-label" for="autoPay"></label>
+													</div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+									
+												</div>
+												
+											<div class="col-2">
+									
+													<label class="control-label mb-1">Active</label>
+														<!-- Default checked -->
+													<div class="custom-control custom-checkbox">
+											 			<input type="checkbox" class="custom-control-input" id="active" th:field="*{active}" checked>
+														<label class="custom-control-label" for="active"></label>
+													</div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+									
+												</div>
+
+												<div class="col-4">
+													<div class="form-group">
+														<label class="control-label mb-1">Remarks:</label>
+														<textarea rows="5" cols="20" placeholder="Type you message here..." name="remarks" id="remarks" th:field="*{remarks}" class="form-control" aria-required="true"   aria-invalid="false">
+
+                                                    	</textarea>
+													</div>
+												 </div>
+												 
+										
+				
+												 
+											</div>	 
+												 
+											
+											
+											<div class="col-12 text-right">
+								<!--
+											<button type="submit" class="btn btn-primary btn-md">
+												<i class="fa fa-dot-circle-o"></i> Save
+											</button>
+								-->
+											<button type="button" id="saveTicketRequest" class="btn btn-primary btn-md">
+												<i class="fa fa-dot-circle-o"></i> Save
+											</button>
+											
+												</div>
+
+
+
+
+											
+										</form>
+
+
+
+									</div>
+								</div>
+
+							</div>
+						</div> <!-- .card -->
+
+					</div>
+					<!--/.col-->
+				</div>
+
+
+
+<!----------------------------------------------------------------------------------------------------------------------------------->
+
+
+			
+
+				
+
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/ajax.js"></script>
+
+
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#myTable').DataTable({
+				"scrollX": true
+			});
+			$('#sub-close').submit(function(e) {
+				e.preventDefault();
+				// Coding
+				//$('#umodal').modal('toggle'); 
+				$('#umodal').modal('hide');
+				return false;
+			});
+		});
+		
+		$('#userName').change(
+		        function() {
+		        
+		        var userId=$('#userName').val();
+		        //document.getElementById("userId").value = userId;
+		        
+		        var formData= { 
+     				 		"userId" :userId
+     				 		
+						};
+		
+		 $.ajax({
+		            type : "GET",	    		           
+		             url:"/attm_ticketrequestcontroller/getuserid",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            var x="";
+            document.getElementById("userId").value=x;
+            document.getElementById("userName").value=x;
+	  	 	document.getElementById("dob").value=x;
+	     	document.getElementById("fatherName").value=x;
+	     	document.getElementById("motherName").value=x;
+	     	document.getElementById("contactNo").value=x;
+	     	document.getElementById("userAddress").value=x;
+            }
+            else{
+            
+             $.each(result, function(i,modelUser){
+             
+             
+	     
+	     document.getElementById("userId").value=modelUser.userId;
+	     document.getElementById("userName").value=modelUser.userId;
+	  	 document.getElementById("dob").value=modelUser.dob;
+	     document.getElementById("fatherName").value=modelUser.fatherName;
+	     document.getElementById("motherName").value=modelUser.motherName;
+	     document.getElementById("contactNo").value=modelUser.contactNo;
+	     document.getElementById("userAddress").value=modelUser.userAddress;
+	     document.getElementById("passportNo").value=modelUser.passportNo;
+	 
+	     		
+		});        // each
+            
+            }		//else
+		               
+		            	
+		            },		// success
+			 });		// ajax's
+		        
+		         });	//change function
+		
+		
+		Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		document.getElementById("requestDate").value = new Date().toDateInputValue();
+
+function checkForUserId()
+		{
+		
+		
+		var passportNo=$("#passportNo").val();
+		
+		var formData= { 
+     				 		"passportNo" :passportNo
+     				 		
+						};
+		
+		 $.ajax({
+		            type : "GET",	    		           
+		             url:"/attm_ticketrequestcontroller/checkinguserid",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            var x="";
+            document.getElementById("userId").value=x;
+            document.getElementById("userName").value=x;
+	  	 	document.getElementById("dob").value=x;
+	     	document.getElementById("fatherName").value=x;
+	     	document.getElementById("motherName").value=x;
+	     	document.getElementById("contactNo").value=x;
+	     	document.getElementById("userAddress").value=x;
+            }
+            else{
+            
+             $.each(result, function(i,modelUser){
+             
+             
+	     
+	     document.getElementById("userId").value=modelUser.userId;
+	     document.getElementById("userName").value=modelUser.userId;
+	  	 document.getElementById("dob").value=modelUser.dob;
+	     document.getElementById("fatherName").value=modelUser.fatherName;
+	     document.getElementById("motherName").value=modelUser.motherName;
+	     document.getElementById("contactNo").value=modelUser.contactNo;
+	     document.getElementById("userAddress").value=modelUser.userAddress;
+	    
+	 
+	     		
+		});        // each
+            
+            }		//else
+		               
+		            	
+		            },		// success
+			 });		// ajax's
+		
+		}		//function
+
+
+
+$('#requesterId').change(
+		        function() {
+		        
+		        var userId=$('#requesterId').val();
+		        //document.getElementById("userId").value = userId;
+		        
+		        var formData= { 
+     				 		"userId" :userId
+     				 		
+						};
+		
+		 $.ajax({
+		            type : "GET",	    		           
+		             url:"/attm_ticketrequestcontroller/getuserid",
+		            dataType : 'json',
+			        data: formData,
+		            success: function(result){
+		    if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            var x="";
+            document.getElementById("requesterId").value=x;
+
+            }
+            else{
+            
+             $.each(result, function(i,modelUser){
+             
+             
+	     
+	     document.getElementById("requesterId").value=modelUser.userId;
+	     //document.getElementById("requesterId2").value=modelUser.userId;
+	  	 document.getElementById("requesterName").value=modelUser.userName;
+	     document.getElementById("requesterContactPhone").value=modelUser.contactNo;
+	    
+	 
+	     		
+		});        // each
+            
+            }		//else
+		               
+		            	
+		            },		// success
+			 });		// ajax's
+		        
+		         });	//change function
+		         
+		         
+		$('#fromCountryId').change(
+		        function() {
+		        
+		        	
+		        
+		var fromCountryId=$('#fromCountryId').val();        
+		        
+		         $.getJSON("/ticketrequestcontroller/getcitybycountryid", {
+		                countryId : fromCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#fromCityId').html(html);
+		                
+		                });
+		
+		  });
+		  
+	$('#toCountryId').change(
+		        function() {
+		        
+		     	
+		        
+		var toCountryId=$('#toCountryId').val();
+		
+		$.getJSON("/ticketrequestcontroller/getcitybycountryid", {
+		                countryId : toCountryId,   
+		                ajax : 'true'
+		            }, function(data) {
+		                var html = '<option value="">Select City</option>';
+		                //var html;
+		                var len = data.length;
+		                
+		                for ( var i = 0; i < len; i++) {
+		                    html += '<option value="' + data[i].cityId + '">'
+		                            + data[i].cityName + '</option>';
+		                }
+		                html += '</option>';
+		                $('#toCityId').html(html);
+		                
+		                });
+		
+		  });	
+		  
+		  
+		  
+		  
+		  
+		   $('#enable').click(function(e) {
+		   //function myFunction(){
+		   
+		   
+		   var toAgentId=document.getElementById("toAgentId");
+		   
+		   //document.getElementById("toAgentId").disabled=true;
+		  
+		  
+		   if(toAgentId.disabled==false)
+		   {
+		   		$('#toAgentId').prop('disabled', true);
+		   		//$('#toAgentId').removeAttr('disabled', false);
+		   		//document.getElementById("toAgentId").disabled=false;
+		   }
+		   else 
+		   {
+		   //alert("In Click Function")
+				$('#toAgentId').prop('disabled', false);
+				//document.getElementById("toAgentId").disabled=true;
+		   }
+		  
+		  
+		   //}
+		    });
+		  
+		  $('#saveTicketRequest').click(function(e) {
+		  
+		  //alert("In save JS function");
+		 
+		   var ticketRequestId = $("#ticketRequestId").val();
+		   var requesterId = $("#requesterId").val();
+		   var requesterName = $("#requesterName").val();
+		   var requesterContactPhone = $("#requesterContactPhone").val();
+		   		
+		   
+		   var userId = $("#userName").val();
+		   var fromAgentId = $("#fromAgentId").val();
+		   var toAgentId = $("#toAgentId").val();
+		   
+		   
+		   var requestDate = $("#requestDate").val();
+		   var airLineId = $("#airLineId").val();
+		   var possibleFlightDate = $("#possibleFlightDate").val();
+		   var noOfTickets = $("#noOfTickets").val();
+		   var fromCountryId = $("#fromCountryId").val();
+		   var fromCityId = $("#fromCityId").val();
+		   var toCountryId = $("#toCountryId").val();
+		   var toCityId = $("#toCityId").val();
+		   var approxAMT = $("#approxAMT").val();
+		   var agreementAMT = $("#agreementAMT").val();
+		   var active = document.getElementById("active");
+		   var remarks = $("#remarks").val();
+	 
+		   var ticketOwnerCompanyId = $("#ticketOwnerCompanyId").val();
+		   var advPayment = $("#advPayment").val();
+		   var autoPay=document.getElementById("autoPay");
+		   
+		   if(autoPay.checked==true)
+		   {
+		   		var autoPayment=1;
+		   }
+		   else{
+		   		var autoPayment=0;
+		   }
+		   
+		   if(active.checked==true)
+		   {
+		   var activeStatus=1;
+		   }
+		   else
+		   {
+		   var activeStatus=0;
+		   }
+		   
+		  var x="";
+		   
+		
+		  var formData= { 
+      				
+      				"ticketRequestId" : ticketRequestId,
+      				"requesterId" : requesterId,
+      				"requesterName" : requesterName,
+      				"requesterContactPhone" : requesterContactPhone,
+      				"userId" : userId,
+      				"fromAgentId" : fromAgentId,
+      				"toAgentId" : toAgentId,
+      				"requestDate" : requestDate,
+      				"airLineId" : airLineId,
+      				"possibleFlightDate" : possibleFlightDate,
+      				"noOfTickets" : noOfTickets,
+      				"fromCountryId" : fromCountryId,
+      				"fromCityId" : fromCityId,
+      				"ticketOwnerCompanyId" : ticketOwnerCompanyId,
+      				"advPayment" : advPayment,
+      				"autoPayment" : autoPayment,
+      				"toCountryId" : toCountryId,
+      				"toCityId" : toCityId,
+      				"approxAMT" : approxAMT,
+      				"agreementAMT" : agreementAMT,
+      				"remarks" : remarks,
+      				"activeStatus" : activeStatus
+      		};
+      		
+      		if(ticketOwnerCompanyId==0||ticketOwnerCompanyId==x)
+		  {
+		  		alert("Please Insert Ticket Owner Company");
+		  }
+		  else{
+      		
+      		$.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketrequestcontroller/saveticketrequest",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+                
+            alert("No Records are found");
+            
+            }else{
+            var x = "Successfully saved"
+            //alert("Successfully saved");
+            
+           document.getElementById("message").innerHTML = x;
+            
+             $.each(result, function(i,modelTicketPurchaseMstList){
+					
+	    //alert("ticketRequestId: "+modelTicketPurchaseMstList.ticketRequestId);
+	   	document.getElementById("ticketRequestId").value = modelTicketPurchaseMstList.ticketRequestId;
+			 
+					
+				});        // each
+				
+	
+			}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+      		
+      	}	// else condition	
+      		
+	  
+		   });        
+		         
+
+		
+	</script>
+</body>
+
+</html>

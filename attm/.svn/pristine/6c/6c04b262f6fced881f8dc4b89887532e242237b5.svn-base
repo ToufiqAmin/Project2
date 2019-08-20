@@ -1,0 +1,539 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Man Power Clearance List</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/scss/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+   
+       
+
+    <style type="text/css">
+       
+       #calculate{
+     display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+    
+    
+    <style>
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+    <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./">BiziiDash</a>
+                <a class="navbar-brand hidden" href="./">BD</a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    </li>
+
+
+                    <h3 class="menu-title">Buyer Info</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Buyer</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-puzzle-piece"></i><a href="buyer_data_list.html">Buyer List</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="buyer_data_upload.html">Buyer upload</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="buyer_inquery_table.html">Buyer Inquery Table</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="buyer_inquery_details.html">Buyer Inquery Detail</a></li>
+                        </ul>
+                    </li>
+
+                    <h3 class="menu-title">Design Info</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Design</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Design</a></li>
+                        </ul>
+                    </li>
+
+                    <h3 class="menu-title">User Info</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>User</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">User</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">User</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">User</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">User</a></li>
+                        </ul>
+                    </li>
+
+                    <h3 class="menu-title">Inquery Info</h3><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Inquery</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-puzzle-piece"></i><a href="buyer_inquery_table.html">Inquery</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Inquery</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Inquery</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Inquery</a></li>
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="needs-validation search-form" novalidate>
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+
+                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
+    
+
+                </div>
+            </div>
+
+        </header><!-- /header -->
+        <!-- Header-->
+
+    <div class="panel">
+      <div class="panel-heading custom-header-panel">
+          <h5 class="panel-title roboto">Search</h3>
+          
+      </div>
+  <div class="panel-body">
+
+
+
+  <!-- <h3> Patient Registration </h3>   -->
+  
+
+   
+ 
+                
+                    <form class="needs-validation" th:action="@{/manpowerclearancelistcontroller/search}" novalidate>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="" class="control-label mb-1">User Name</label>
+                                <input  type="text" class="form-control" aria-required="true" aria-invalid="false" name="userName" placeholder="User Name" >
+                            </div>
+                        </div>
+                        
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="" class="control-label mb-1">Send Date</label>
+								<input type="date" class="form-control" aria-required="true" aria-invalid="false"  name="sendDate" >
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="" class="control-label mb-1">Receive Date</label>
+                                <input type="date" class="form-control" aria-required="true" aria-invalid="false"  name="receiveDate" >
+                            </div>
+                        </div>
+                   
+                      <div class="col-1">
+							<div class="form-group">
+								<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="defaultChecked2" name ="active" checked>
+									<label class="custom-control-label" for="defaultChecked2"></label>
+								</div>
+								<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+							</div>
+						</div>
+                        
+                        <div class="col-sm-3 text-right">
+                            
+                                <input type="submit" value="Search" class="btn btn-primary btn-md" style="margin-top: 24px;">
+                                <input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">
+                         
+
+                        </div>
+
+					</div>
+                    </form>
+                
+
+               <div class="row">
+					<div class="col-lg-12">
+						<div class="card table-container" style="width:1070px; overflow-x: scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+								<a th:href="@{/manpowerclearancecontroller/init}" style="float:right" class="btn btn-success">New</a>
+							</div>
+							<div class="card-body">
+								<table id="buyerTable" class="table table-striped table-bordered display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Man Power Clearance ID</th>
+                                            <th>User ID</th>
+                                            <th>User Name</th>
+                                            <th>Expense Amount</th>
+                                            <th>Send Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+                                            <th>Clearance Agent Name </th>
+                                            <th>Receive Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+                                            <th>Active Status</th>
+                                            <th>Remarks </th>
+                                            <th>Action</th>
+        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr th:each="manPowerClerance : ${manPowerCleranceList}">
+                                        	<td><span th:text="${manPowerClerance.manPowerClearanceId}"></span> </td>  
+                                            <td><span th:text="${manPowerClerance.modelUser_ATTM.userId}"></span> </td>  
+                                            <td><span th:text="${manPowerClerance.modelUser_ATTM.userName}"></span></td>
+                                            <td><span th:text="${manPowerClerance.expenseAmount}"></span></td>
+                                            <td><span th:text="${manPowerClerance.sentDate}"></span></td>
+                                            <td><span th:text="${manPowerClerance.clearanceAgentName}"></span></td>
+											<td><span th:text="${manPowerClerance.receiveDate}"></span></td>
+											<td class="text-center">    	
+												<input type="checkbox" id="defaultChecked9" class="form-control" th:checked="${manPowerClerance.active} ? 'checked'" readonly>							
+                                        	</td>
+                                            <td><textarea rows="2" cols="60" th:text="${manPowerClerance.remarks}" readonly >
+                                            </textarea></td>
+                                            
+                                            
+                                             <td>
+                                                <a  class="btn btn-success btn-sm" th:href="@{'/manpowerclearancecontroller/update/' + ${manPowerClerance.manPowerClearanceId}}">Edit</a>
+                                                                                          
+                                            </td>
+
+            
+                                            
+                                            
+                                        </tr>
+                                       
+
+                                    </tbody>
+                                </table>
+                    		</div>
+                    	</div>
+                       
+                    </div>
+                </div>
+                        
+       
+ 
+				
+
+				
+				
+			</div>   <!-- <div class="panel-body">  -->
+
+
+
+       </div>   <!-- <div class="panel">  -->
+                     
+                     
+
+</div>
+</div>    
+
+    
+       
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+  <!--   <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script> -->
+    <script src="/js/main.js"></script>
+     <script src="/js/datatable.js"></script> 
+     <script src="/js/phone.js">
+     
+     
+     $(document).ready(function() {
+         $('#buyerTable').DataTable({
+             "scrollX": true,
+           
+         });
+
+    });
+     </script> 
+
+
+  
+    <script >
+/*    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );*/
+     // Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+			'use strict';
+			window.addEventListener('load', function() {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', function(event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+		
+		
+		 function loadData(index){
+	
+		 
+		  var formData= { 
+       	 					"id" : index
+       	 					
+        					};
+		  
+			//url="/bgusercontroller/findownerphone/"+index;
+			
+			$('#tablePhone tbody').empty();
+			
+			$.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/bgusercontroller/findownerphone/",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelPhone){
+					
+	     var customerRow = '<tr>' +
+	    	
+			'<td >' + modelPhone.modelCountry.dialCode + '</td>' +   			
+			'<td >' + modelPhone.areaCode + '</td>' +
+			'<td >' + modelPhone.phoneNumber + '</td>' +
+			'<td >' + modelPhone.sActive + '</td>' +
+			'<td >' + modelPhone.sEmergency + '</td>' +
+			'<td >' + '<a type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#smallmodal987">Audit</a>' +'</td>' +
+			
+			        
+			'</tr>';
+									  
+									  
+						
+	      $('#tablePhone tbody').append(customerRow);
+	      
+	     
+					
+		});        // each
+		
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+			
+		}
+		
+		
+    </script>
+</body>
+
+</html>

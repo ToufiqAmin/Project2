@@ -1,0 +1,18 @@
+package com.biziitech.attm.dao;
+
+
+import java.util.Date;
+import java.util.List;
+
+import com.biziitech.attm.custom.model.ModelTicketRequestCustom;
+import com.biziitech.attm.model.ModelTicketRequest;
+
+
+public interface DaoTicketRequest {
+	
+	public void saveTicketRequest(ModelTicketRequest modelTicketRequest_ATTM);
+	public List<ModelTicketRequest> getTicketRequestByCraiteria(String requesterName, String requesterContactPhone, String userName, String fromAgentName, String toAgentName, String airLineName,Date fromDate,Date toDate, int status);
+	public List<ModelTicketRequest> getTicketRequestById(Long ticketRequestId);
+	public List<ModelTicketRequestCustom> getTicketRequestDetails(String requesterName, String requesterContactPhone, Long userName, Long fromAgentName, Long toAgentName, Long ownerCompanyName,Date fromDate,Date toDate, int status);
+	
+}

@@ -1,0 +1,13 @@
+package com.biziitech.attm.dao;
+
+
+import javax.transaction.Transactional;
+
+import com.biziitech.attm.model.ModelTran;
+
+@Transactional
+public interface DaoTran {
+	
+	public void saveTran(ModelTran modelTran);
+
+}

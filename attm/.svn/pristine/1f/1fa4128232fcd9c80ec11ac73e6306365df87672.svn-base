@@ -1,0 +1,507 @@
+package com.biziitech.attm.daoImp;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
+import javax.sql.DataSource;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
+
+
+import com.biziitech.attm.bg.repository.TicketSellMstRepository;
+import com.biziitech.attm.custom.model.ModelTicketSellCustom;
+import com.biziitech.attm.dao.DaoTicketSellMst;
+import com.biziitech.attm.model.ModelTicketSellMst;
+
+@Service
+public class DaoTicketSellMstImp implements DaoTicketSellMst{
+	
+	@Autowired
+	private TicketSellMstRepository ticketSellMstRepository;
+	
+	@Autowired
+    private DataSource dataSource;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Override
+	@Transactional
+	public void saveTicketSellMst(ModelTicketSellMst modelTicketSellMst) {
+		// TODO Auto-generated method stub
+	 ticketSellMstRepository.save(modelTicketSellMst);
+	}
+
+	@Override
+	public List<ModelTicketSellMst> getTicketSellMstById(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		return ticketSellMstRepository.findTicketSellMstById(ticketSellMstId);
+	}
+
+	@Override
+	public List<ModelTicketSellCustom> getTicketSellUnDoneChdDetails(Long purchaseAgentId, Date fromDate, Date toDate,
+			Long sellAgentId, Long sellUserId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"h.USER_ID,g.user_name,h.TICKET_PURCHASE_CHD_ID,h.PNR,"+
+				"h.AGENT_PASSENGER_NAME,h.SELLING_PRICE_USD,h.SELLING_PRICE_BDT\r\n" + 
+				"FROM attm_ticket_sell_mst a \r\n" + 
+				"INNER JOIN attm_ticket_purchase_mst b ON a.TICKET_PURCHASE_MST_ID=b.TICKET_PURCHASE_MST_ID\r\n" + 
+				"INNER JOIN attm_ticket_request c ON b.TICKET_REQUEST_ID=c.TICKET_REQUEST_ID\r\n" + 
+				"INNER JOIN attm_airline d ON b.AIRLINE_ID=d.AIRLINE_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent e ON c.FROM_AGENT_ID=e.AGENT_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent f ON a.TO_AGENT_ID=f.AGENT_ID\r\n" + 				
+				"LEFT outer JOIN attm_ticket_purchase_chd h ON b.TICKET_PURCHASE_MST_ID=h.TICKET_PURCHASE_MST_ID\r\n" + 
+				"LEFT OUTER JOIN bg_user g ON h.USER_ID=g.user_id\r\n" + 
+				"WHERE NOT EXISTS(\r\n" + 
+				"SELECT * FROM attm_ticket_sell_chd h \r\n" + 
+				"WHERE h.TICKET_SELL_MST_ID=a.TICKET_SELL_MST_ID\r\n" + 
+				") and a.ACTIVE_STATUS=1 \r\n" + 
+				"and c.TO_AGENT_ID=coalesce(:purchaseAgentId,c.TO_AGENT_ID)\r\n" + 
+				"and a.SELL_DATE BETWEEN coalesce(:fromDate,a.SELL_DATE) \r\n" + 
+				"AND coalesce(:toDate,a.SELL_DATE)\r\n" + 
+				"and c.FROM_AGENT_ID=coalesce(:sellAgentId,c.FROM_AGENT_ID)\r\n" + 
+				"and c.USER_ID=coalesce(:sellUserId,c.USER_ID)\r\n" + 
+				"GROUP BY a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"h.USER_ID,g.user_name,h.TICKET_PURCHASE_CHD_ID,h.PNR,"+
+				"h.AGENT_PASSENGER_NAME,h.SELLING_PRICE_USD,h.SELLING_PRICE_BDT";
+		
+		RowMapper<ModelTicketSellCustom> serviceMapper=new RowMapper<ModelTicketSellCustom>() {
+
+			@Override
+			public ModelTicketSellCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketSellCustom bn= new ModelTicketSellCustom();
+				
+				bn.setTicketSellMstId(rs.getLong("TICKET_SELL_MST_ID"));
+				bn.setTicketPurchaseMstId(rs.getLong("TICKET_PURCHASE_MST_ID"));
+				bn.setRemarks(rs.getString("REMARKS"));
+				bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+				if(bn.getActiveStatus()==1) 
+				{
+					bn.setActive(true);
+					bn.setsActive("Yes");
+				}
+				else {
+					bn.setActive(false);
+					bn.setsActive("No");
+				}
+				
+				bn.setPurchaseAgentId(rs.getLong("TO_AGENT_ID"));
+				bn.setPurchaseAgentName(rs.getString("f.AGENT_NAME"));
+				bn.setPurchaseAgentSelfStatus(rs.getInt("f.SELF_FLAG"));			
+				bn.setToAgentId(rs.getLong("FROM_AGENT_ID"));
+				bn.setToAgentName(rs.getString("e.AGENT_NAME"));
+				bn.setSellAgentSelfStatus(rs.getInt("e.SELF_FLAG"));
+				bn.setUserId(rs.getLong("USER_ID"));
+				bn.setUserName(rs.getString("user_name"));
+				
+				if(bn.getUserId()!=null|| bn.getUserId()!=0) 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				else {
+				if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==0) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==0 && bn.getSellAgentSelfStatus()==1) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==1)
+				{
+					bn.setUserId(0L);
+					bn.setUserName("");
+				}
+				else 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				
+				}
+				
+				if(bn.getPurchaseAgentId()==null||bn.getToAgentId()==0) 
+				{
+					bn.setPurchaseAgentId(0L);
+					bn.setPurchaseAgentName("");
+					bn.setToAgentId(0L);
+					bn.setToAgentName("");
+				}
+				else 
+				{
+					bn.setPurchaseAgentId(bn.getPurchaseAgentId());
+					bn.setPurchaseAgentName(bn.getPurchaseAgentName());
+					bn.setToAgentId(bn.getToAgentId());
+					bn.setToAgentName(bn.getToAgentName());
+				}
+				
+				
+				
+				bn.setAirLineId(rs.getLong("AIRLINE_ID"));
+				bn.setAirLineName(rs.getString("AIRLINE_NAME"));
+				bn.setSellDate(rs.getDate("SELL_DATE"));
+				bn.setSellQty(rs.getInt("SELL_QTY"));
+				bn.setRequestDate(rs.getDate("REQUEST_DATE"));
+				bn.setPurchaseDate(rs.getDate("PURCHASE_DATE"));
+				bn.setPurchaseQty(rs.getInt("NO_OF_TICKETS"));
+				bn.setSoldQty(0);
+				bn.setTicketAMTUSD(rs.getDouble("SELLING_PRICE_USD"));
+				bn.setTicketAMTBDT(rs.getDouble("SELLING_PRICE_BDT"));
+				bn.setAgentPassengerName(rs.getString("AGENT_PASSENGER_NAME"));
+				bn.setTicketPurchaseChdId(rs.getLong("TICKET_PURCHASE_CHD_ID"));
+				bn.setpNR(rs.getString("PNR"));
+				//bn.setPurchasedQTY(purChasedQTY);
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("purchaseAgentId", purchaseAgentId);
+	      System.out.println(" in daoTicketPurchaseMstImp, purchaseAgentId:" +purchaseAgentId);
+	      parameters.addValue("fromDate", fromDate);
+	      parameters.addValue("toDate", toDate);
+	      parameters.addValue("sellAgentId", sellAgentId);
+	      parameters.addValue("sellUserId", sellUserId);
+
+	      
+
+		System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelTicketSellCustom> getTicketSellDoneChdDetails(Long purchaseAgentId, Date fromDate, Date toDate,
+			Long sellAgentId, Long sellUserId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"i.USER_ID,g.user_name,i.TICKET_PURCHASE_CHD_ID,i.PNR,"+
+				"i.AGENT_PASSENGER_NAME,i.SELLING_PRICE_USD,i.SELLING_PRICE_BDT\r\n" + 
+				"FROM attm_ticket_sell_chd h \r\n" + 
+				"INNER JOIN attm_ticket_sell_mst a ON h.TICKET_SELL_MST_ID=a.TICKET_SELL_MST_ID\r\n" + 
+				"INNER JOIN attm_ticket_purchase_mst b ON a.TICKET_PURCHASE_MST_ID=b.TICKET_PURCHASE_MST_ID\r\n" + 
+				"INNER JOIN attm_ticket_request c ON b.TICKET_REQUEST_ID=c.TICKET_REQUEST_ID\r\n" + 
+				"INNER JOIN attm_airline d ON b.AIRLINE_ID=d.AIRLINE_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent e ON c.FROM_AGENT_ID=e.AGENT_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent f ON a.TO_AGENT_ID=f.AGENT_ID\r\n" + 				
+				"LEFT OUTER JOIN attm_ticket_purchase_chd i ON b.TICKET_PURCHASE_MST_ID=i.TICKET_PURCHASE_MST_ID\r\n" + 
+				"LEFT OUTER JOIN bg_user g ON i.USER_ID=g.user_id\r\n" + 
+				"WHERE a.ACTIVE_STATUS=1\r\n" + 
+				"and c.TO_AGENT_ID=coalesce(:purchaseAgentId,c.TO_AGENT_ID)\r\n" + 
+				"and a.SELL_DATE BETWEEN coalesce(:fromDate,a.SELL_DATE) \r\n" + 
+				"AND coalesce(:toDate,a.SELL_DATE)\r\n" + 
+				"and c.FROM_AGENT_ID=coalesce(:sellAgentId,c.FROM_AGENT_ID)\r\n" + 
+				"and c.USER_ID=coalesce(:sellUserId,c.USER_ID)\r\n" + 
+				"GROUP BY a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"i.USER_ID,g.user_name,i.TICKET_PURCHASE_CHD_ID,i.PNR,"+
+				"i.AGENT_PASSENGER_NAME,i.SELLING_PRICE_USD,i.SELLING_PRICE_BDT";
+		
+String qry_count_chd="SELECT COUNT(h.TICKET_SELL_CHD_ID) AS Id FROM attm_ticket_sell_chd h where h.TICKET_SELL_MST_ID=?";
+		
+		RowMapper<ModelTicketSellCustom> serviceMapper=new RowMapper<ModelTicketSellCustom>() {
+
+			@Override
+			public ModelTicketSellCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketSellCustom bn= new ModelTicketSellCustom();
+				
+				Integer size;
+				//Long id;
+				Integer id;
+				bn.setTicketSellMstId(rs.getLong("TICKET_SELL_MST_ID"));
+				bn.setTicketPurchaseMstId(rs.getLong("TICKET_PURCHASE_MST_ID"));
+				bn.setRemarks(rs.getString("REMARKS"));
+				bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+				if(bn.getActiveStatus()==1) 
+				{
+					bn.setActive(true);
+					bn.setsActive("Yes");
+				}
+				else {
+					bn.setActive(false);
+					bn.setsActive("No");
+				}
+				
+				bn.setPurchaseAgentId(rs.getLong("TO_AGENT_ID"));
+				bn.setPurchaseAgentName(rs.getString("f.AGENT_NAME"));
+				bn.setPurchaseAgentSelfStatus(rs.getInt("f.SELF_FLAG"));			
+				bn.setToAgentId(rs.getLong("FROM_AGENT_ID"));
+				bn.setToAgentName(rs.getString("e.AGENT_NAME"));
+				bn.setSellAgentSelfStatus(rs.getInt("e.SELF_FLAG"));
+				bn.setUserId(rs.getLong("USER_ID"));
+				bn.setUserName(rs.getString("user_name"));
+				
+				if(bn.getUserId()!=null|| bn.getUserId()!=0) 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				else {
+				if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==0) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==0 && bn.getSellAgentSelfStatus()==1) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==1)
+				{
+					bn.setUserId(0L);
+					bn.setUserName("");
+				}
+				else 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				
+				}
+				
+				if(bn.getPurchaseAgentId()==null||bn.getToAgentId()==0) 
+				{
+					bn.setPurchaseAgentId(0L);
+					bn.setPurchaseAgentName("");
+					bn.setToAgentId(0L);
+					bn.setToAgentName("");
+				}
+				else 
+				{
+					bn.setPurchaseAgentId(bn.getPurchaseAgentId());
+					bn.setPurchaseAgentName(bn.getPurchaseAgentName());
+					bn.setToAgentId(bn.getToAgentId());
+					bn.setToAgentName(bn.getToAgentName());
+				}
+				
+				
+				
+				bn.setAirLineId(rs.getLong("AIRLINE_ID"));
+				bn.setAirLineName(rs.getString("AIRLINE_NAME"));
+				bn.setSellDate(rs.getDate("SELL_DATE"));
+				bn.setSellQty(rs.getInt("SELL_QTY"));
+				bn.setRequestDate(rs.getDate("REQUEST_DATE"));
+				bn.setPurchaseDate(rs.getDate("PURCHASE_DATE"));
+				bn.setPurchaseQty(rs.getInt("NO_OF_TICKETS"));
+				
+				 Object[] inputs = new Object[] {bn.getTicketSellMstId()};
+				 id = jdbcTemplate.queryForObject(qry_count_chd, inputs, Integer.class);
+				
+				 //size = id.SIZE;
+				 
+				 //size = id;
+				 
+				 System.out.println("Size: "+id);
+				 
+//				 if(size==null || size==0) 
+//				 {
+//					 bn.setSoldQty(0);
+//				 }
+//				 else {
+					 
+					 bn.setSoldQty(id);
+//				 }
+				 
+				 bn.setTicketAMTUSD(rs.getDouble("SELLING_PRICE_USD"));
+				 bn.setTicketAMTBDT(rs.getDouble("SELLING_PRICE_BDT"));
+				 bn.setAgentPassengerName(rs.getString("AGENT_PASSENGER_NAME"));
+				 bn.setTicketPurchaseChdId(rs.getLong("TICKET_PURCHASE_CHD_ID"));
+				 bn.setpNR(rs.getString("PNR"));
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("purchaseAgentId", purchaseAgentId);
+	      System.out.println(" in daoTicketPurchaseMstImp, purchaseAgentId:" +purchaseAgentId);
+	      parameters.addValue("fromDate", fromDate);
+	      parameters.addValue("toDate", toDate);
+	      parameters.addValue("sellAgentId", sellAgentId);
+	      parameters.addValue("sellUserId", sellUserId);
+
+	      
+
+		System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelTicketSellCustom> getTicketSellMstByMstId(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"h.USER_ID,g.user_name,h.TICKET_PURCHASE_CHD_ID,h.PNR,"+
+				"h.AGENT_PASSENGER_NAME,h.SELLING_PRICE_USD,h.SELLING_PRICE_BDT\r\n" + 
+				"FROM attm_ticket_sell_mst a \r\n" + 
+				"INNER JOIN attm_ticket_purchase_mst b ON a.TICKET_PURCHASE_MST_ID=b.TICKET_PURCHASE_MST_ID\r\n" + 
+				"INNER JOIN attm_ticket_request c ON b.TICKET_REQUEST_ID=c.TICKET_REQUEST_ID\r\n" + 
+				"INNER JOIN attm_airline d ON b.AIRLINE_ID=d.AIRLINE_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent e ON c.FROM_AGENT_ID=e.AGENT_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent f ON a.TO_AGENT_ID=f.AGENT_ID\r\n" + 				
+				"LEFT outer JOIN attm_ticket_purchase_chd h ON b.TICKET_PURCHASE_MST_ID=h.TICKET_PURCHASE_MST_ID\r\n" + 
+				"LEFT OUTER JOIN bg_user g ON h.USER_ID=g.user_id\r\n" + 
+				"WHERE NOT EXISTS(\r\n" + 
+				"SELECT * FROM attm_ticket_sell_chd h \r\n" + 
+				"WHERE h.TICKET_SELL_MST_ID=a.TICKET_SELL_MST_ID\r\n" + 
+				") and a.TICKET_SELL_MST_ID=coalesce(:ticketSellMstId,a.TICKET_SELL_MST_ID)\r\n" + 
+				"GROUP BY a.TICKET_SELL_MST_ID,a.SELL_DATE,a.SELL_QTY,a.REMARKS,a.ACTIVE_STATUS,\r\n" + 
+				"a.TICKET_PURCHASE_MST_ID,b.PURCHASE_DATE,b.NO_OF_TICKETS,\r\n" + 
+				"b.TICKET_REQUEST_ID,c.REQUEST_DATE,b.AIRLINE_ID,d.AIRLINE_NAME,\r\n" + 
+				"c.FROM_AGENT_ID,e.AGENT_NAME,e.SELF_FLAG,\r\n" + 
+				"a.TO_AGENT_ID,f.AGENT_NAME,f.SELF_FLAG,\r\n" + 
+				"h.USER_ID,g.user_name,h.TICKET_PURCHASE_CHD_ID,h.PNR,"+
+				"h.AGENT_PASSENGER_NAME,h.SELLING_PRICE_USD,h.SELLING_PRICE_BDT";
+		
+		RowMapper<ModelTicketSellCustom> serviceMapper=new RowMapper<ModelTicketSellCustom>() {
+
+			@Override
+			public ModelTicketSellCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketSellCustom bn= new ModelTicketSellCustom();
+				
+				bn.setTicketSellMstId(rs.getLong("TICKET_SELL_MST_ID"));
+				bn.setTicketPurchaseMstId(rs.getLong("TICKET_PURCHASE_MST_ID"));
+				bn.setRemarks(rs.getString("REMARKS"));
+				bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+				if(bn.getActiveStatus()==1) 
+				{
+					bn.setActive(true);
+					bn.setsActive("Yes");
+				}
+				else {
+					bn.setActive(false);
+					bn.setsActive("No");
+				}
+				
+				bn.setPurchaseAgentId(rs.getLong("TO_AGENT_ID"));
+				bn.setPurchaseAgentName(rs.getString("f.AGENT_NAME"));
+				bn.setPurchaseAgentSelfStatus(rs.getInt("f.SELF_FLAG"));			
+				bn.setToAgentId(rs.getLong("FROM_AGENT_ID"));
+				bn.setToAgentName(rs.getString("e.AGENT_NAME"));
+				bn.setSellAgentSelfStatus(rs.getInt("e.SELF_FLAG"));
+				bn.setUserId(rs.getLong("USER_ID"));
+				bn.setUserName(rs.getString("user_name"));
+				
+				if(bn.getUserId()!=null|| bn.getUserId()!=0) 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				else {
+				if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==0) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==0 && bn.getSellAgentSelfStatus()==1) 
+				{	
+					bn.setUserId(0L);
+					bn.setUserName("DEFLT");
+				}
+				else if(bn.getPurchaseAgentSelfStatus()==1 && bn.getSellAgentSelfStatus()==1)
+				{
+					bn.setUserId(0L);
+					bn.setUserName("");
+				}
+				else 
+				{
+					bn.setUserId(bn.getUserId());
+					bn.setUserName(bn.getUserName());
+				}
+				
+				}
+				
+				if(bn.getPurchaseAgentId()==null||bn.getToAgentId()==0) 
+				{
+					bn.setPurchaseAgentId(0L);
+					bn.setPurchaseAgentName("");
+					bn.setToAgentId(0L);
+					bn.setToAgentName("");
+				}
+				else 
+				{
+					bn.setPurchaseAgentId(bn.getPurchaseAgentId());
+					bn.setPurchaseAgentName(bn.getPurchaseAgentName());
+					bn.setToAgentId(bn.getToAgentId());
+					bn.setToAgentName(bn.getToAgentName());
+				}
+				
+				
+				
+				bn.setAirLineId(rs.getLong("AIRLINE_ID"));
+				bn.setAirLineName(rs.getString("AIRLINE_NAME"));
+				bn.setSellDate(rs.getDate("SELL_DATE"));
+				bn.setSellQty(rs.getInt("SELL_QTY"));
+				bn.setRequestDate(rs.getDate("REQUEST_DATE"));
+				bn.setPurchaseDate(rs.getDate("PURCHASE_DATE"));
+				bn.setPurchaseQty(rs.getInt("NO_OF_TICKETS"));
+				bn.setSoldQty(0);
+				bn.setTicketAMTUSD(rs.getDouble("SELLING_PRICE_USD"));
+				bn.setTicketAMTBDT(rs.getDouble("SELLING_PRICE_BDT"));
+				bn.setAgentPassengerName(rs.getString("AGENT_PASSENGER_NAME"));
+				bn.setTicketPurchaseChdId(rs.getLong("TICKET_PURCHASE_CHD_ID"));
+				bn.setpNR(rs.getString("PNR"));
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("ticketSellMstId", ticketSellMstId);
+	      System.out.println(" in daoTicketPurchaseMstImp, ticketSellMstId:" +ticketSellMstId);
+	      
+	      
+
+		System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelTicketSellMst> getTicketSellMstByPurchaseMstId(Long ticketPurchaseMstId) {
+		// TODO Auto-generated method stub
+		return ticketSellMstRepository.findTicketSellMstByPurchaseMstId(ticketPurchaseMstId);
+	}
+
+	
+
+}

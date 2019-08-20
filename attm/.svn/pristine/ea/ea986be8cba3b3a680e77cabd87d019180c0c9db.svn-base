@@ -1,0 +1,2010 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ticket Sell</title>
+	<meta name="description" content="Sufee Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" href="apple-icon.png">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link rel="stylesheet"th:href="@{/css/normalize.css}" href="../../static/css/normalize.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"href="../../static/css/font-awesome.min.css">
+    <link rel="stylesheet"th:href="@{/css/themify-icons.css}" href="../../static/css/themify-icons.css">
+    <link rel="stylesheet"th:href="@{/css/flag-icon.min.css}" href="../../static/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/css/cs-skin-elastic.css}"href="../../static/css/cs-skin-elastic.css">
+	 <!-- <link rel="stylesheet" href="../../static/css/bootstrap-select.less"> -->
+    <link rel="stylesheet"th:href="@{/scss/style.css}" href="../../static/scss/style.css">
+
+  
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+	<style type="text/css">
+		.modal-backdrop.show {
+			display: none;
+		}
+
+		.modal-backdrop.fade {
+			display: none;
+		}
+
+		input[type=checkbox],
+		input[type=radio] {
+			width: 20px !important;
+		}
+
+		.up-msg {
+			padding: 10px;
+		}
+	</style>
+	
+	<style>
+
+.groove {
+/*
+	border-style: groove;
+*/
+
+	border-bottom-style: solid;
+
+}
+
+.custom-header-panel{
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+}
+
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
+.card-header{
+    /* background-color: #004b8e !important; */
+    background-color: #004b8e !important;
+    border-color: #004b8e !important;
+    color: white;
+
+    padding: 10px 15px;
+  /*margin: -15px -15px 15px; */
+
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+
+ <style type="text/css">
+       
+       #calculate{
+      display:none;
+     }
+    
+        .modal-backdrop.show {
+            display: none;
+        }
+
+        .modal-backdrop.fade {
+            display: none;
+        }
+
+/*
+        div.dataTables_wrapper {
+            width: 100%;
+        }
+*/
+		.selected{
+			background-color: #eee;
+			color: #000;
+		}
+		
+		.dataTables_length, .dataTables_filter {
+			display: none !important;
+		}
+    </style>
+
+
+</head>
+
+<body>
+	<!-- Left Panel -->
+
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./">ATTM</a>
+				<a class="navbar-brand hidden" href="./">BD</a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+			
+                
+   <li class="menu-item-has-children dropdown" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <i class="menu-icon fa fa-laptop"></i>    Set Up
+          </a>
+        
+       <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown" >
+          
+             <li th:each="s:${listModelUserObjectSetup}" 
+                   th:value="${s.userObjectId}">
+            <a class="dropdown-item" th:href="@{${s.modelObject.filePath}+'/'+${s.modelUser.userId}}" >
+               
+                    <span th:utext="${s.modelObject.objectName}">
+                   </span>
+                </a>
+            </li>
+          
+          <!--
+          	<li><a th:href="@{'/bgusercontroller/init'+'/'+${userId}}">User</a></li>
+			<li><a th:href="@{'/bgusertypecontroller/init'+'/'+${userId}}">User Type</a></li>
+			<li><a th:href="@{'/servicecontroller/init'+'/'+${userId}}">Service</a></li>
+			<li><a th:href="@{'/clientservicecontroller/init'+'/'+${userId}}">Client Service</a></li>
+          	<li><a th:href="@{'/agentcontroller/init'+'/'+${userId}}">Agent</a></li>
+          	<li><a th:href="@{'/airlinecontroller/init'+'/'+${userId}}">Air Line</a></li>
+          	<li><a th:href="@{'/ticketrequestcontroller/init'+'/'+${userId}}">Ticket Request</a></li>
+          -->	
+        </ul>
+        
+   </li>
+   
+      
+	 <li class="menu-item-has-children dropdown">
+     
+       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="menu-icon fa fa-laptop"></i> Transaction
+        </a>
+        
+           <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+           
+           
+              <li th:each="t:${listModelUserObjectTransaction}"
+                   th:value="${t.userObjectId}">
+                   
+                   <a class="dropdown-item" th:href="@{${t.modelObject.filePath}+'/'+${t.modelUser.userId}}" >
+                 
+                         <span th:utext="${t.modelObject.objectName}">
+                         </span>
+                      </a>
+              </li>
+             
+             <!--
+             <li><a th:href="@{'/passportreceivecontroller/init'+'/'+${userId}}">Passport Receive</a></li>
+             <li><a th:href="@{'/manpowerclearancecontroller/init'+'/'+${userId}}">Manpower Clearance</a></li>
+             --> 
+          </ul>
+      </li>			
+				
+        	
+		   	
+		<li class="menu-item-has-children dropdown">
+     
+             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-laptop"></i>   Tools
+             </a>
+        
+            <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                <li th:each="u:${listModelUserObjectTool}"
+                     th:value="${u.userObjectId}">
+                     
+                           <a class="dropdown-item" th:href="@{${u.modelObject.filePath}+'/'+${u.modelUser.userId}}" >
+                 
+                    <span th:utext="${u.modelObject.objectName}">
+                    </span>
+                 </a>
+               </li>
+          
+            </ul>
+       </li>	
+
+
+		<li class="menu-item-has-children dropdown">
+     
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="menu-icon fa fa-laptop"></i> Report
+              </a>
+        
+              <ul class="sub-menu children dropdown-menu" aria-labelledby="navbarDropdown">
+                   <li th:each="r:${listModelUserObjectReport}"
+                        th:value="${r.userObjectId}">
+                        <a class="dropdown-item" th:href="@{${r.modelObject.filePath}+'/'+${r.modelUser.userId}}" >
+                     <!--  <a class="dropdown-item" th:href="${r.modelObject.filePath}"> -->
+                           <span th:utext="${r.modelObject.objectName}">
+                           </span>
+                       </a>
+                   </li>
+          
+              </ul>
+        </li>	
+					
+					
+					
+	             </ul>
+			</div>
+		</nav>
+	</aside><!-- /#left-panel -->
+
+	<!-- Left Panel -->
+
+	<!-- Right Panel -->
+
+	<div id="right-panel" class="right-panel">
+
+		<!-- Header-->
+		<header id="header" class="header">
+
+			<div class="header-menu">
+<!--
+				<div class="col-sm-4">
+					<a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+					<div class="header-left">
+						<button class="search-trigger"><i class="fa fa-search"></i></button>
+						<div class="form-inline">
+							<form class="search-form">
+								<input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+								<button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+							</form>
+						</div>
+
+					</div>
+				</div>
+-->
+		<!--
+				<div class="col-sm-5">
+					<div class="user-area dropdown float-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        </a>
+
+						<div class="user-menu dropdown-menu">
+							<a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+							
+							<input type="text" class="nav-link" th:value="${userId}" id="accessUserId" readonly>
+
+							<a class="nav-link" href="/logoncontroller/init"><i class="fa fa-power -off"></i>Logout</a>
+						</div>
+					</div>
+                </div>
+         -->       
+                  
+                        <div class="col-sm-4 text-right" >
+                         
+                      </div> 
+               
+                       <div class="col-sm-8 text-right" >
+                          
+                           <a class="nav-link" href="/logoncontroller/init"  style="float:right;" ><i class="fa fa-power -off"></i>Logout</a>
+                       	   <span class="nav-link" id="logonUserId" th:text="${userId}"readonly style="color: black; float:right;" hidden></span>	
+                           <span class="nav-link" id="logonUserName" th:text="${name}"readonly style="color: black; float:right;"></span>
+                       </div>
+                 
+			</div>
+
+		</header><!-- /header -->
+		<!-- Header-->
+
+
+		
+		<div class="content mt-3">
+			<div class="animated fadeIn">
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<strong class="card-title">Ticket Sell Form</strong>
+				
+							</div>
+							<div class="card-body">
+								<!-- Credit Card -->
+								<div id="">
+									<div class="card-body">
+										<form class="needs-validation" id="searchForm" method="post" novalidate>
+											<div class="row">																			
+								
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Passport No</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="passportNo" id="passportNo" placeholder="Passport No" >
+													</div>
+												</div>
+												
+												<div class="col-1">
+													<div class="form-group">
+														<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="checkForUserId()" value="Check">				
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">Passenger Name</label>
+														<select class="form-control" id="userName" name ="userName"  >
+														  <option value="">Select User</option>
+														   <option th:each="user:${userList}"
+															th:value="${user.userId}"	
+															th:utext="${user.userName}"
+															/>										
+														</select>
+														
+													</div>
+												</div>
+												
+												<div class="col-2" >
+													<div class="form-group">
+														<label class="control-label mb-1">User ID</label>
+														<input type="text" class="form-control" aria-required="true" aria-invalid="false" name="userId" id="userId" placeholder="User ID" readonly>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>Country From:</label>
+														<select class="form-control" name ="countryFrom" id="fromCountryId">
+													  	<option value="">Select Country</option>		
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>City From:</label>
+														<select class="form-control" name ="cityFrom" id="fromCityId">
+															<option value="">Select City</option>
+															<option th:each="city:${cityList}"
+																	th:value="${city.cityId}"	
+																	th:utext="${city.cityName}"
+															/>
+														   								
+														</select>
+													</div>
+												</div>
+												
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">Country To:</label>
+														<select class="form-control" name ="countryTo" id="toCountryId">
+													  	<option value="">Select Country</option>	
+														   <option th:each="country:${countryList}"
+															th:value="${country.countryId}"	
+															th:utext="${country.countryName}"
+															/>										
+														</select>
+													</div>
+												</div>
+									
+												<div class="col-3">
+													<div class="form-group">
+														<label  class="control-label mb-1">City To:</label>
+														<select class="form-control" name ="cityTo" id="toCityId">
+											    		<option value="">Select City</option>
+														<option th:each="city:${cityList}"
+																th:value="${city.cityId}"	
+																th:utext="${city.cityName}"
+														/>
+														</select>
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">From Agent:</label>
+															<select class="form-control" name ="fromAgentId" id="fromAgentId" >
+														  		<option value="">Select Agent</option>
+														   		<option th:each="agent:${agentList}"
+																th:value="${agent.agentId}"	
+																th:utext="${agent.agentName}"
+																/>										
+															</select>
+																											
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label class="control-label mb-1">To Agent:</label>
+															<select class="form-control" name ="toAgentId" id="toAgentId" >
+														  		<option value="">Select Agent</option>
+														   		<option th:each="agent:${agentList2}"
+																th:value="${agent.agentId}"	
+																th:utext="${agent.agentName}"
+																/>										
+															</select>
+																											
+													</div>
+												</div>
+												
+												<div class="col-3">
+													<div class="form-group">
+														<label>From Date</label>
+														<input type="date" id="startDate" class="form-control"  name ="From Date" >
+													</div>
+												</div>
+									
+												<div class="col-3">
+													<div class="form-group">
+														<label>To Date</label>
+														<input type="date" id="endDate" class="form-control"  name ="To Date"  >
+													</div>
+												</div>												
+											
+											
+                     							<div class="col-2">
+													<div class="form-group">
+														<label class="control-label mb-1">Sell Done</label>
+														<!-- Default checked -->
+														<div class="custom-control custom-checkbox">
+											 				<input type="checkbox" class="custom-control-input" onClick="myFunction()" id="sellActive" >
+															<label class="custom-control-label" for="sellActive"></label>
+														</div>
+														<!--<input type="checkbox" class="form-control" aria-required="true" aria-invalid="false" th:field="*{active}"-->
+													</div>
+												</div>
+								
+											</div>
+
+										<div class="col-sm-12 text-right">
+											<input type="submit" value="Search" class="btn btn-primary" style="margin-top: 24px;">
+											<input type="button" style="margin-top: 24px;" class="btn btn-success" onClick="location.reload()" value="Refresh">				
+										</div>										
+									</form>
+
+								</div>
+							</div>
+
+
+		<!-- =======================================Ticket Sell Mst Table========================== -->
+					
+						<div class="card" style="width: 1070px; overflow:scroll">
+							<div class="card-header">
+								<strong class="card-title">Search Result</strong>
+							</div>
+									
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names">
+							</div>
+								<table id="ticketSellMstTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+									<a><span class="req" style="color: red">Click Self Agent Name to view Chd Data in Ticket Sell Chd</span></a>
+									<thead>
+										<tr>
+											
+											<th scope="col" hidden>Ticket Request ID</th>											
+											<th scope="col" >Request Date(<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+											<th scope="col" >User Name</th>
+											<th scope="col" >From Agent Name</th>
+											<th scope="col" >To Agent Name</th>
+											<th scope="col" >AirLine Name</th>
+											<th scope="col" >Advance Payment</th>
+											<th scope="col" >Agreement Amount</th>
+											<th scope="col" >Sold QTY</th>
+											<th scope="col" >Sell QTY</th>
+											<th scope="col" >Remarks</th>	
+											<th scope="col" >Active</th>																					
+											<th scope="col" >Action</th>
+											<th scope="col" >Edit</th>
+										</tr>
+									</thead>
+									<tbody>
+						<!--		
+										<tr >
+                                            <td hidden><span ></span> </td>
+                                            <td><span ></span></td>                                                                                                                                                                                                                            
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            
+                                           
+                                            <td>
+                                            <input type="button" value="Sell Chd" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >
+                                            </td>
+                                           
+                                        </tr>
+				-->
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInTicketSellMstTable" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+
+
+<!-- =======================================Ticket Sell Chd Table========================== -->
+					
+						<div class="card" style="width: 1070px; overflow:scroll">
+							<div class="card-header">
+								<strong class="card-title">Ticket Sell Chd</strong>
+							</div>
+									
+							<div class="card-body">
+							<div class="text-right">
+								<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names">
+							</div>
+								<table id="sellChdTable" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+					<!--		<a><span class="req" style="color: red">Click Purchase Date to view Chd Data in Purchase Chd</span></a>	 -->
+									<thead>
+										<tr>
+											
+											<th scope="col" hidden>Ticket Sell Chd ID</th>
+											<th scope="col" >Ticket Sell Mst ID</th>
+											<th scope="col" >Ticket Purchase Chd ID</th>
+											<th scope="col" >User Name</th>
+											<th scope="col" >PNR</th>
+											<th scope="col" >Agent Passenger Name</th>
+											<th scope="col" >Ticket AMT (USD/BDT)</th>
+											<th scope="col" >Remarks</th>
+											<th scope="col" >Active</th>
+											<th scope="col" >Action</th>
+							
+
+										</tr>
+									</thead>
+									<tbody>
+									
+										<tr >
+                                            <td hidden><span ></span> </td>
+                                            <td><span ></span> </td>
+                                       		<td><span ></span></td>
+                                            <td><span ></span></td>                                                                                                                                                                                                                            
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td><span ></span></td>
+                                            <td>
+                                            <input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >
+                                            </td>
+                                           
+                                        </tr>
+				
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInSellChdTable" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+
+					
+					
+
+
+
+
+
+
+
+
+
+			
+
+				
+
+			</div><!-- .animated -->
+		</div><!-- .content -->
+
+
+	</div><!-- /#right-panel -->
+
+	<!-- Right Panel -->
+	
+
+<!--=====================================================================
+				Ticket Sell Mst Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Ticket Sell Mst</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+			<!--	<div class="groove">	-->
+						<div class="row" >
+						
+ 			   
+ 			   				<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Ticket Sell Mst ID</label>
+									<input type="text" id="ticketSellMstId" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketSellMstId" readonly>
+								</div>
+							</div>
+							
+							
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Ticket Request ID</label>
+									<input type="text" id="ticketRequestId" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketRequestId" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Sell Date</label>
+									<input type="date" id="sellDate2" class="form-control" aria-required="true" aria-invalid="false"  name ="sellDate" readonly>
+								</div>
+							</div>
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Ticket QTY</label>
+									<input type="text" id="ticketQty" class="form-control" aria-required="true" aria-invalid="false"  name ="ticketQty" >
+								</div>
+							</div>
+
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Sell QTY</label>
+									<input type="text" id="sellQty2" class="form-control" aria-required="true" aria-invalid="false"  name ="sellQty" >
+								</div>
+							</div>
+
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="sellMstActive" name ="active" checked>
+								<label class="custom-control-label" for="sellMstActive"></label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="ticketSellMstRemarks" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="ticketSellMstRemarks" placeholder="Write Message Here" id="ticketSellMstRemarks" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+				
+					
+
+				
+					
+				</div>
+					
+					<div class="row">  
+					    <div class="col-12 modal-footer text-right">
+						     <div class="form-group">
+								<button type="button" id="saveSellMst" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" data-dismiss="modal" class="btn btn-default btn-md">
+        						Close
+        						</button>
+						     </div>
+					    </div>	
+                   </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+                      					
+
+ 
+<!--=====================================================================
+				Ticket Sell Mst Entry  modal
+=====================================================================-->
+	
+	<div class="modal fade" id="largeModal30" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Ticket Sell Mst</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" style="text-align: left">
+					<form  class="needs-validation" method="post"  novalidate>
+			<!--	<div class="groove">	-->
+						<div class="row" >
+						
+							
+							
+							<div class="col-3" hidden>
+								<div class="form-group" >
+									<label class="control-label mb-1">Ticket Request Id</label>
+									<input type="text" id="ticketRequestId" class="form-control" aria-required="true" aria-invalid="false" name ="ticketRequestId" readonly>
+								</div>
+							</div>
+							
+ 			   
+ 			   				<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Ticket Sell Mst ID</label>
+									<input type="text" id="sellMstId" class="form-control" aria-required="true" aria-invalid="false"  name ="sellMstId" readonly>
+								</div>
+							</div>
+							
+							
+							<div class="col-3">
+								<div class="form-group">
+									<label class="control-label mb-1">Sell Date</label>
+									<input type="date" id="sellDate" class="form-control" aria-required="true" aria-invalid="false"  name ="sellDate" >
+								</div>
+							</div>
+						
+
+							<div class="col-3" >
+								<div class="form-group">
+									<label class="control-label mb-1">To Agent Id</label>
+									<input type="text" id="toAgentId2" class="form-control" aria-required="true" aria-invalid="false" name ="toAgentId2" readonly>
+								</div>
+							</div>
+					
+							<div class="col-3" >
+								<div class="form-group">
+									<label class="control-label mb-1">To Agent Name</label>
+									<input  type="text" id="toAgentName" class="form-control" aria-required="true" aria-invalid="false" name ="toAgentName" placeholder="To Agent Name" >
+								</div>
+							</div>
+					
+							<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Sell Qty</label>
+									<input type="text" id="sellQty" class="form-control" aria-required="true" aria-invalid="false" name ="sellQty" >
+								</div>
+							</div>	
+					
+							<div class="col-3" >
+								<div class="form-group" >
+									<label class="control-label mb-1">Selected Qty</label>
+									<input type="text" id="selectedQty" class="form-control" aria-required="true" aria-invalid="false" name ="selectedQty" >
+								</div>
+							</div>
+					
+					
+					<div class="col-1">
+						<div class="form-group">
+							<label class="control-label mb-1">Active</label>
+								<!-- Default checked -->
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="sellMstActive" name ="active" checked>
+								<label class="custom-control-label" for="sellMstActive"></label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-5">
+						<div class="form-group">
+							<label for="ticketSellMstRemarks" class="control-label mb-1">Remarks</label>
+							<textarea rows="3" cols="60" name="ticketSellMstRemarks" placeholder="Write Message Here" id="ticketSellMstRemarks" class="form-control" aria-required="true" aria-invalid="false">
+							</textarea>
+						</div>
+					</div>
+					
+				<div class="card" style="width: 1070px; overflow:scroll">
+					<div class="card-header">
+						<strong class="card-title">Search Result</strong>
+					</div>
+									
+					<div class="card-body">
+						
+						<table id="ticketSellMstTable2" class="table table-striped table-bordered" cellspacing="0" style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col" >Select Row</th>
+									<th scope="col" hidden>Ticket Purchase Chd ID</th>										
+									<th scope="col" >Ticket Purchase Mst ID</th>											
+									<th scope="col" >Purchase Date (<span style="font-size:15px">yyyy/mm/dd</span>)</th>
+									<th scope="col" >Ticket No</th>
+									<th scope="col" >User Name</th>
+									<th scope="col" >PNR</th>
+									<th scope="col" >Ticket AMT (USD/BDT)</th>
+									<th scope="col" >From Country</th>
+									<th scope="col" >From City</th>
+									<th scope="col" >To Country</th>
+									<th scope="col" >To City</th>
+									<th scope="col" >QTY</th>
+									<th scope="col" >Agent Passenger Name</th>
+									<th scope="col" >Selling Price (USD/BDT)</th>	
+									<th scope="col" >Active</th>																					
+									<th scope="col" >Remarks</th>
+									
+								</tr>
+							</thead>
+									<tbody>
+						
+									</tbody>
+								</table>
+								
+								<div class="pagination-container">
+	           						<nav>
+	           			   				<ul id="paginationInTicketSellMstTable2" class="pagination"></ul>
+				        			</nav>
+								</div>        
+								
+							</div>
+						</div>
+				
+				</div>	
+
+					
+					<div class="row">  
+					    <div class="col-12 modal-footer text-right">
+						     <div class="form-group">
+								<button type="button" id="saveSellMst" class="btn btn-primary btn-md">
+        						Save
+        						</button>
+        						<button type="button" data-dismiss="modal" class="btn btn-default btn-md">
+        						Close
+        						</button>
+						     </div>
+					    </div>	
+                   </div>
+                                            					
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div> 
+ 
+			
+					
+					
+			
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/ajax.js"></script>
+
+
+	<script src="/js/lib/data-table/datatables.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/dataTables.buttons.min.js"></script>
+	<script src="/js/lib/data-table/buttons.bootstrap.min.js"></script>
+	<script src="/js/lib/data-table/jszip.min.js"></script>
+	<script src="/js/lib/data-table/pdfmake.min.js"></script>
+	<script src="/js/lib/data-table/vfs_fonts.js"></script>
+	<script src="/js/lib/data-table/buttons.html5.min.js"></script>
+	<script src="/js/lib/data-table/buttons.print.min.js"></script>
+	<script src="/js/lib/data-table/buttons.colVis.min.js"></script>
+	<script src="/js/lib/data-table/datatables-init.js"></script>
+	<script type="text/javascript">
+	
+
+	$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#ticketSellMstTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#sellChdTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+}); 
+
+
+		$(function () {
+    $('#searchForm').submit(function(e) {
+     // prevent default for submission
+      e.preventDefault();
+      //alert("in submit function");
+      
+      var check=document.getElementById("sellActive");
+       if(check.checked==true){
+      	
+      	 //alert(" sell Done is active");
+      	 
+      	 sellMstDone();
+      		      	
+      	}
+      	else{
+      	
+      	//alert("sell Done is inActive");
+      	
+      	sellMstUnDone();
+   	
+      	}
+      
+   
+ 
+   });  // submit
+   });   // function  
+   
+   
+   function sellMstUnDone()
+   {
+   		//alert("in sellMstUnDone function");
+   		
+   		
+   		userId = $("#userName").val();
+   		startDate = $("#startDate").val();
+   		endDate = $("#endDate").val();
+   		fromCountryId = $("#fromCountryId").val();
+   		fromCityId = $("#fromCityId").val();
+   		toCountryId = $("#toCountryId").val();
+   		toCityId = $("#toCityId").val();
+   		fromAgentId = $("#fromAgentId").val();
+   		toAgentId = $("#toAgentId").val();
+   		
+   		
+   		var formData= { 
+       	 		"userId" : userId,
+       	 		"fromDate" : startDate,
+       	 		"toDate" : endDate,
+        		"fromCountryId" : fromCountryId,
+        		"fromCityId" : fromCityId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"fromAgentId" : fromAgentId,
+        		"toAgentId" : toAgentId
+        		       		
+        		};
+        		
+         $('#ticketSellMstTable tbody').empty();
+         
+         $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/getticketsellundone",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketSellChdList){
+             
+             
+              var customerRow = '<tr>' +
+			'<td class="tdTicketRequestId" hidden>' + modelTicketSellChdList.ticketRequestId + '</td>' +
+			'<td class="tdRequestDate">' +'<a href="#" >'+ modelTicketSellChdList.requestDate+'</a>'+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdUserName" >' + modelTicketSellChdList.userName + '</td>' +
+			'<td class="tdFromAgentId" hidden>' + modelTicketSellChdList.fromAgentId + '</td>' +    			
+			'<td class="tdFromAgentName" >' + modelTicketSellChdList.fromAgentName + '</td>' +
+			'<td class="tdToAgentId" hidden>' + modelTicketSellChdList.toAgentId + '</td>' +    			
+			'<td class="tdToAgentName" >' + modelTicketSellChdList.toAgentName +'</td>' +		
+			'<td class="tdAirLineId" hidden>' + modelTicketSellChdList.airLineId+'</td>' +
+			'<td class="tdAirLineName" >' + modelTicketSellChdList.airLineName+'</td>' +
+			'<td class="tdAdvancePayment" >' + modelTicketSellChdList.advancePayment+'</td>' +
+			'<td class="tdAgreementAMT" >' + modelTicketSellChdList.agreementAMT+'</td>' +			
+			'<td class="tdSoldQty">' + modelTicketSellChdList.soldQty+'</td>' +
+			'<td class="tdSellQty">' + modelTicketSellChdList.noOfTickets+'</td>' +
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +			
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdTicketSellMst">' +'<input type="button" value="Sell Mst" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+		   	'<td class="tdEdit">' +'<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal" >'+ '</td>' +
+			        
+			'</tr>';
+             
+             
+              $('#ticketSellMstTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	var table="#ticketSellMstTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInTicketSellMstTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax		
+   		
+   
+   }
+   
+   function sellMstDone()
+   {
+   		alert("in sellMstDone function");
+   		
+   		userId = $("#userName").val();
+   		startDate = $("#startDate").val();
+   		endDate = $("#endDate").val();
+   		fromCountryId = $("#fromCountryId").val();
+   		fromCityId = $("#fromCityId").val();
+   		toCountryId = $("#toCountryId").val();
+   		toCityId = $("#toCityId").val();
+   		fromAgentId = $("#fromAgentId").val();
+   		toAgentId = $("#toAgentId").val();
+   		
+   		
+   		var formData= { 
+       	 		"userId" : userId,
+       	 		"fromDate" : startDate,
+       	 		"toDate" : endDate,
+        		"fromCountryId" : fromCountryId,
+        		"fromCityId" : fromCityId,
+        		"toCountryId" : toCountryId,
+        		"toCityId" : toCityId,
+        		"fromAgentId" : fromAgentId,
+        		"toAgentId" : toAgentId
+        		       		
+        		};
+        		
+         $('#ticketSellMstTable tbody').empty();
+         
+         $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/getticketselldone",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketSellChdList){
+             
+             
+              var customerRow = '<tr>' +
+			'<td class="tdTicketRequestId" hidden>' + modelTicketSellChdList.ticketRequestId + '</td>' +
+			'<td class="tdRequestDate">' +'<a href="#" >'+ modelTicketSellChdList.requestDate+'</a>'+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdUserName" >' + modelTicketSellChdList.userName + '</td>' +
+			'<td class="tdFromAgentId" hidden>' + modelTicketSellChdList.fromAgentId + '</td>' +    			
+			'<td class="tdFromAgentName" >' + modelTicketSellChdList.fromAgentName + '</td>' +
+			'<td class="tdToAgentId" hidden>' + modelTicketSellChdList.toAgentId + '</td>' +    			
+			'<td class="tdToAgentName" >' + modelTicketSellChdList.toAgentName +'</td>' +		
+			'<td class="tdAirLineId" hidden>' + modelTicketSellChdList.airLineId+'</td>' +
+			'<td class="tdAirLineName" >' + modelTicketSellChdList.airLineName+'</td>' +
+			'<td class="tdAdvancePayment" >' + modelTicketSellChdList.advancePayment+'</td>' +
+			'<td class="tdAgreementAMT" >' + modelTicketSellChdList.agreementAMT+'</td>' +			
+			'<td class="tdSoldQty">' + modelTicketSellChdList.soldQty+'</td>' +
+			'<td class="tdSellQty">' + modelTicketSellChdList.noOfTickets+'</td>' +
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +			
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdTicketSellMst">' +'<input type="button" value="Sell Mst" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+		   	'<td class="tdEdit">' +'<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal" >'+ '</td>' +
+			        
+			'</tr>';
+             
+             
+              $('#ticketSellMstTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	var table="#ticketSellMstTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInTicketSellMstTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+   
+   }
+   
+   
+$("#ticketSellMstTable").on('click','.tdEdit',function(){
+      
+      
+      
+    var $row = $(this).closest("tr");
+   	var ticketSellMstId=$row.find(".tdTicketSellMstId").text();
+   	var ticketPurchaseMstId=$row.find(".tdTicketPurchaseMstId").text();
+   	var sellDate=$row.find(".tdSellDate").text();
+   	var sellQty=$row.find(".tdSellQty").text();
+   	var toAgentId=$row.find(".tdToAgentId").text();
+   	var remarks=$row.find(".tdRemarks").text();
+   	var activeStatus=$row.find(".tdActiveStatus").text();
+   	
+   	
+   	
+   	if(activeStatus==1)
+   	{
+   		document.getElementById("sellMstActive").checked = true;
+   	}
+   	else{
+   		
+   		document.getElementById("sellMstActive").checked = false;
+   	}
+   	
+   	//alert("activeStatus: "+activeStatus+"ticketSellMstId: "+ticketSellMstId);
+   	
+   	 document.getElementById("ticketSellMstId").value = ticketSellMstId;
+   	 document.getElementById("ticketPurchaseMstId").value = ticketPurchaseMstId;
+   	 document.getElementById("sellDate").value = sellDate;
+   	 document.getElementById("sellQty").value = sellQty;
+   	 document.getElementById("toAgentId").value = toAgentId;
+   	 document.getElementById("ticketSellMstRemarks").value = remarks;
+   	 //document.getElementById("ticketSellMstId").value = ticketSellMstId;
+      
+});	//click function
+       
+		
+	$("#ticketSellMstTable").on('click','.tdTicketSellMst',function(){
+      
+      var $row = $(this).closest("tr");
+      //var ticketSellMstId=$row.find(".tdTicketSellMstId").text();
+      var ticketRequestId=$row.find(".tdTicketRequestId").text();
+      var toAgentId=$row.find(".tdToAgentId").text();
+      var toAgentName=$row.find(".tdToAgentName").text();
+      var soldQty=$row.find(".tdSoldQty").text();
+      var sellQty=$row.find(".tdSellQty").text();
+      var x ="";
+      
+      alert("in sell Mst function sellQty: "+sellQty+" toAgentId: "+toAgentId);
+      
+      
+      Date.prototype.toDateInputValue = (function() {
+		    var local = new Date(this);
+		    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+		    return local.toJSON().slice(0,10);
+		});
+		
+		//var today = new Date().toDateInputValue();
+     
+      // document.getElementById("sellChdId").value = x;
+       document.getElementById("ticketRequestId").value = ticketRequestId;
+       document.getElementById("toAgentId2").value = toAgentId;
+       document.getElementById("toAgentName").value = toAgentName;
+       document.getElementById("sellQty").value = sellQty;
+       document.getElementById("selectedQty").value = soldQty;
+       document.getElementById("ticketSellMstRemarks").value = x;
+       document.getElementById("sellDate").value = new Date().toDateInputValue();;
+       
+       
+       var formData= { 
+       	 		"ticketRequestId" : ticketRequestId
+       	 		        		       		
+        		};
+        		
+         $('#ticketSellMstTable2 tbody').empty();
+         
+         $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/getselfticketpurchase",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketSellChdList){
+             
+             
+              var customerRow = '<tr>' +
+			'<td class="tdTicketRequestId" hidden>' + modelTicketSellChdList.ticketRequestId + '</td>' +
+			'<td id="sellMst1" class="sellMstSelectbox text-center">' + '<input type="checkbox" >' + '</td>' +
+			'<td class="tdTicketPurchaseChdId" hidden>' + modelTicketSellChdList.ticketPurchaseChdId+'</td>' +
+			'<td class="tdTicketPurchaseMstId">' + modelTicketSellChdList.ticketPurchaseMstId+'</td>' +
+			'<td class="tdPurchaseDate">' + modelTicketSellChdList.purchaseDate+'</td>' +
+			'<td class="tdTicketNo">' + modelTicketSellChdList.ticketNo+'</td>' +
+			'<td class="tdUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdUserName" >' + modelTicketSellChdList.userName + '</td>' +
+			'<td class="tdPNR">' + modelTicketSellChdList.pNR+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketSellChdList.ticketAMTUSD+'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' + modelTicketSellChdList.ticketAMTBDT+'</td>' +
+			'<td class="tdTicketAMT">' + modelTicketSellChdList.ticketAMTUSD+'/'+modelTicketSellChdList.ticketAMTBDT+'</td>' +
+			'<td class="tdFromCountryId" hidden>' + modelTicketSellChdList.fromCountryId + '</td>' +    			
+			'<td class="tdFromCountryName" >' + modelTicketSellChdList.fromCountryName + '</td>' +
+			'<td class="tdFromCityId" hidden>' + modelTicketSellChdList.fromCityId + '</td>' +    			
+			'<td class="tdFromCityName" >' + modelTicketSellChdList.fromCityName +'</td>' +		
+			'<td class="tdToCountryId" hidden>' + modelTicketSellChdList.toCountryId+'</td>' +
+			'<td class="tdToCountryName" >' + modelTicketSellChdList.tocountryName+'</td>' +
+			'<td class="tdToCityId" hidden>' + modelTicketSellChdList.toCityId+'</td>' +
+			'<td class="tdToCityName" >' + modelTicketSellChdList.toCityName+'</td>' +			
+			'<td class="tdPurchasedQTY">' + modelTicketSellChdList.purchasedQTY+'</td>' +
+			'<td class="tdAgentPassengerName">' + modelTicketSellChdList.agentPassengerName+'</td>' +
+			'<td class="tdSellingPriceUSD" hidden>' + modelTicketSellChdList.sellingPriceUSD+'</td>' +
+			'<td class="tdSellingPriceBDT" hidden>' + modelTicketSellChdList.sellingPriceBDT+'</td>' +
+			'<td class="tdTicketAMT">' + modelTicketSellChdList.sellingPriceUSD+'/'+modelTicketSellChdList.sellingPriceBDT+'</td>' +
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +			
+		
+			
+			        
+			'</tr>';
+             
+             
+              $('#ticketSellMstTable2 tbody').append(customerRow);
+					
+		});        // each
+	
+	var table="#ticketSellMstTable2";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInTicketSellMstTable2").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+       
+       
+      
+    });	//click function
+    
+    
+    $("#ticketSellMstTable2").on('click','.sellMstSelectbox',function(){
+    
+    alert("in click function");
+    
+    var $row = $(this).closest("tr");
+    
+    var check = $row.find(".sellMstSelectbox");
+    
+    if(check.prop("checked")==false)
+    {
+    	alert("unchecked");
+    	//var i= document.getElementById("selectedQty").value;
+    	//i=i-1;
+    	//document.getElementById("selectedQty").value=i;
+    }
+    else{
+    
+ 
+    	
+    	alert("checked");
+    	
+    	//var i= document.getElementById("selectedQty").value;
+    	//i=i+1;
+    	//document.getElementById("selectedQty").value=i;
+    }
+    
+    
+    });
+    
+    
+    $('#saveSellMst').click(function(e) {
+   	   	 
+   	  ticketSellMstId = $("#ticketSellMstId").val();
+   	  ticketRequestId = $("#ticketRequestId").val();
+   	  sellDate = $("#sellDate").val();
+      sellQty = $("#sellQty").val();
+      selectedQty = $("#selectedQty").val();
+      toAgentId = $("#toAgentId").val();
+   	  ticketSellMstRemarks = $("#ticketSellMstRemarks").val();
+   	  active = document.getElementById("sellMstActive");
+   	  if(active.checked==true)
+   	  {
+   	  var activeStatus = 1;
+   	  }
+   	  else
+   	  {
+   	  var activeStatus = 0;
+   	  }
+   	  
+   	  if(selectedQty=>sellQty || selectedQty==0)
+   	  {
+   	  	alert("Selected must be equal to or less than sellQTY");
+   	  }
+   	  else
+   	  {
+   	  
+   	  $('#ticketSellMstTable2 tr').filter(':has(:checkbox:checked)').each(function() { 
+   	   
+   	   var $row = $(this).closest("tr"); 
+   	   
+   	   var ticketPurchaseMstId = $row.find(".tdTicketPurchaseMstId").text();
+   	   var ticketPurchaseChdId = $row.find(".tdTicketPurchaseChdId").text();
+   	   
+   	   
+   	   var formData= { 
+       	 		"ticketSellMstId" : ticketSellMstId,
+       	 		"ticketPurchaseMstId" : ticketPurchaseMstId,
+       	 		"ticketPurchaseChdId" : ticketPurchaseChdId,
+       	 		"ticketRequestId" : ticketRequestId,
+        		"sellDate" : sellDate,
+        		"sellQty" : sellQty,
+        		"toAgentId" : toAgentId,
+        		"remarks" : ticketSellMstRemarks,
+        		"activeStatus" : activeStatus
+        		};
+     // alert("ticketPurchaseMstId: "+ticketPurchaseMstId); 
+       
+      $('#ticketSellMstTable tbody').empty();  		
+      
+      $.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/saveticketsellmst",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketSellChdList){
+             alert("Successfully saved"); 
+             
+          var customerRow = '<tr>' +
+	    	'<td class="tdTicketSellMstId" hidden>' + modelTicketSellChdList.ticketSellMstId + '</td>' +
+			'<td class="tdTicketPurchaseMstId" hidden>' + modelTicketSellChdList.ticketPurchaseMstId + '</td>' +
+			'<td class="tdTicketPurchaseChdId" hidden>' + modelTicketSellChdList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdSellUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdToAgentId" hidden>' + modelTicketSellChdList.toAgentId + '</td>' +    			
+			'<td class="tdToAgentName" >' +'<a href="#" >'+ modelTicketSellChdList.toAgentName +'</a>'+ '</td>' +
+			'<td class="tdRequestDate">' + modelTicketSellChdList.requestDate+'</td>' +
+			'<td class="tdPurchaseDate">' + modelTicketSellChdList.purchaseDate+'</td>' +
+			'<td class="tdSellDate">' + modelTicketSellChdList.sellDate+'</td>' +		
+			'<td class="tdAirLineId" hidden>' + modelTicketSellChdList.airLineId+'</td>' +
+			'<td class="tdAirLineName" >' + modelTicketSellChdList.airLineName+'</td>' +
+			'<td class="tdPurchaseAgentId" hidden>' + modelTicketSellChdList.purchaseAgentId+'</td>' +
+			'<td class="tdPurchaseAgentName" >' + modelTicketSellChdList.purchaseAgentName+'</td>' +
+			'<td class="tdPurchaseQty" >' + modelTicketSellChdList.purchaseQty+'</td>' +
+			'<td class="tdSoldQty">' + modelTicketSellChdList.soldQty+'</td>' +
+			'<td class="tdSellQty">' + modelTicketSellChdList.sellQty+'</td>' +
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +			
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdAgentPassengerName" hidden>' + modelTicketSellChdList.agentPassengerName+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketSellChdList.ticketAMTUSD+'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' + modelTicketSellChdList.ticketAMTBDT+'</td>' +
+			'<td class="tdPNR" hidden>' + modelTicketSellChdList.pNR+'</td>' +
+			'<td class="tdTicketSellChd">' +'<input type="button" value="Sell Chd" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+		   	'<td class="tdEdit">' +'<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal" >'+ '</td>' +
+			        
+			'</tr>';
+             
+             
+              $('#ticketSellMstTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+   	  
+   	   });
+   	  
+   	  }
+   	  
+   	   
+      
+      
+      
+       });	//click function
+    
+ 
+    $("#ticketSellMstTable").on('click','.tdToAgentName',function(){
+      
+      alert("in self Agent function");
+     
+      var $row = $(this).closest("tr");
+      var ticketSellMstId=$row.find(".tdTicketSellMstId").text();
+      
+      var formData= { 
+       	 		"ticketSellMstId" : ticketSellMstId
+       	 		
+        		       		
+        		};
+        		
+         $('#sellChdTable tbody').empty();
+      
+      $.ajax({
+            			type : "GET",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/getticketsellchdbymstid",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+            
+             $.each(result, function(i,modelTicketSellChdList){
+              
+             
+          var customerRow = '<tr>' +
+          	'<td class="tdTicketSellChdId" hidden>' + modelTicketSellChdList.ticketSellChdId + '</td>' +
+	    	'<td class="tdTicketSellMstId" >' + modelTicketSellChdList.ticketSellMstId + '</td>' +
+			'<td class="tdTicketPurchaseChdId" >' + modelTicketSellChdList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdSellUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdSellUserName" >' + modelTicketSellChdList.userName + '</td>' +   			
+			'<td class="tdPNR" >'+ modelTicketSellChdList.pNR +'</td>' +
+			'<td class="tdAgentPassengerName">' + modelTicketSellChdList.agentPassengerName+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketSellChdList.ticketAMTUSD+'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' + modelTicketSellChdList.ticketAMTBDT+'</td>' +
+			'<td >' + modelTicketSellChdList.ticketAMTUSD+'/'+modelTicketSellChdList.ticketAMTBDT+'</td>' +		
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +
+
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +			
+
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdEditChd">' +'<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+		   	
+		        
+			'</tr>';
+             
+             
+              $('#sellChdTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	var table="#sellChdTable";
+	$('.pagination').html('');
+	
+	var trnum =0;
+	var maxRows =parseInt(10);
+	var  totalRows=$(table+' tbody tr').length;
+	
+	$(table+' tr:gt(0)').each(function(e) {
+	
+	              trnum++;
+	              
+	              if(trnum > maxRows)
+	              {
+	                 $(this).hide();
+	              }
+	              if(trnum <= maxRows)
+	              {
+	                 $(this).show();
+	              }
+	    
+	
+	
+	});   //each function
+	
+	 if(totalRows > maxRows)
+	              {
+	              
+	              
+	              var pagenum =Math.ceil(totalRows/maxRows);
+	              
+	              for(var i=1;i<=pagenum;)
+	              {
+	                 $("#paginationInSellChdTable").append('<li class="btn-sm" data-page="'+i+'">\<span>'+ i++ +'</span></li>').show();
+	              }  //for
+	                
+	              }   //if
+	              
+	              
+	              $('.pagination li:first-child').addClass('active');
+	             $('.pagination li').on('click',function(){
+	             
+	             var pageNum =  $(this).attr('data-page');
+	             var trIndex= 0;
+	             
+	             $('.pagination li').removeClass('active');
+	              $(this).addClass('active');
+	             $(table+' tr:gt(0)').each(function(e) {
+	             
+	                trIndex++;
+	                if(trIndex >(maxRows*pageNum) || trIndex<=((maxRows*pageNum)-maxRows))
+	                {
+	                    $(this).hide();
+	                }
+	                else
+	                {
+	                $(this).show();
+	                }
+	             
+	                          
+	                }); // each function
+	             
+	             });  //  click function
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+      
+    });	//click function
+    
+      $("#sellChdTable").on('click','.tdEditChd',function(){
+      
+      var $row = $(this).closest("tr");
+      var ticketSellChdId=$row.find(".tdTicketSellChdId").text();
+      var ticketSellMstId=$row.find(".tdTicketSellMstId").text();
+      var ticketPurChaseChdId=$row.find(".tdTicketPurchaseChdId").text();
+      var sellUserId=$row.find(".tdSellUserId").text();
+      var pNR=$row.find(".tdPNR").text();
+      var agentPassengerName=$row.find(".tdAgentPassengerName").text();
+      var ticketAMTUSD=$row.find(".tdTicketAMTUSD").text();
+      var ticketAMTBDT=$row.find(".tdTicketAMTBDT").text();
+      var activeStatus=$row.find(".tdActiveStatus").text();
+      var remarks=$row.find(".tdRemarks").text();
+      var x ="";
+      
+      if(activeStatus==1)
+      {
+      		document.getElementById("sellChdActive").checked=true;
+      }
+      else{
+      		document.getElementById("sellChdActive").checked=false;
+      }
+      
+       document.getElementById("sellChdId").value = ticketSellChdId;
+       document.getElementById("sellMstId").value = ticketSellMstId;
+       document.getElementById("purchaseChdId").value = ticketPurChaseChdId;
+       document.getElementById("sellUserId2").value = sellUserId;
+       document.getElementById("pNR").value = pNR;
+       document.getElementById("agentPassengerName").value = agentPassengerName;
+       document.getElementById("ticketAMTUSD").value = ticketAMTUSD;
+       document.getElementById("ticketAMTBDT").value = ticketAMTBDT;
+       document.getElementById("ticketSellChdRemarks").value = remarks;
+       document.getElementById("soldQty").value = x;
+       document.getElementById("sellQty").value = x;
+      
+         });	//click function
+      
+      
+      $('#saveSellChd').click(function(e) {
+      
+        
+      soldQty = $("#soldQty").val();
+      sellQty = $("#sellQty").val();
+      
+      var i;
+      var j;
+      
+      var x ="";
+    
+       
+       if(soldQty==x && sellQty==x)
+       {
+       		var i=0;
+       		var j=1;
+       		
+       		saveSellChd(i,j);
+       }
+       else if(soldQty==sellQty)
+       {
+       
+       alert("Ticket Sell Mst crossed it's limit. Cannot Save for Sell Chd");
+       }
+       else{
+       
+       		var i=soldQty;
+       		var j=sellQty;
+       		
+       		saveSellChd(i,j);
+       }
+      
+      });	//click function   
+      
+      
+       function saveSellChd(i,j)
+       {
+       alert("i: "+i+" j: "+j);
+       
+       var m=parseInt(i);
+       var n=parseInt(j);
+       
+      sellChdId = $("#sellChdId").val();
+      sellMstId = $("#sellMstId").val();
+      purchaseChdId = $("#purchaseChdId").val();
+      sellUserId2 = $("#sellUserId2").val();
+      pNR = $("#pNR").val();
+      agentPassengerName = $("#agentPassengerName").val();
+      ticketAMTUSD = $("#ticketAMTUSD").val();
+      ticketAMTBDT = $("#ticketAMTBDT").val();
+      ticketSellChdRemarks = $("#ticketSellChdRemarks").val();
+      active = document.getElementById("sellChdActive");
+      if(active.checked==true)
+      {
+      	var activeStatus=1;
+      }
+      else{
+      	var activeStatus=0;
+      }
+      
+       var formData= { 
+       	 		"ticketSellChdId" : sellChdId,
+       	 		"ticketSellMstId" : sellMstId,
+       	 		"ticketPurchaseChdId" : purchaseChdId,
+       	 		"sellUserId" : sellUserId2,
+       	 		"pNR" : pNR,
+       	 		"agentPassengerName" : agentPassengerName,
+       	 		"ticketAMTUSD" : ticketAMTUSD,
+       	 		"ticketAMTBDT" : ticketAMTBDT,
+       	 		"activeStatus" : activeStatus,
+       	 		"remarks" : ticketSellChdRemarks
+        		       		
+        		};
+        		
+      //var k; 
+        		
+      if(m<n){  		
+        		
+         $('#sellChdTable tbody').empty();  		
+      
+      $.ajax({
+            			type : "POST",
+           				// url :  "/api/inquiry_search",
+           				   url:"/ticketsellcontroller/saveticketsellchd",
+            			   dataType : 'json',
+	    				   data: formData,
+            			   success: function(result){
+            			   
+            if(result===null||result.length==0)
+            {
+            alert("No Records are found");
+            
+            }else{
+             alert("Successfully saved"); 
+             
+             $.each(result, function(i,modelTicketSellChdList){
+            
+             
+          var customerRow = '<tr>' +
+          	'<td class="tdTicketSellChdId" hidden>' + modelTicketSellChdList.ticketSellChdId + '</td>' +
+	    	'<td class="tdTicketSellMstId" >' + modelTicketSellChdList.ticketSellMstId + '</td>' +
+			'<td class="tdTicketPurchaseChdId" >' + modelTicketSellChdList.ticketPurchaseChdId + '</td>' +
+			'<td class="tdSellUserId" hidden>' + modelTicketSellChdList.userId + '</td>' +
+			'<td class="tdSellUserName" >' + modelTicketSellChdList.userName + '</td>' +   			
+			'<td class="tdPNR" >'+ modelTicketSellChdList.pNR +'</td>' +
+			'<td class="tdAgentPassengerName">' + modelTicketSellChdList.agentPassengerName+'</td>' +
+			'<td class="tdTicketAMTUSD" hidden>' + modelTicketSellChdList.ticketAMTUSD+'</td>' +
+			'<td class="tdTicketAMTBDT" hidden>' + modelTicketSellChdList.ticketAMTBDT+'</td>' +
+			'<td >' + modelTicketSellChdList.ticketAMTUSD+'/'+modelTicketSellChdList.ticketAMTBDT+'</td>' +		
+			'<td class="tdRemarks">' + modelTicketSellChdList.remarks+'</td>' +
+
+			'<td class="tdsActive" >' + modelTicketSellChdList.sActive+'</td>' +			
+
+			'<td class="tdActiveStatus" hidden>' + modelTicketSellChdList.activeStatus+'</td>' +
+			'<td class="tdEditChd">' +'<input type="button" value="Edit" class="btn btn-primary btn-md" data-toggle="modal" data-target="#largeModal30" >'+ '</td>' +
+		   	
+		        
+			'</tr>';
+             
+             
+              $('#sellChdTable tbody').append(customerRow);
+					
+		});        // each
+		
+	
+	
+	
+		}	//else
+					 
+		},   // end success
+	error : function(e) {
+		alert("ERROR: ", e);
+		console.log("ERROR: ", e);
+			}
+										
+        });   // end ajax
+       
+       m=m+1;
+       document.getElementById("soldQty").value =m;
+       
+       
+       }	// if condition
+       else
+       {
+       alert("Sell Mst has crossed it's limit. Can't save Sell Chd");
+       
+       } 
+       
+     		
+       
+       }
+      
+        
+		
+		
+	</script>
+</body>
+
+</html>

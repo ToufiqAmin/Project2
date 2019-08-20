@@ -1,0 +1,88 @@
+package com.biziitech.attm.daoImp;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.biziitech.attm.bg.repository.TicketPurchaseChdRepository;
+import com.biziitech.attm.dao.DaoTicketPurchaseChd;
+import com.biziitech.attm.model.ModelTicketPurchaseChd;
+
+@Service
+public class DaoTicketPurchaseChdImp implements DaoTicketPurchaseChd{
+	
+	@Autowired
+	private TicketPurchaseChdRepository ticketPurchaseChdRepository;
+
+	@Override
+	@Transactional
+	public void saveTicketPurchaseChd(ModelTicketPurchaseChd modelTicketPurchaseChd) {
+		// TODO Auto-generated method stub
+		ticketPurchaseChdRepository.save(modelTicketPurchaseChd);
+	}
+
+	@Override
+	public List<ModelTicketPurchaseChd> getTicketPurchaseChdByMstId(Long ticketPurchaseMstId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketPurchaseChd> resultList= ticketPurchaseChdRepository.getTicketPurchaseChdByMstId(ticketPurchaseMstId);
+		
+		List<ModelTicketPurchaseChd> ticketPurchaseMstList=new ArrayList<>();
+		
+		for(ModelTicketPurchaseChd ticketPurchaseMst: resultList) {
+				if(ticketPurchaseMst.getActiveStatus()==1)
+				 { 
+					ticketPurchaseMst.setsActive("Yes");
+					ticketPurchaseMst.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketPurchaseMst.setsActive("NO");
+					 ticketPurchaseMst.setActive(false);
+				     
+				 }
+				
+				
+				ticketPurchaseMstList.add(ticketPurchaseMst);
+				}
+		
+				
+		return ticketPurchaseMstList;
+	}
+
+	@Override
+	public List<ModelTicketPurchaseChd> getTicketPurchaseChdById(Long ticketPurchaseChdId) {
+		// TODO Auto-generated method stub
+		List<ModelTicketPurchaseChd> resultList= ticketPurchaseChdRepository.getTicketPurchaseChdById(ticketPurchaseChdId);
+		
+		List<ModelTicketPurchaseChd> ticketPurchaseChdList=new ArrayList<>();
+		
+		for(ModelTicketPurchaseChd ticketPurchaseChd: resultList) {
+				if(ticketPurchaseChd.getActiveStatus()==1)
+				 { 
+					ticketPurchaseChd.setsActive("Yes");
+					ticketPurchaseChd.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketPurchaseChd.setsActive("NO");
+					 ticketPurchaseChd.setActive(false);
+				     
+				 }
+				
+				
+				ticketPurchaseChdList.add(ticketPurchaseChd);
+				}
+	
+	
+	
+			return ticketPurchaseChdList;
+	}		
+
+}

@@ -1,0 +1,382 @@
+package com.biziitech.attm.custom.model;
+
+import java.util.Date;
+
+public class ModelTicketPurchaseCustom {
+	
+	
+	private Long ticketPurchaseMstId;
+	private Date purchaseDate;
+	private Date flightDate;
+	private Date possibleFlightDate;
+	private Long ticketRequestId;
+	private Integer ticketRequestNoOfTickets;
+	private String ticketRequesterName;
+	private Long ticketRequesterId;
+	private Long airLineId;
+	private String airLineName;
+	private Double totalAMT;
+	private String remarks;
+	private String agentPassengerName;
+	private int activeStatus;
+	private String sActive;
+	private boolean active;
+	private Long enteredBy;
+	private String enteredByName;
+	private Date entryTimeStamp;
+	private Long updatedBy;
+	private String updatedByName;
+	private Date updatedTimeStamp;
+	private Date requestDate;
+	private Long userId;
+	private String userName;
+	private Long agentId;
+	private String agentName;
+	private Long fromAgentId;
+	private String fromAgentName;
+	private Long toAgentId;
+	private String toAgentName;
+	private Integer fromAgentSelfStatus;
+	private Integer toAgentSelfStatus;
+	private Long fromCountryId;
+	private String fromCountryName;
+	private Long fromCityId;
+	private String fromCityName;
+	private Long toCountryId;
+	private String tocountryName;
+	private Long toCityId;
+	private String toCityName;
+	private Integer noOfTickets;
+	private Double approxAMT;
+	private Double agreementAMT;
+	private Long ticketPurchaseChdId;
+	private String ticketNo;
+	private String pNR;
+	private Double ticketAMTUSD;
+	private Double ticketAMTBDT;
+	private Double sellingPriceUSD;
+	private Double sellingPriceBDT;
+	
+	private Integer purchasedQTY;
+	
+	
+	public Long getTicketPurchaseMstId() {
+		return ticketPurchaseMstId;
+	}
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+	public Long getTicketRequestId() {
+		return ticketRequestId;
+	}
+	public Long getAirLineId() {
+		return airLineId;
+	}
+	public String getAirLineName() {
+		return airLineName;
+	}
+	public Double getTotalAMT() {
+		return totalAMT;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public int getActiveStatus() {
+		return activeStatus;
+	}
+	public String getsActive() {
+		return sActive;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public Long getEnteredBy() {
+		return enteredBy;
+	}
+	public String getEnteredByName() {
+		return enteredByName;
+	}
+	public Date getEntryTimeStamp() {
+		return entryTimeStamp;
+	}
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	public String getUpdatedByName() {
+		return updatedByName;
+	}
+	public Date getUpdatedTimeStamp() {
+		return updatedTimeStamp;
+	}
+	public Date getRequestDate() {
+		return requestDate;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public Long getAgentId() {
+		return agentId;
+	}
+	public String getAgentName() {
+		return agentName;
+	}
+	public Long getFromCountryId() {
+		return fromCountryId;
+	}
+	public String getFromCountryName() {
+		return fromCountryName;
+	}
+	public Long getFromCityId() {
+		return fromCityId;
+	}
+	public String getFromCityName() {
+		return fromCityName;
+	}
+	public Long getToCountryId() {
+		return toCountryId;
+	}
+	public String getTocountryName() {
+		return tocountryName;
+	}
+	public Long getToCityId() {
+		return toCityId;
+	}
+	public String getToCityName() {
+		return toCityName;
+	}
+	public Integer getNoOfTickets() {
+		return noOfTickets;
+	}
+	public Double getApproxAMT() {
+		return approxAMT;
+	}
+	public Double getAgreementAMT() {
+		return agreementAMT;
+	}
+	public void setTicketPurchaseMstId(Long ticketPurchaseMstId) {
+		this.ticketPurchaseMstId = ticketPurchaseMstId;
+	}
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+	public void setTicketRequestId(Long ticketRequestId) {
+		this.ticketRequestId = ticketRequestId;
+	}
+	public void setAirLineId(Long airLineId) {
+		this.airLineId = airLineId;
+	}
+	public void setAirLineName(String airLineName) {
+		this.airLineName = airLineName;
+	}
+	public void setTotalAMT(Double totalAMT) {
+		this.totalAMT = totalAMT;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public void setActiveStatus(int activeStatus) {
+		this.activeStatus = activeStatus;
+	}
+	public void setsActive(String sActive) {
+		this.sActive = sActive;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public void setEnteredBy(Long enteredBy) {
+		this.enteredBy = enteredBy;
+	}
+	public void setEnteredByName(String enteredByName) {
+		this.enteredByName = enteredByName;
+	}
+	public void setEntryTimeStamp(Date entryTimeStamp) {
+		this.entryTimeStamp = entryTimeStamp;
+	}
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public void setUpdatedByName(String updatedByName) {
+		this.updatedByName = updatedByName;
+	}
+	public void setUpdatedTimeStamp(Date updatedTimeStamp) {
+		this.updatedTimeStamp = updatedTimeStamp;
+	}
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public void setAgentId(Long agentId) {
+		this.agentId = agentId;
+	}
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+	public void setFromCountryId(Long fromCountryId) {
+		this.fromCountryId = fromCountryId;
+	}
+	public void setFromCountryName(String fromCountryName) {
+		this.fromCountryName = fromCountryName;
+	}
+	public void setFromCityId(Long fromCityId) {
+		this.fromCityId = fromCityId;
+	}
+	public void setFromCityName(String fromCityName) {
+		this.fromCityName = fromCityName;
+	}
+	public void setToCountryId(Long toCountryId) {
+		this.toCountryId = toCountryId;
+	}
+	public void setTocountryName(String tocountryName) {
+		this.tocountryName = tocountryName;
+	}
+	public void setToCityId(Long toCityId) {
+		this.toCityId = toCityId;
+	}
+	public void setToCityName(String toCityName) {
+		this.toCityName = toCityName;
+	}
+	public void setNoOfTickets(Integer noOfTickets) {
+		this.noOfTickets = noOfTickets;
+	}
+	public void setApproxAMT(Double approxAMT) {
+		this.approxAMT = approxAMT;
+	}
+	public void setAgreementAMT(Double agreementAMT) {
+		this.agreementAMT = agreementAMT;
+	}
+	public Long getTicketPurchaseChdId() {
+		return ticketPurchaseChdId;
+	}
+	public String getTicketNo() {
+		return ticketNo;
+	}
+	public String getpNR() {
+		return pNR;
+	}
+	public Double getTicketAMTUSD() {
+		return ticketAMTUSD;
+	}
+	public Double getTicketAMTBDT() {
+		return ticketAMTBDT;
+	}
+	public void setTicketPurchaseChdId(Long ticketPurchaseChdId) {
+		this.ticketPurchaseChdId = ticketPurchaseChdId;
+	}
+	public void setTicketNo(String ticketNo) {
+		this.ticketNo = ticketNo;
+	}
+	public void setpNR(String pNR) {
+		this.pNR = pNR;
+	}
+	public void setTicketAMTUSD(Double ticketAMTUSD) {
+		this.ticketAMTUSD = ticketAMTUSD;
+	}
+	public void setTicketAMTBDT(Double ticketAMTBDT) {
+		this.ticketAMTBDT = ticketAMTBDT;
+	}
+	public Integer getTicketRequestNoOfTickets() {
+		return ticketRequestNoOfTickets;
+	}
+	public void setTicketRequestNoOfTickets(Integer ticketRequestNoOfTickets) {
+		this.ticketRequestNoOfTickets = ticketRequestNoOfTickets;
+	}
+	public Integer getPurchasedQTY() {
+		return purchasedQTY;
+	}
+	public void setPurchasedQTY(Integer purchasedQTY) {
+		this.purchasedQTY = purchasedQTY;
+	}
+	public Date getFlightDate() {
+		return flightDate;
+	}
+	public void setFlightDate(Date flightDate) {
+		this.flightDate = flightDate;
+	}
+	public String getAgentPassengerName() {
+		return agentPassengerName;
+	}
+	public void setAgentPassengerName(String agentPassengerName) {
+		this.agentPassengerName = agentPassengerName;
+	}
+	public Double getSellingPriceUSD() {
+		return sellingPriceUSD;
+	}
+	public void setSellingPriceUSD(Double sellingPriceUSD) {
+		this.sellingPriceUSD = sellingPriceUSD;
+	}
+	public Double getSellingPriceBDT() {
+		return sellingPriceBDT;
+	}
+	public void setSellingPriceBDT(Double sellingPriceBDT) {
+		this.sellingPriceBDT = sellingPriceBDT;
+	}
+	public String getTicketRequesterName() {
+		return ticketRequesterName;
+	}
+	public void setTicketRequesterName(String ticketRequesterName) {
+		this.ticketRequesterName = ticketRequesterName;
+	}
+	public Long getTicketRequesterId() {
+		return ticketRequesterId;
+	}
+	public void setTicketRequesterId(Long ticketRequesterId) {
+		this.ticketRequesterId = ticketRequesterId;
+	}
+	public Date getPossibleFlightDate() {
+		return possibleFlightDate;
+	}
+	public void setPossibleFlightDate(Date possibleFlightDate) {
+		this.possibleFlightDate = possibleFlightDate;
+	}
+	public Long getFromAgentId() {
+		return fromAgentId;
+	}
+	public void setFromAgentId(Long fromAgentId) {
+		this.fromAgentId = fromAgentId;
+	}
+	public String getFromAgentName() {
+		return fromAgentName;
+	}
+	public void setFromAgentName(String fromAgentName) {
+		this.fromAgentName = fromAgentName;
+	}
+	public Long getToAgentId() {
+		return toAgentId;
+	}
+	public void setToAgentId(Long toAgentId) {
+		this.toAgentId = toAgentId;
+	}
+	public String getToAgentName() {
+		return toAgentName;
+	}
+	public void setToAgentName(String toAgentName) {
+		this.toAgentName = toAgentName;
+	}
+	public Integer getFromAgentSelfStatus() {
+		return fromAgentSelfStatus;
+	}
+	public void setFromAgentSelfStatus(Integer fromAgentSelfStatus) {
+		this.fromAgentSelfStatus = fromAgentSelfStatus;
+	}
+	public Integer getToAgentSelfStatus() {
+		return toAgentSelfStatus;
+	}
+	public void setToAgentSelfStatus(Integer toAgentSelfStatus) {
+		this.toAgentSelfStatus = toAgentSelfStatus;
+	}
+
+
+	
+	
+	
+	
+	
+}

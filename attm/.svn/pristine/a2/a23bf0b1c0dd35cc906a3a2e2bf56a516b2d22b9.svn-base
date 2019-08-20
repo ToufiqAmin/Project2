@@ -1,0 +1,36 @@
+package com.biziitech.attm.daoImp;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.biziitech.attm.bg.repository.TicketSellMstRepository;
+import com.biziitech.attm.dao.DaoTicketSellMst;
+import com.biziitech.attm.model.ModelTicketSellMst;
+
+@Service
+public class DaoTicketSellMstImp implements DaoTicketSellMst{
+	
+	@Autowired
+	private TicketSellMstRepository ticketSellMstRepository;
+
+	@Override
+	@Transactional
+	public void saveTicketSellMst(ModelTicketSellMst modelTicketSellMst) {
+		// TODO Auto-generated method stub
+	 ticketSellMstRepository.save(modelTicketSellMst);
+	}
+
+	@Override
+	public List<ModelTicketSellMst> getTicketSellMstById(Long ticketSellMstId) {
+		// TODO Auto-generated method stub
+		return ticketSellMstRepository.findTicketSellMstById(ticketSellMstId);
+	}
+
+	
+
+}

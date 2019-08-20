@@ -1,0 +1,371 @@
+package com.biziitech.attm.daoImp;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import com.biziitech.attm.bg.repository.TicketRequestRepository;
+import com.biziitech.attm.custom.model.ModelTicketPurchaseCustom;
+import com.biziitech.attm.custom.model.ModelTicketRequestCustom;
+import com.biziitech.attm.dao.DaoTicketRequest;
+import com.biziitech.attm.model.ModelTicketRequest;
+
+
+
+@Service
+public class DaoTicketRequestImp implements DaoTicketRequest{
+	
+	@Autowired
+	private TicketRequestRepository attm_TicketRequestRepository;
+	
+	@Autowired
+    private DataSource dataSource;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+    
+	
+	
+    public void setNamedDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+        this.namedParameterJdbcTemplate=namedParameterJdbcTemplate;
+          }
+
+	@Override
+	public void saveTicketRequest(ModelTicketRequest modelTicketRequest) {
+		// TODO Auto-generated method stub
+		//if(modelTicketRequest.isActive()) 
+		//{
+		//	modelTicketRequest.setActiveStatus(1);
+			
+		//}
+		//else 
+		//{
+			//modelTicketRequest.setActiveStatus(0);
+			
+		//}
+		if(modelTicketRequest.ispOFlag()) 
+		{
+			modelTicketRequest.setpOFlagStatus(1);
+		}
+		else 
+		{
+			modelTicketRequest.setpOFlagStatus(0);
+		}
+		attm_TicketRequestRepository.save(modelTicketRequest);
+		
+	}
+
+	@Override
+	public List<ModelTicketRequest> getTicketRequestByCraiteria(String requesterName, String requesterContactPhone, String userName, 
+			String fromAgentName,String toAgentName,String airLineName,Date fromDate,Date toDate,int status) {
+		// TODO Auto-generated method stub
+		List<ModelTicketRequest> resultList= attm_TicketRequestRepository.findTicketRequestDetails(requesterName,requesterContactPhone,userName, fromAgentName,toAgentName, airLineName,fromDate,toDate, status);
+		
+		List<ModelTicketRequest> ticketRequestList=new ArrayList<>();
+		
+		for(ModelTicketRequest ticketRequest: resultList) {
+				if(ticketRequest.getActiveStatus()==1)
+				 { 
+					ticketRequest.setsActive("Yes");
+					ticketRequest.setActive(true);
+				 }
+				 
+				 else
+				 {
+					 ticketRequest.setsActive("NO");
+					 ticketRequest.setActive(false);
+				     
+				 }
+				if(ticketRequest.getpOFlagStatus()==1) 
+				{
+					ticketRequest.setsPOFlag("Yes");
+					ticketRequest.setpOFlag(true);
+				}
+				else 
+				{
+					ticketRequest.setsPOFlag("No");
+					ticketRequest.setpOFlag(false);
+				}
+				
+				
+				 
+				ticketRequestList.add(ticketRequest);
+		}
+		
+		
+		
+		return ticketRequestList;
+	}
+
+	@Override
+	public List<ModelTicketRequest> getTicketRequestById(Long ticketRequestId) {
+		// TODO Auto-generated method stub
+		return attm_TicketRequestRepository.findTicketRequestById(ticketRequestId);
+	}
+
+	@Override
+	public List<ModelTicketRequestCustom> getTicketRequestDetails(String requesterName, String requesterContactPhone,
+			Long userName, Long fromAgentName, Long toAgentName, Long ownerCompanyName, Date fromDate, Date toDate,
+			int status) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_REQUEST_ID,a.REQUEST_DATE,\r\n" + 
+				"a.USER_ID,b.user_name,b.CONTACT_NO,a.POSSIBLE_FLIGHT_DATE,\r\n" + 
+				"a.COUNTRY_FROM,c.country_name,a.CITY_FROM,d.CITY_NAME,\r\n" + 
+				"a.COUNTRY_TO,e.country_name,a.CITY_TO,f.CITY_NAME,\r\n" + 
+				"a.NO_OF_TICKETS,a.APPROX_AMT,a.AGREEMENT_AMT,\r\n" + 
+				"a.TICKET_OWNER_COMPANY_ID,g.OWNER_COMPANY_NAME,a.ACTIVE_STATUS,a.REMARKS,\r\n" + 
+				"a.REQUESTER_ID,a.REQUESTER_NAME,a.REQUESTER_CONTACT_PHONE,\r\n" + 
+				"a.FROM_AGENT_ID,h.AGENT_NAME,a.TO_AGENT_ID,i.AGENT_NAME,\r\n" + 
+				"a.AUTO_PAYMENT,a.ADV_PAYMENT\r\n" + 
+				"FROM attm_ticket_request a \r\n" + 
+				"LEFT OUTER JOIN bg_user b ON a.USER_ID=b.user_id\r\n" + 
+				"INNER JOIN bg_country c ON a.COUNTRY_FROM=c.country_id\r\n" + 
+				"INNER JOIN bg_city d ON a.CITY_FROM=d.CITY_ID\r\n" + 
+				"INNER JOIN bg_country e ON a.COUNTRY_TO=e.country_id\r\n" + 
+				"INNER JOIN bg_city f ON a.CITY_TO=f.CITY_ID\r\n" + 
+				"LEFT OUTER JOIN attm_ticket_owner_company g ON a.TICKET_OWNER_COMPANY_ID=g.TICKET_OWNER_COMPANY_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent h ON a.FROM_AGENT_ID=h.AGENT_ID\r\n" + 
+				"LEFT OUTER JOIN attm_agent i ON a.TO_AGENT_ID=i.AGENT_ID\r\n" + 
+				"WHERE a.ACTIVE_STATUS=coalesce(:status,a.ACTIVE_STATUS)\r\n" +
+				"and a.REQUESTER_NAME LIKE CONCAT('%',:requesterName, '%')\r\n" + 
+				"and a.REQUESTER_CONTACT_PHONE LIKE CONCAT('%',:requesterContactPhone, '%')\r\n" + 
+				//"and a.USER_ID=coalesce(:userName,a.USER_ID)\r\n" + 
+				//"and a.FROM_AGENT_ID=coalesce(:fromAgentName,a.FROM_AGENT_ID)\r\n" + 
+				//"and a.TO_AGENT_ID=coalesce(:toAgentName,a.TO_AGENT_ID)\r\n" + 
+				//"and a.TICKET_OWNER_COMPANY_ID =coalesce(:ownerCompanyName,a.TICKET_OWNER_COMPANY_ID)\r\n" + 
+				"and a.REQUEST_DATE BETWEEN \r\n" + 
+				"coalesce(:fromDate,a.REQUEST_DATE) \r\n" + 
+				"AND coalesce(:toDate,a.REQUEST_DATE)\r\n" + 
+				"GROUP BY a.TICKET_REQUEST_ID,a.REQUEST_DATE,\r\n" + 
+				"a.USER_ID,b.user_name,b.CONTACT_NO,a.POSSIBLE_FLIGHT_DATE,\r\n" + 
+				"a.COUNTRY_FROM,c.country_name,a.CITY_FROM,d.CITY_NAME,\r\n" + 
+				"a.COUNTRY_TO,e.country_name,a.CITY_TO,f.CITY_NAME,\r\n" + 
+				"a.NO_OF_TICKETS,a.APPROX_AMT,a.AGREEMENT_AMT,\r\n" + 
+				"a.TICKET_OWNER_COMPANY_ID,g.OWNER_COMPANY_NAME,a.ACTIVE_STATUS,a.REMARKS,\r\n" + 
+				"a.REQUESTER_ID,a.REQUESTER_NAME,a.REQUESTER_CONTACT_PHONE,\r\n" + 
+				"a.FROM_AGENT_ID,h.AGENT_NAME,a.TO_AGENT_ID,i.AGENT_NAME,\r\n" + 
+				"a.AUTO_PAYMENT,a.ADV_PAYMENT";
+		
+		
+		/*
+		 * query
+		 * 
+		 * 
+		 * SELECT a.TICKET_REQUEST_ID,a.REQUEST_DATE,
+			a.USER_ID,b.user_name,b.CONTACT_NO,a.POSSIBLE_FLIGHT_DATE,
+			a.COUNTRY_FROM,c.country_name,a.CITY_FROM,d.CITY_NAME,
+			a.COUNTRY_TO,e.country_name,a.CITY_TO,f.CITY_NAME,
+			a.NO_OF_TICKETS,a.APPROX_AMT,a.AGREEMENT_AMT,
+			a.TICKET_OWNER_COMPANY_ID,g.OWNER_COMPANY_NAME,a.ACTIVE_STATUS,a.REMARKS,
+			a.REQUESTER_ID,a.REQUESTER_NAME,a.REQUESTER_CONTACT_PHONE,
+			a.FROM_AGENT_ID,h.AGENT_NAME,a.TO_AGENT_ID,i.AGENT_NAME,
+			a.AUTO_PAYMENT,a.ADV_PAYMENT
+			FROM attm_ticket_request a 
+			LEFT OUTER JOIN bg_user b ON a.USER_ID=b.user_id
+			INNER JOIN bg_country c ON a.COUNTRY_FROM=c.country_id
+			INNER JOIN bg_city d ON a.CITY_FROM=d.CITY_ID
+			INNER JOIN bg_country e ON a.COUNTRY_TO=e.country_id
+			INNER JOIN bg_city f ON a.CITY_TO=f.CITY_ID
+			LEFT OUTER JOIN attm_ticket_owner_company g ON a.TICKET_OWNER_COMPANY_ID=g.TICKET_OWNER_COMPANY_ID
+			LEFT OUTER JOIN attm_agent h ON a.FROM_AGENT_ID=h.AGENT_ID
+			LEFT OUTER JOIN attm_agent i ON a.TO_AGENT_ID=i.AGENT_ID
+			WHERE a.ACTIVE_STATUS=coalesce(:status,a.ACTIVE_STATUS)
+			and a.REQUESTER_NAME LIKE CONCAT('%',:requesterName, '%')
+			and a.REQUESTER_CONTACT_PHONE LIKE CONCAT('%',:requesterContactPhone, '%')
+			//and a.USER_ID=coalesce(:userName,a.USER_ID)
+			//and a.FROM_AGENT_ID=coalesce(:fromAgentName,a.FROM_AGENT_ID)
+			//and a.TO_AGENT_ID=coalesce(:toAgentName,a.TO_AGENT_ID)
+			//and a.TICKET_OWNER_COMPANY_ID =coalesce(:ownerCompanyName,a.TICKET_OWNER_COMPANY_ID)
+			and a.REQUEST_DATE BETWEEN
+			coalesce(:fromDate,a.REQUEST_DATE)
+			AND coalesce(:toDate,a.REQUEST_DATE)
+			GROUP BY a.TICKET_REQUEST_ID,a.REQUEST_DATE,
+			a.USER_ID,b.user_name,b.CONTACT_NO,a.POSSIBLE_FLIGHT_DATE,
+			a.COUNTRY_FROM,c.country_name,a.CITY_FROM,d.CITY_NAME,
+			a.COUNTRY_TO,e.country_name,a.CITY_TO,f.CITY_NAME,
+			a.NO_OF_TICKETS,a.APPROX_AMT,a.AGREEMENT_AMT,
+			a.TICKET_OWNER_COMPANY_ID,g.OWNER_COMPANY_NAME,a.ACTIVE_STATUS,a.REMARKS,
+			a.REQUESTER_ID,a.REQUESTER_NAME,a.REQUESTER_CONTACT_PHONE,
+			a.FROM_AGENT_ID,h.AGENT_NAME,a.TO_AGENT_ID,i.AGENT_NAME,
+			a.AUTO_PAYMENT,a.ADV_PAYMENT
+		 * 
+		 * */
+		
+			RowMapper<ModelTicketRequestCustom> serviceMapper=new RowMapper<ModelTicketRequestCustom>() {
+
+			@Override
+			public ModelTicketRequestCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketRequestCustom bn= new ModelTicketRequestCustom();
+				
+				bn.setTicketRequestId(rs.getLong("TICKET_REQUEST_ID"));
+				bn.setTicketRequestDate(rs.getDate("REQUEST_DATE"));
+				bn.setUserId(rs.getLong("USER_ID"));
+				bn.setUserName(rs.getString("user_name"));
+				bn.setUserContactNo(rs.getString("CONTACT_NO"));
+				bn.setPossibleFlightDate(rs.getDate("POSSIBLE_FLIGHT_DATE"));
+				bn.setCountryFromId(rs.getLong("COUNTRY_FROM"));
+				bn.setCountryFromName(rs.getString("c.country_name"));
+				bn.setFromCityId(rs.getLong("CITY_FROM"));
+				bn.setFromCityName(rs.getString("d.CITY_NAME"));
+				bn.setCountryToId(rs.getLong("COUNTRY_TO"));
+				bn.setCountryToName(rs.getString("e.country_name"));
+				bn.setToCityId(rs.getLong("CITY_TO"));
+				bn.setToCityName(rs.getString("f.CITY_NAME"));
+				bn.setNoOfTickets(rs.getInt("NO_OF_TICKETS"));
+				bn.setApproxAMT(rs.getDouble("APPROX_AMT"));
+				bn.setAgreementAMT(rs.getDouble("AGREEMENT_AMT"));
+				bn.setActiveStatus(rs.getInt("ACTIVE_STATUS"));
+				if(bn.getActiveStatus()==1) 
+				{
+					bn.setsActive("Yes");
+				}
+				else {
+					bn.setsActive("No");
+				}
+				bn.setAdvPayment(rs.getDouble("ADV_PAYMENT"));
+				bn.setAutoPayment(rs.getInt("AUTO_PAYMENT"));
+				if(bn.getAutoPayment()==1) 
+				{
+					bn.setsAutoPayment("Yes");
+				}
+				else {
+					bn.setsAutoPayment("No");
+					
+				}
+				bn.setRequesterId(rs.getLong("REQUESTER_ID"));
+				bn.setRequesterName(rs.getString("REQUESTER_NAME"));
+				bn.setRequesterContactPhone(rs.getString("REQUESTER_CONTACT_PHONE"));
+				bn.setFromAgentId(rs.getLong("a.FROM_AGENT_ID"));
+				bn.setFromAgentName(rs.getString("h.AGENT_NAME"));
+				bn.setToAgentId(rs.getLong("TO_AGENT_ID"));
+				bn.setToAgentName(rs.getString("i.AGENT_NAME"));
+				bn.setTicketOwnerCompanyId(rs.getLong("TICKET_OWNER_COMPANY_ID"));
+				bn.setOwnerCompanyName(rs.getString("OWNER_COMPANY_NAME"));
+				bn.setRemarks(rs.getString("REMARKS"));
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("requesterName", requesterName);
+	      System.out.println(" in daoTicketRequestImp, requesterName:" +requesterName);
+	      parameters.addValue("requesterContactPhone", requesterContactPhone);
+	      parameters.addValue("userName", userName);
+	      parameters.addValue("fromAgentName", fromAgentName);
+	      System.out.println(" in daoTicketRequestImp, fromAgentName:" +fromAgentName);
+	      parameters.addValue("toAgentName", toAgentName);
+	      parameters.addValue("ownerCompanyName", ownerCompanyName);
+	      parameters.addValue("fromDate", fromDate);
+	      parameters.addValue("toDate", toDate);
+	      parameters.addValue("status", status);
+	      
+
+		System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelTicketRequestCustom> getTicketRequestIdInTicketPurchase(Long ticketRequestId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_REQUEST_ID,b.TICKET_PURCHASE_MST_ID FROM attm_ticket_request a\r\n" + 
+				"INNER JOIN attm_ticket_purchase_mst b ON a.TICKET_REQUEST_ID=b.TICKET_REQUEST_ID\r\n" + 
+				"WHERE a.TICKET_REQUEST_ID=COALESCE(:ticketRequestId,a.TICKET_REQUEST_ID)\r\n" + 
+				"GROUP BY a.TICKET_REQUEST_ID,b.TICKET_PURCHASE_MST_ID";
+		
+		/*
+		 * SELECT a.TICKET_REQUEST_ID,b.TICKET_PURCHASE_MST_ID FROM attm_ticket_request a
+INNER JOIN attm_ticket_purchase_mst b ON a.TICKET_REQUEST_ID=b.TICKET_REQUEST_ID
+WHERE a.TICKET_REQUEST_ID=COALESCE(:ticketRequestId,a.TICKET_REQUEST_ID)
+GROUP BY a.TICKET_REQUEST_ID,b.TICKET_PURCHASE_MST_ID
+		 * */
+		
+		
+			RowMapper<ModelTicketRequestCustom> serviceMapper=new RowMapper<ModelTicketRequestCustom>() {
+
+			@Override
+			public ModelTicketRequestCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+				// TODO Auto-generated method stub
+				ModelTicketRequestCustom bn= new ModelTicketRequestCustom();
+				
+				bn.setTicketRequestId(rs.getLong("TICKET_REQUEST_ID"));
+				
+				
+				return bn;
+			}
+
+		};
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	      parameters.addValue("ticketRequestId", ticketRequestId);
+	      System.out.println(" in daoTicketRequestImp, ticketRequestId:" +ticketRequestId);
+	   
+	      
+
+		System.out.println("service mapper ");
+		return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+
+	@Override
+	public List<ModelTicketRequestCustom> getTicketRequestIdInTicketSell(Long ticketRequestId) {
+		// TODO Auto-generated method stub
+		String qry="SELECT a.TICKET_REQUEST_ID,b.TICKET_SELL_MST_ID FROM attm_ticket_request a\r\n" + 
+				"INNER JOIN attm_ticket_sell_mst b ON a.TICKET_REQUEST_ID=b.TICKET_REQUEST_ID\r\n" + 
+				"WHERE a.TICKET_REQUEST_ID=COALESCE(:ticketRequestId,a.TICKET_REQUEST_ID)\r\n" + 
+				"GROUP BY a.TICKET_REQUEST_ID,b.TICKET_SELL_MST_ID";
+		
+		/*
+		 * SELECT a.TICKET_REQUEST_ID,b.TICKET_SELL_MST_ID FROM attm_ticket_request a
+INNER JOIN attm_ticket_sell_mst b ON a.TICKET_REQUEST_ID=b.TICKET_REQUEST_ID
+WHERE a.TICKET_REQUEST_ID=COALESCE(:ticketRequestId,a.TICKET_REQUEST_ID)
+GROUP BY a.TICKET_REQUEST_ID,b.TICKET_SELL_MST_ID
+		 * */
+		
+		
+		RowMapper<ModelTicketRequestCustom> serviceMapper=new RowMapper<ModelTicketRequestCustom>() {
+
+		@Override
+		public ModelTicketRequestCustom mapRow(ResultSet rs, int rownum) throws SQLException {
+			// TODO Auto-generated method stub
+			ModelTicketRequestCustom bn= new ModelTicketRequestCustom();
+			
+			bn.setTicketRequestId(rs.getLong("TICKET_REQUEST_ID"));
+			
+			
+			return bn;
+		}
+
+	};
+	
+	MapSqlParameterSource parameters = new MapSqlParameterSource();
+      parameters.addValue("ticketRequestId", ticketRequestId);
+      System.out.println(" in daoTicketRequestImp, ticketRequestId:" +ticketRequestId);
+   
+      
+
+	System.out.println("service mapper ");
+	return namedParameterJdbcTemplate.query(qry,parameters,serviceMapper);
+	}
+	
+	
+	
+	
+
+}

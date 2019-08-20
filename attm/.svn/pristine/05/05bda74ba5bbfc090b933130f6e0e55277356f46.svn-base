@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}"
+          href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+    <link rel="stylesheet" th:href="@{/css/style1.css}" href="../../static/css/style1.css" />
+</head>
+<body>
+
+<div class="container">
+    <div th:fragment="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+                    <ul class="nav navbar-nav">
+                     <li>-------------------SET UP---------------------</li>
+                    <li><a th:href="@{/bgusercontroller/init}">User</a>
+                    
+                    <li><a th:href="@{/bgusertypecontroller/init}">User Type</a></li>
+                    <li><a th:href="@{/servicecontroller/init}">Service</a></li>
+                    <li><a th:href="@{/clientservicecontroller/init}">Client Service</a></li>
+                    <li><a th:href="@{/agentcontroller/init}">Agent</a></li>
+                    <li><a th:href="@{/airlinecontroller/init}">Air Line</a></li>
+                    <li><a th:href="@{/ticketrequestcontroller/init}">Ticket Request</a></li>
+                    <li><a th:href="@{/passportreceivecontroller/init}">Passport Receive</a></li>
+                    <li><a th:href="@{/manpowerclearancecontroller/init}">Manpower Clearance</a></li>
+                    <li><a th:href="@{/logoncontroller/init}">Logon</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="jumbotron">
+            <div class="row text-center">
+                <div class="row">
+                    <h2  align="center">ATTM Application</h2>
+                </div>
+            </div>
+            <div class="row text-center">
+                <img src="../../static/images/biziitech.png" width="30%" class="center"
+                     th:src="@{/images/biziitech.png}" />
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
